@@ -3,10 +3,19 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 
 namespace: elastic-stack-logging
 
-resources:
-- kibana-admin-index-patterns.yaml
-- kibana-dashboard-pa-was-basic.yaml
-- kibana-dashboard-pa.yaml
-- kibana-dashboard-pd.yaml
-- kibana-dashboard-pf-basic.yaml
-- kibana-dashboard-pf.yaml
+configMapGenerator:
+  - name: kibana-dashboards-pa
+    files:
+      - kibana-dashboard-pa-was.ndjson
+      - kibana-dashboard-pa.ndjson
+  - name: kibana-dashboards-pd
+    files:
+      - kibana-dashboard-pd.ndjson
+  - name: kibana-dashboards-pf
+    files:
+      - kibana-dashboard-pf-threat.ndjson
+      - kibana-dashboard-pf.ndjson
+
+generatorOptions:
+ annotations:
+   argocd.argoproj.io/sync-options: Replace=true
