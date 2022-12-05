@@ -25,8 +25,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 11875,
   "graphTooltip": 0,
-  "id": 7,
-  "iteration": 1660135640316,
+  "iteration": 1669992659142,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -119,7 +118,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "sum(rate(nginx_ingress_controller_requests{ingress=\"$ingressName\"}[5m]) * 60) by (status)",
+          "expr": "sum(rate(nginx_ingress_controller_requests{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m]) * 60) by (status)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -219,7 +218,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "sum(irate(nginx_ingress_controller_bytes_sent_sum{ingress=\"$ingressName\"}[5m]) * 60) by (path, status)",
+          "expr": "sum(irate(nginx_ingress_controller_bytes_sent_sum{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m]) * 60) by (path, status)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -330,7 +329,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "sum(irate(nginx_ingress_controller_request_size_count{ingress=\"$ingressName\"}[5m]) * 60) by (method, status)",
+          "expr": "sum(irate(nginx_ingress_controller_request_size_count{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m]) * 60) by (method, status)",
           "interval": "",
           "legendFormat": "{{method}} - Status: {{status}}",
           "refId": "B"
@@ -428,7 +427,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "sum(rate(nginx_ingress_controller_response_duration_seconds_count{ingress=\"$ingressName\"}[5m])*1000) by (method, status)",
+          "expr": "sum(rate(nginx_ingress_controller_response_duration_seconds_count{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m])*1000) by (method, status)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -448,7 +447,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "pingaccess-was-ingress",
           "value": "pingaccess-was-ingress"
         },
@@ -474,6 +473,33 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P1809F7CD0C75ACF3"
+        },
+        "definition": "label_values(k8s_cluster_name)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "cluster_name",
+        "options": [],
+        "query": {
+          "query": "label_values(k8s_cluster_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
