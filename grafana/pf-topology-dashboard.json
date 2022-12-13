@@ -127,7 +127,7 @@
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: failure AND role: IdP AND cluster_name: $cluster_name",
+          "query": "event: SSO AND status: failure AND role: IdP AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -237,7 +237,7 @@
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: success AND role: IdP AND cluster_name: $cluster_name",
+          "query": "event: SSO AND status: success AND role: IdP AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -347,7 +347,7 @@
               "type": "count"
             }
           ],
-          "query": "(event: AUTHN_ATTEMPT AND status: failure AND cluster_name: $cluster_name) OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:* AND cluster_name: $cluster_name)",
+          "query": "(event: AUTHN_ATTEMPT AND status: failure AND cluster_name: \"$cluster_name\") OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:* AND cluster_name: \"$cluster_name\")",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -457,7 +457,7 @@
               "type": "count"
             }
           ],
-          "query": "event: AUTHN_ATTEMPT AND cluster_name: $cluster_name",
+          "query": "event: AUTHN_ATTEMPT AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -567,7 +567,7 @@
               "type": "count"
             }
           ],
-          "query": "NOT clientIp: 127.0.0.1 AND cluster_name: $cluster_name",
+          "query": "NOT clientIp: 127.0.0.1 AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
