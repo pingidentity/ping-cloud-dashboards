@@ -130,7 +130,7 @@
               "type": "count"
             }
           ],
-          "query": "method: \"GET\" AND responseCode: 403 AND cluster_name: $cluster_name",
+          "query": "method: \"GET\" AND responseCode: 403 AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -240,7 +240,7 @@
               "type": "count"
             }
           ],
-          "query": "NOT client: 127.0.0.1 AND cluster_name: $cluster_name",
+          "query": "NOT client: 127.0.0.1 AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -353,7 +353,7 @@
               "type": "cardinality"
             }
           ],
-          "query": "((responseCode: 200 AND NOT authMech: NULL) OR responseCode:401) AND cluster_name: $cluster_name",
+          "query": "((responseCode: 200 AND NOT authMech: NULL) OR responseCode:401) AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
