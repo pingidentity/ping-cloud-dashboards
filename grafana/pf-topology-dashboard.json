@@ -21,7 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 5,
+  "iteration": 1669985651039,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -127,7 +127,7 @@
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: failure AND role: IdP",
+          "query": "event: SSO AND status: failure AND role: IdP AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -237,7 +237,7 @@
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: success AND role: IdP",
+          "query": "event: SSO AND status: success AND role: IdP AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -347,7 +347,7 @@
               "type": "count"
             }
           ],
-          "query": "(event: AUTHN_ATTEMPT AND status: failure) OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:*)",
+          "query": "(event: AUTHN_ATTEMPT AND status: failure AND cluster_name: \"$cluster_name\") OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:* AND cluster_name: \"$cluster_name\")",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -457,7 +457,7 @@
               "type": "count"
             }
           ],
-          "query": "event: AUTHN_ATTEMPT",
+          "query": "event: AUTHN_ATTEMPT AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -556,6 +556,10 @@
               "type": "date_histogram"
             }
           ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P70346AB9D940FE4A"
+          },
           "metrics": [
             {
               "field": "select field",
@@ -563,7 +567,7 @@
               "type": "count"
             }
           ],
-          "query": "NOT clientIp: 127.0.0.1",
+          "query": "NOT clientIp: 127.0.0.1 AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -576,7 +580,35 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P1809F7CD0C75ACF3"
+        },
+        "definition": "label_values(k8s_cluster_name)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "cluster_name",
+        "options": [],
+        "query": {
+          "query": "label_values(k8s_cluster_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",

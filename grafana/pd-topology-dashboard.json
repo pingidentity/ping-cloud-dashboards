@@ -22,8 +22,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 8,
-  "iteration": 1660576124630,
+  "iteration": 1669983770742,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -251,7 +250,13 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "sum by (operation) (throughput{namespace=\"$namespace\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "sum by (operation) (throughput{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+          "interval": "",
           "legendFormat": "{{operation}}",
           "refId": "A"
         }
@@ -338,7 +343,13 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "sum(throughput{namespace=\"$namespace\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "sum(throughput{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+          "interval": "",
           "legendFormat": "Throughput",
           "refId": "A"
         }
@@ -425,7 +436,13 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "avg by (operation) (response_time{namespace=\"$namespace\"} > 0)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "avg by (operation) (response_time{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"} > 0)",
+          "interval": "",
           "legendFormat": "{{operation}}",
           "refId": "A"
         }
@@ -512,7 +529,14 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "avg((response_time{namespace=\"$namespace\"} > 0))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "avg((response_time{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"} > 0))",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -598,7 +622,13 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "sum by (gcType, size, cause) (rate(garbage_collections{namespace=\"$namespace\"}[1m]))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "sum by (gcType, size, cause) (rate(garbage_collections{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}[1m]))",
+          "interval": "",
           "legendFormat": "{{gcType}}-{{size}}-{{cause}}",
           "refId": "A"
         }
@@ -685,7 +715,13 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "replica_backlog {namespace=\"$namespace\"}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "replica_backlog {namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+          "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
         }
@@ -772,7 +808,13 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "avg by (backendID) (backend_entry_count{namespace=\"$namespace\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "avg by (backendID) (backend_entry_count{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+          "interval": "",
           "legendFormat": "{{backendID}}",
           "refId": "A"
         }
@@ -859,7 +901,13 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "expr": "avg by (region) (garbage_collection_live_megabytes{namespace=\"$namespace\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "avg by (region) (garbage_collection_live_megabytes{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+          "interval": "",
           "legendFormat": "{{region}}",
           "refId": "A"
         }
@@ -896,6 +944,33 @@
         },
         "refresh": 1,
         "regex": "/ping-cloud*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P1809F7CD0C75ACF3"
+        },
+        "definition": "label_values(k8s_cluster_name)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "cluster_name",
+        "options": [],
+        "query": {
+          "query": "label_values(k8s_cluster_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
