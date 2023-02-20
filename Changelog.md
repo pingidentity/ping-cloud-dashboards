@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.18.0.0
+
+- Refactored 'Kibana PF Dashboard' queries to exclude healcheckconnection information
+
+_Changes:_
+
+- [X] PDO-4939 Refactor 'Kibana PF Dashboard' queries to exclude healcheckconnection information from them
+
 ### 1.17.0.0
 
 - Create new global repo for dashboards
