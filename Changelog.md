@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.18.0.0
+
+- Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
+
+_Changes_
+
+- [X] PDO-4952 Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
+
 ### 1.17.0.0
 
 - Create new global repo for dashboards
