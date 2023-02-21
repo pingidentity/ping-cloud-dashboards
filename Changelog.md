@@ -2,11 +2,11 @@
 
 ### 1.18.0.0
 
-- Refactored 'Kibana PF Dashboard' queries to exclude healcheckconnection information
+- Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
 
-_Changes:_
+_Changes_
 
-- [X] PDO-4939 Refactor 'Kibana PF Dashboard' queries to exclude healcheckconnection information from them
+- [X] PDO-4952 Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
 
 ### 1.17.0.0
 
