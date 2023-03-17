@@ -3,10 +3,12 @@
 ### 1.18.0.0
 
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
+- Add Logstash dashboard
 
 _Changes_
 
 - [X] PDO-4952 Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
+- [X] PDO-5142 Add logstash metrics to prometheus
 
 ### 1.17.0.0
 
