@@ -8,7 +8,8 @@ configMapGenerator:
   - name: ping-dashboards
     files:
       - kubernetes-dashboard.json
-      - kubernetes-storage-dashboard.json
+      - kubernetes-storage-cluster-dashboard.json
+      - kubernetes-storage-namespace-dashboard.json
       - pa-by-server-dashboard.json
       - pa-topology-dashboard.json
       - pf-by-server-dashboard.json
