@@ -86,10 +86,208 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 0
+      },
+      "id": 10,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\",name=~\"tail.*\"}[1m])) by (instance)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Fluent-bit incoming events per minute",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {}
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 12,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[1m])) by (instance)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Fluent-bit outgoing events per minute",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {}
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 8
       },
       "id": 2,
       "interval": "1m",
@@ -118,7 +316,8 @@
           "refId": "A"
         }
       ],
-      "title": "Incoming events per minute",
+      "title": "Logstash incoming events per minute",
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -182,7 +381,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 8
       },
       "id": 4,
       "interval": "1m",
@@ -211,7 +410,8 @@
           "refId": "A"
         }
       ],
-      "title": "Outgoing events per minute",
+      "title": "Logstash outgoing events per minute",
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -275,7 +475,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 17
       },
       "id": 6,
       "options": {
@@ -303,7 +503,7 @@
           "refId": "A"
         }
       ],
-      "title": "Events in queue",
+      "title": "Logstash events in queue",
       "type": "timeseries"
     },
     {
@@ -368,7 +568,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 17
       },
       "id": 8,
       "options": {
@@ -408,7 +608,7 @@
           "refId": "B"
         }
       ],
-      "title": "Heap usage",
+      "title": "Logstash heap usage",
       "type": "timeseries"
     }
   ],
@@ -448,13 +648,13 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Logstash app metrics",
+  "title": "Logging metrics",
   "uid": "5RHno_aVz",
-  "version": 6,
+  "version": 4,
   "weekStart": ""
 }
