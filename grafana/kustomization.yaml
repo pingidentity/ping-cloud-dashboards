@@ -15,6 +15,7 @@ configMapGenerator:
       - pd-by-server-dashboard.json
       - pd-topology-dashboard.json
       - p1as-ingress-dashboard.json
+      - logging-dashboard.json
   - name: dashboard-providers
     files:
       - ping-dashboards.yaml
