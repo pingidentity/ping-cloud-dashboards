@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -21,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1669985651039,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -36,6 +38,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -53,7 +57,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -94,7 +98,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -127,7 +132,7 @@
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: failure AND role: IdP AND cluster_name: \"$cluster_name\"",
+          "query": "event: SSO AND status: failure AND role: IdP AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -146,6 +151,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -163,7 +170,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -204,7 +211,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -237,7 +245,7 @@
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: success AND role: IdP AND cluster_name: \"$cluster_name\"",
+          "query": "event: SSO AND status: success AND role: IdP AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -256,6 +264,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -273,7 +283,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -314,7 +324,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -347,7 +358,7 @@
               "type": "count"
             }
           ],
-          "query": "(event: AUTHN_ATTEMPT AND status: failure AND cluster_name: \"$cluster_name\") OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:* AND cluster_name: \"$cluster_name\")",
+          "query": "(event: AUTHN_ATTEMPT AND status: failure AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\") OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:* AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\")",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -366,6 +377,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -383,7 +396,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -424,7 +437,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -457,7 +471,7 @@
               "type": "count"
             }
           ],
-          "query": "event: AUTHN_ATTEMPT AND cluster_name: \"$cluster_name\"",
+          "query": "event: AUTHN_ATTEMPT AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -476,6 +490,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -493,7 +509,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -534,7 +550,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -567,7 +584,7 @@
               "type": "count"
             }
           ],
-          "query": "NOT clientIp: 127.0.0.1 AND cluster_name: \"$cluster_name\"",
+          "query": "NOT clientIp: 127.0.0.1 AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -576,7 +593,7 @@
       "type": "timeseries"
     }
   ],
-  "schemaVersion": 35,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
