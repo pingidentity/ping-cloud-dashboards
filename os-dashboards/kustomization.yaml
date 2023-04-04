@@ -1,0 +1,13 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: elastic-stack-logging
+
+configMapGenerator:
+  - name: os-dashboards-pd
+    files:
+      - os-dashboard-pd.ndjson
+
+generatorOptions:
+ annotations:
+   argocd.argoproj.io/sync-options: Replace=true
