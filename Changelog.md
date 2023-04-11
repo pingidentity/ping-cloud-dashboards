@@ -2,12 +2,13 @@
 
 ### 1.18.0.0
 
-- Replaced "grafana-kubernetes-app" plugin functionality with a few Kubernetes infrastructure monitoring dashboards
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
 - Refactor 'Kibana PA Dashboard' queries to exclude healcheckconnection information from them
 - Add Logstash dashboard
+- Fix: Splitted Grafana dashboards into different CMs to avoid length limit issue
 
 _Changes_
+
 
 - [X] PDO-4722 Grafana: replacement of "grafana-kubernetes-app" plugin
 - [X] PDO-4952 Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
