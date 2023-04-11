@@ -18,8 +18,6 @@ configMapGenerator:
   - name: kubernetes-dashboards
     files:
       - kubernetes-dashboard.json
-      - kubernetes-storage-cluster-dashboard.json
-      - kubernetes-storage-namespace-dashboard.json
   - name: dashboard-providers
     files:
       - ping-dashboards.yaml
