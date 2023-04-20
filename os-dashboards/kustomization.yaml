@@ -7,11 +7,9 @@ configMapGenerator:
   - name: os-dashboards-pd
     files:
       - os-dashboard-pd.ndjson
-  - name: os-dashboard-pf
+  - name: os-dashboards-pf
     files:
-      - os-dashboard-pf.ndjso
-  - name: os-dashboard-pf-threat
-    files:
+      - os-dashboard-pf.ndjson
       - os-dashboard-pf-threat.ndjson   
 
 generatorOptions:
