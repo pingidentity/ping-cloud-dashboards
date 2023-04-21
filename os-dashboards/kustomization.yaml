@@ -11,6 +11,9 @@ configMapGenerator:
     files:
       - os-dashboard-pf.ndjson
       - os-dashboard-pf-threat.ndjson   
+  - name: os-dashboards-pa
+    files:
+      - os-dashboard-pa.ndjson
 
 generatorOptions:
  annotations:
