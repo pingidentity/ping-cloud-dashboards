@@ -24,13 +24,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "elasticsearch",
-        "uid": "P2A5947B8990D8DCD"
+        "type": "grafana-opensearch-datasource",
+        "uid": "xCysL8y4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -109,30 +110,30 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "alias": "Amount",
+          "alias": "",
           "bucketAggs": [
             {
               "field": "@timestamp",
               "id": "2",
               "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
+                "interval": "auto"
               },
               "type": "date_histogram"
             }
           ],
           "datasource": {
-            "type": "elasticsearch",
-            "uid": "P2A5947B8990D8DCD"
+            "type": "grafana-opensearch-datasource",
+            "uid": "xCysL8y4z"
           },
+          "format": "table",
           "metrics": [
             {
               "id": "1",
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: failure AND role: IdP AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
+          "query": "event: SSO AND status: failure AND role: IdP AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name",
+          "queryType": "lucene",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -142,8 +143,8 @@
     },
     {
       "datasource": {
-        "type": "elasticsearch",
-        "uid": "P2A5947B8990D8DCD"
+        "type": "grafana-opensearch-datasource",
+        "uid": "xCysL8y4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -222,30 +223,30 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "alias": "Amount",
+          "alias": "",
           "bucketAggs": [
             {
               "field": "@timestamp",
               "id": "2",
               "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
+                "interval": "auto"
               },
               "type": "date_histogram"
             }
           ],
           "datasource": {
-            "type": "elasticsearch",
-            "uid": "P2A5947B8990D8DCD"
+            "type": "grafana-opensearch-datasource",
+            "uid": "xCysL8y4z"
           },
+          "format": "table",
           "metrics": [
             {
               "id": "1",
               "type": "count"
             }
           ],
-          "query": "event: SSO AND status: success AND role: IdP AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
+          "query": "event: SSO AND status: success AND role: IdP AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name",
+          "queryType": "lucene",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -255,8 +256,8 @@
     },
     {
       "datasource": {
-        "type": "elasticsearch",
-        "uid": "P2A5947B8990D8DCD"
+        "type": "grafana-opensearch-datasource",
+        "uid": "xCysL8y4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -335,30 +336,30 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "alias": "Value",
+          "alias": "",
           "bucketAggs": [
             {
               "field": "@timestamp",
               "id": "2",
               "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
+                "interval": "auto"
               },
               "type": "date_histogram"
             }
           ],
           "datasource": {
-            "type": "elasticsearch",
-            "uid": "P2A5947B8990D8DCD"
+            "type": "grafana-opensearch-datasource",
+            "uid": "xCysL8y4z"
           },
+          "format": "table",
           "metrics": [
             {
               "id": "1",
               "type": "count"
             }
           ],
-          "query": "(event: AUTHN_ATTEMPT AND status: failure AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\") OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:* AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\")",
+          "query": "(event: AUTHN_ATTEMPT AND status: failure AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name) OR (status:inprogress AND event:AUTHN_ATTEMPT AND subject:* AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name)",
+          "queryType": "lucene",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -368,8 +369,8 @@
     },
     {
       "datasource": {
-        "type": "elasticsearch",
-        "uid": "P2A5947B8990D8DCD"
+        "type": "grafana-opensearch-datasource",
+        "uid": "xCysL8y4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -448,30 +449,30 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "alias": "Value",
+          "alias": "",
           "bucketAggs": [
             {
               "field": "@timestamp",
               "id": "2",
               "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
+                "interval": "auto"
               },
               "type": "date_histogram"
             }
           ],
           "datasource": {
-            "type": "elasticsearch",
-            "uid": "P2A5947B8990D8DCD"
+            "type": "grafana-opensearch-datasource",
+            "uid": "xCysL8y4z"
           },
+          "format": "table",
           "metrics": [
             {
               "id": "1",
               "type": "count"
             }
           ],
-          "query": "event: AUTHN_ATTEMPT AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
+          "query": "event: AUTHN_ATTEMPT AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name",
+          "queryType": "lucene",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -481,8 +482,8 @@
     },
     {
       "datasource": {
-        "type": "elasticsearch",
-        "uid": "P70346AB9D940FE4A"
+        "type": "grafana-opensearch-datasource",
+        "uid": "HZX0Y8yVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -561,30 +562,30 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
+          "alias": "",
           "bucketAggs": [
             {
               "field": "@timestamp",
               "id": "2",
               "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
+                "interval": "auto"
               },
               "type": "date_histogram"
             }
           ],
           "datasource": {
-            "type": "elasticsearch",
-            "uid": "P70346AB9D940FE4A"
+            "type": "grafana-opensearch-datasource",
+            "uid": "HZX0Y8yVz"
           },
+          "format": "table",
           "metrics": [
             {
-              "field": "select field",
               "id": "1",
               "type": "count"
             }
           ],
-          "query": "NOT clientIp: 127.0.0.1 AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
+          "query": "NOT clientIp: 127.0.0.1 AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name",
+          "queryType": "lucene",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -599,7 +600,7 @@
   "templating": {
     "list": [
       {
-        "allValue": ".*",
+        "allValue": "*",
         "current": {
           "selected": true,
           "text": "All",
