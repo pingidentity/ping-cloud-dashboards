@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.19.0.0
+
+- OpenSearch migration: update grafana dashboards datasource
+
+_Changes_
+
+- [X] PDO-5245 Update grafana dashboards datasource
+
 ### 1.18.0.0
 
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
@@ -10,7 +18,6 @@
 - Fix: Splitted Grafana dashboards into different CMs to avoid length limit issue
 
 _Changes_
-
 
 - [X] PDO-4722 Grafana: replacement of "grafana-kubernetes-app" plugin
 - [X] PDO-4952 Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
