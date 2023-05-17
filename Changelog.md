@@ -2,6 +2,7 @@
 
 ### 1.19.0.0
 
+- Created Grafana Dashboard to visualize Kubernetes volumes metrics
 - OpenSearch migration: update grafana dashboards datasource
 - Added Grafana Dashboards to visualize Kubernetes API metrics and Autoscaler stats
 - OpenSearch migration: Implement Monitoring
@@ -9,6 +10,7 @@
 _Changes_
 
 - [X] PDO-5245 Update grafana dashboards datasource
+- [X] PDO-5265 Create Grafana Dashboard to visualize Kubernetes volumes metrics
 - [X] PDO-5266 Create Grafana Dashboard to visualize Kubernetes API metrics
 - [X] PDO-5307 Add OpenSearch monitoring
 

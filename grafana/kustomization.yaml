@@ -17,6 +17,8 @@ configMapGenerator:
   - name: kubernetes-dashboards
     files:
       - kubernetes-dashboard.json
+      - kubernetes-storage-cluster-dashboard.json
+      - kubernetes-storage-namespace-dashboard.json
       - kubernetes-api-server-dashboard.json
       - kubernetes-cluster-autoscaler-dashboard.json
   - name: dashboard-providers
