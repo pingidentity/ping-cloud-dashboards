@@ -7,18 +7,22 @@ generatorOptions:
 configMapGenerator:
   - name: ping-dashboards
     files:
+      - p1as-ingress-dashboard.json
       - pa-by-server-dashboard.json
       - pa-topology-dashboard.json
-      - pf-by-server-dashboard.json
-      - pf-topology-dashboard.json
       - pd-by-server-dashboard.json
       - pd-topology-dashboard.json
-      - p1as-ingress-dashboard.json
-      - logging-dashboard.json
+      - pf-by-server-dashboard.json
+      - pf-topology-dashboard.json
   - name: kubernetes-dashboards
     files:
       - kubernetes-dashboard.json
   - name: dashboard-providers
     files:
-      - ping-dashboards.yaml
       - kubernetes-dashboards.yaml
+      - monitoring-dashboards.yaml
+      - ping-dashboards.yaml
+  - name: monitoring-dashboards
+    files:
+      - logging-dashboard.json
+      - opensearch-dashboard.json
