@@ -3,15 +3,16 @@
 ### 1.19.0.0
 
 - OpenSearch migration: update grafana dashboards datasource
+- Added Grafana Dashboards to visualize Kubernetes API metrics and Autoscaler stats
 - OpenSearch migration: Implement Monitoring
 
 _Changes_
 
 - [X] PDO-5245 Update grafana dashboards datasource
+- [X] PDO-5266 Create Grafana Dashboard to visualize Kubernetes API metrics
 - [X] PDO-5307 Add OpenSearch monitoring
 
 ### 1.18.0.0
-
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
 - Refactor 'Kibana PA Dashboard' queries to exclude healcheckconnection information from them
 - PA dashboard migrated from Elasticsearch to Opensearch
