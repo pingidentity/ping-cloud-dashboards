@@ -3,10 +3,12 @@
 ### 1.19.0.0
 
 - OpenSearch migration: update grafana dashboards datasource
+- OpenSearch migration: Implement Monitoring
 
 _Changes_
 
 - [X] PDO-5245 Update grafana dashboards datasource
+- [X] PDO-5307 Add OpenSearch monitoring
 
 ### 1.18.0.0
 
