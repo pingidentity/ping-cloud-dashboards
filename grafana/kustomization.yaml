@@ -14,13 +14,15 @@ configMapGenerator:
       - pd-topology-dashboard.json
       - pf-by-server-dashboard.json
       - pf-topology-dashboard.json
-  - name: kubernetes-dashboards
+  - name: kubernetes-cluster-dashboards
     files:
       - kubernetes-dashboard.json
-      - kubernetes-storage-cluster-dashboard.json
-      - kubernetes-storage-namespace-dashboard.json
       - kubernetes-api-server-dashboard.json
       - kubernetes-cluster-autoscaler-dashboard.json
+  - name: kubernetes-storage-dashboards
+    files:
+      - kubernetes-storage-cluster-dashboard.json
+      - kubernetes-storage-namespace-dashboard.json
   - name: dashboard-providers
     files:
       - kubernetes-dashboards.yaml
