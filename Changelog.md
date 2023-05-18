@@ -6,6 +6,7 @@
 - OpenSearch migration: update grafana dashboards datasource
 - Added Grafana Dashboards to visualize Kubernetes API metrics and Autoscaler stats
 - OpenSearch migration: Implement Monitoring
+- Fix: kubernetes-dashboards configmap "Too long" error
 
 _Changes_
 
