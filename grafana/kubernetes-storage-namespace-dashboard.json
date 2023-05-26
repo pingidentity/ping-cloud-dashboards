@@ -26,7 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 11455,
   "graphTooltip": 1,
-  "id": 4,
+  "id": 19,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -69,7 +69,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#299c46"
+                    "color": "#299c46",
+                    "value": null
                   },
                   {
                     "color": "rgba(237, 129, 40, 0.89)",
@@ -87,7 +88,7 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 14,
+            "w": 24,
             "x": 0,
             "y": 1
           },
@@ -152,7 +153,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#299c46"
+                    "color": "#299c46",
+                    "value": null
                   },
                   {
                     "color": "#FF9830",
@@ -170,7 +172,7 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 7,
+            "w": 12,
             "x": 0,
             "y": 4
           },
@@ -234,7 +236,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#299c46"
+                    "color": "#299c46",
+                    "value": null
                   },
                   {
                     "color": "rgba(237, 129, 40, 0.89)",
@@ -252,8 +255,8 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 7,
-            "x": 7,
+            "w": 12,
+            "x": 12,
             "y": 4
           },
           "id": 6,
@@ -334,7 +337,7 @@
             "h": 14,
             "w": 8,
             "x": 0,
-            "y": 8
+            "y": 2
           },
           "id": 63,
           "links": [],
@@ -422,7 +425,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  (\n    (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"} ) \n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1w], 7 * 24 * 60 * 60) < 0)\n  )\n)",
+              "expr": "  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1w:1h]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
               "format": "table",
               "instant": true,
               "intervalFactor": 1,
@@ -455,7 +458,7 @@
             "h": 7,
             "w": 16,
             "x": 8,
-            "y": 8
+            "y": 2
           },
           "hiddenSeries": false,
           "id": 61,
@@ -492,14 +495,27 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  (\n    ((kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"} ) * 0) + 1\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)",
+              "expr": "count (\n  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1w:1h]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
+              "format": "time_series",
               "instant": false,
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{persistentvolumeclaim}}",
+              "range": true,
               "refId": "A"
             }
           ],
-          "thresholds": [],
+          "thresholds": [
+            {
+              "$$hashKey": "object:2225",
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 1,
+              "yaxis": "left"
+            }
+          ],
           "timeRegions": [],
           "title": "Volumes Full in Week Based on Daily Use Rate - Alert History",
           "tooltip": {
@@ -555,7 +571,7 @@
             "h": 7,
             "w": 16,
             "x": 8,
-            "y": 15
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 78,
@@ -592,7 +608,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n)",
+              "expr": "predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1w:1h]), 7 * 24 * 60 * 60) ",
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "{{persistentvolumeclaim}}",
@@ -646,7 +662,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 22
+            "y": 16
           },
           "id": 12,
           "isNew": false,
@@ -906,7 +922,7 @@
             "h": 6,
             "w": 16,
             "x": 8,
-            "y": 22
+            "y": 16
           },
           "hiddenSeries": false,
           "id": 65,
@@ -1038,7 +1054,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1054,7 +1071,7 @@
             "h": 4,
             "w": 2,
             "x": 0,
-            "y": 29
+            "y": 3
           },
           "id": 4,
           "links": [],
@@ -1081,7 +1098,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(sum (kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\",phase=\"Bound\"} ==1 )) or vector(0)",
+              "expr": "(sum (kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\",job=\"kube-state-metrics\",phase=\"Bound\"} ==1 )) or vector(0)",
               "format": "table",
               "instant": true,
               "refId": "A"
@@ -1103,7 +1120,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 33
+            "y": 7
           },
           "id": 8,
           "isNew": false,
@@ -1289,7 +1306,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": " (kube_persistentvolumeclaim_info { k8s_cluster_name=~\"$k8s_cluster_name\",namespace = \"$namespace\" })",
+              "expr": " (kube_persistentvolumeclaim_info { k8s_cluster_name=~\"$k8s_cluster_name\",job=\"kube-state-metrics\",namespace = \"$namespace\" })",
               "format": "table",
               "instant": true,
               "refId": "E"
@@ -1406,7 +1423,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 43
+            "y": 4
           },
           "hiddenSeries": false,
           "id": 16,
@@ -1426,7 +1443,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "nullPointMode": "null",
+          "nullPointMode": "null as zero",
           "options": {
             "alertThreshold": true
           },
@@ -1514,7 +1531,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 51
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 19,
@@ -1534,7 +1551,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "nullPointMode": "null",
+          "nullPointMode": "null as zero",
           "options": {
             "alertThreshold": true
           },
@@ -1666,9 +1683,9 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 7,
-            "w": 12,
+            "w": 6,
             "x": 0,
-            "y": 60
+            "y": 5
           },
           "hiddenSeries": false,
           "id": 20,
@@ -1820,7 +1837,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 68
+            "y": 6
           },
           "hiddenSeries": false,
           "id": 43,
@@ -1857,7 +1874,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "rate(kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1h])",
+              "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}))[1h:1m]\n)",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -1919,7 +1936,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 74
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 49,
@@ -1956,7 +1973,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "rate(kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1d])",
+              "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}))[1d:10m]\n)",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -2018,7 +2035,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 80
+            "y": 18
           },
           "hiddenSeries": false,
           "id": 50,
@@ -2055,7 +2072,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "rate(kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1w])",
+              "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}))[1w:1h]\n)",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -2129,7 +2146,7 @@
         "description": "Name of K8s cluster",
         "hide": 0,
         "includeAll": true,
-        "label": "K8s cluster name",
+        "label": "cluster_name",
         "multi": false,
         "name": "k8s_cluster_name",
         "options": [],
@@ -2178,6 +2195,7 @@
         "allFormat": "",
         "allValue": "",
         "current": {
+          "selected": false,
           "text": "80",
           "value": "80"
         },
@@ -2237,7 +2255,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
