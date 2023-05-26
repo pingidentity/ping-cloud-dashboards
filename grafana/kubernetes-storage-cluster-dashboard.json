@@ -26,7 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 11454,
   "graphTooltip": 1,
-  "id": 3,
+  "id": 18,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -88,7 +88,7 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 7,
+            "w": 12,
             "x": 0,
             "y": 1
           },
@@ -117,7 +117,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  count (\n    (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!=\"$user_namespace\"})\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!=\"$user_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)\nor\nvector(0)",
+              "expr": "(\n  count (\n    (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!=\"$ping_cloud_namespace\"})\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!=\"$ping_cloud_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)\nor\nvector(0)",
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "alerts",
@@ -171,8 +171,8 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 7,
-            "x": 7,
+            "w": 12,
+            "x": 12,
             "y": 1
           },
           "id": 34,
@@ -200,7 +200,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  count (\n    (\n      (kubelet_volume_stats_available_bytes {k8s_cluster_name=\"$k8s_cluster_name\",namespace=\"$user_namespace\"})\n    )\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes{k8s_cluster_name=\"$k8s_cluster_name\",namespace=\"$user_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)\nor\nvector(0)",
+              "expr": "(\n  count (\n    (\n      (kubelet_volume_stats_available_bytes {k8s_cluster_name=\"$k8s_cluster_name\",namespace=\"$ping_cloud_namespace\"})\n    )\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes{k8s_cluster_name=\"$k8s_cluster_name\",namespace=\"$ping_cloud_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)\nor\nvector(0)",
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "alerts",
@@ -209,55 +209,6 @@
           ],
           "title": "User Namespace Volumes Full in Week Based on Daily Use Rate",
           "type": "stat"
-        },
-        {
-          "dashboardFilter": "",
-          "dashboardTags": [],
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 10,
-            "x": 14,
-            "y": 1
-          },
-          "id": 29,
-          "limit": 10,
-          "nameFilter": "",
-          "onlyAlertsOnDashboard": true,
-          "options": {
-            "alertInstanceLabelFilter": "",
-            "alertName": "",
-            "dashboardAlerts": false,
-            "groupBy": [],
-            "groupMode": "default",
-            "maxItems": 20,
-            "sortOrder": 1,
-            "stateFilter": {
-              "error": true,
-              "firing": true,
-              "noData": false,
-              "normal": false,
-              "pending": true
-            },
-            "viewMode": "list"
-          },
-          "show": "current",
-          "sortOrder": 1,
-          "stateFilter": [],
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "refId": "A"
-            }
-          ],
-          "title": "Dashboard Alerts",
-          "type": "alertlist"
         },
         {
           "datasource": {
@@ -304,7 +255,7 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 7,
+            "w": 12,
             "x": 0,
             "y": 4
           },
@@ -387,8 +338,8 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 7,
-            "x": 7,
+            "w": 12,
+            "x": 12,
             "y": 4
           },
           "id": 47,
@@ -467,7 +418,7 @@
           "fontSize": "100%",
           "gridPos": {
             "h": 14,
-            "w": 7,
+            "w": 8,
             "x": 0,
             "y": 2
           },
@@ -480,6 +431,7 @@
           },
           "styles": [
             {
+              "$$hashKey": "object:615",
               "alias": "Available",
               "align": "auto",
               "colorMode": "row",
@@ -500,6 +452,7 @@
               "unit": "bytes"
             },
             {
+              "$$hashKey": "object:616",
               "alias": "Namespace",
               "align": "auto",
               "colors": [
@@ -516,6 +469,7 @@
               "unit": "short"
             },
             {
+              "$$hashKey": "object:617",
               "alias": "PVC",
               "align": "auto",
               "colors": [
@@ -532,6 +486,7 @@
               "unit": "short"
             },
             {
+              "$$hashKey": "object:618",
               "alias": "",
               "align": "auto",
               "colors": [
@@ -553,7 +508,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  (\n    (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$user_namespace\"} ) \n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$user_namespace\"}[1w], 7 * 24 * 60 * 60) < 0)\n  )\n)",
+              "expr": "  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
               "format": "table",
               "instant": true,
               "intervalFactor": 1,
@@ -619,8 +574,8 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 7,
-            "w": 17,
-            "x": 7,
+            "w": 16,
+            "x": 8,
             "y": 2
           },
           "hiddenSeries": false,
@@ -658,7 +613,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "count (\n    (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!=\"$user_namespace\"})\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!=\"$user_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )",
+              "expr": "count (\n  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
               "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate (Infrastructure)",
               "range": true,
               "refId": "A"
@@ -666,11 +621,13 @@
           ],
           "thresholds": [
             {
+              "$$hashKey": "object:125",
               "colorMode": "critical",
               "fill": true,
               "line": true,
               "op": "gt",
-              "value": 0
+              "value": 1,
+              "yaxis": "left"
             }
           ],
           "timeRegions": [],
@@ -688,6 +645,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:111",
               "decimals": 0,
               "format": "short",
               "label": "# of Alerts",
@@ -696,6 +654,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:112",
               "format": "short",
               "logBase": 1,
               "show": false
@@ -724,8 +683,8 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 7,
-            "w": 17,
-            "x": 7,
+            "w": 16,
+            "x": 8,
             "y": 9
           },
           "hiddenSeries": false,
@@ -764,7 +723,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$user_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n)",
+              "expr": "predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"})[1d:10m]), 7 * 24 * 60 * 60)",
               "format": "time_series",
               "hide": false,
               "instant": false,
@@ -789,6 +748,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:468",
               "decimals": 0,
               "format": "bytes",
               "label": "1 Week Predicted Available Space",
@@ -796,6 +756,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:469",
               "format": "bytes",
               "logBase": 1,
               "show": false
@@ -820,7 +781,7 @@
           "fontSize": "100%",
           "gridPos": {
             "h": 13,
-            "w": 7,
+            "w": 8,
             "x": 0,
             "y": 16
           },
@@ -833,6 +794,7 @@
           },
           "styles": [
             {
+              "$$hashKey": "object:895",
               "alias": "Available",
               "align": "auto",
               "colorMode": "row",
@@ -853,6 +815,7 @@
               "unit": "bytes"
             },
             {
+              "$$hashKey": "object:896",
               "alias": "Namespace",
               "align": "auto",
               "colors": [
@@ -869,6 +832,7 @@
               "unit": "short"
             },
             {
+              "$$hashKey": "object:897",
               "alias": "PVC",
               "align": "auto",
               "colors": [
@@ -885,6 +849,7 @@
               "unit": "short"
             },
             {
+              "$$hashKey": "object:898",
               "alias": "",
               "align": "auto",
               "colors": [
@@ -907,7 +872,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "(\n  (\n    (\n      (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$user_namespace\"})\n    )\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$user_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)",
+              "expr": "  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
               "format": "table",
               "instant": true,
               "intervalFactor": 1,
@@ -917,7 +882,7 @@
             }
           ],
           "title": "User Namespace Volumes Full in Week Based on Daily Use Rate - Current",
-          "transform": "timeseries_to_rows",
+          "transform": "table",
           "type": "table-old"
         },
         {
@@ -974,8 +939,8 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 17,
-            "x": 7,
+            "w": 16,
+            "x": 8,
             "y": 16
           },
           "hiddenSeries": false,
@@ -1013,19 +978,21 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "count (\n    (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$user_namespace\"})\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$user_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )",
-              "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate (User Namespace: $user_namespace)",
+              "expr": "count (\n  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
+              "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate (User Namespace: $ping_cloud_namespace)",
               "range": true,
               "refId": "A"
             }
           ],
           "thresholds": [
             {
+              "$$hashKey": "object:275",
               "colorMode": "critical",
               "fill": true,
               "line": true,
               "op": "gt",
-              "value": 0
+              "value": 1,
+              "yaxis": "left"
             }
           ],
           "timeRegions": [],
@@ -1043,6 +1010,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:261",
               "decimals": 0,
               "format": "short",
               "label": "# of Alerts",
@@ -1051,6 +1019,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:262",
               "format": "short",
               "logBase": 1,
               "show": false
@@ -1079,8 +1048,8 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 7,
-            "w": 17,
-            "x": 7,
+            "w": 16,
+            "x": 8,
             "y": 22
           },
           "hiddenSeries": false,
@@ -1119,7 +1088,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$user_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n)",
+              "expr": "predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"})[1d:10m]), 7 * 24 * 60 * 60)",
               "format": "time_series",
               "hide": false,
               "instant": false,
@@ -1144,6 +1113,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:413",
               "decimals": 0,
               "format": "bytes",
               "label": "1 Week Predicted Available Space",
@@ -1151,6 +1121,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:414",
               "format": "bytes",
               "logBase": 1,
               "show": false
@@ -1171,7 +1142,7 @@
           "fontSize": "100%",
           "gridPos": {
             "h": 6,
-            "w": 7,
+            "w": 8,
             "x": 0,
             "y": 29
           },
@@ -1435,8 +1406,8 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 17,
-            "x": 7,
+            "w": 16,
+            "x": 8,
             "y": 29
           },
           "hiddenSeries": false,
@@ -1614,7 +1585,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(sum (kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",phase=\"Bound\"} ==1 )) or vector(0)",
+              "expr": "(sum (kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",job=\"kube-state-metrics\",phase=\"Bound\"} ==1 )) or vector(0)",
               "format": "table",
               "instant": true,
               "refId": "A"
@@ -1822,7 +1793,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"}",
+              "expr": "kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\",job=\"kube-state-metrics\"}",
               "format": "table",
               "instant": true,
               "refId": "E"
@@ -1959,7 +1930,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "nullPointMode": "null",
+          "nullPointMode": "null as zero",
           "options": {
             "alertThreshold": true
           },
@@ -2065,7 +2036,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "nullPointMode": "null",
+          "nullPointMode": "null as zero",
           "options": {
             "alertThreshold": true
           },
@@ -2215,7 +2186,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "rate(kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}[1h])",
+              "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1h:1m]\n)",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -2314,7 +2285,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "rate(kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"}[1d])",
+              "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1d:10m]\n)",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -2415,7 +2386,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "rate(kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"}[1w])",
+              "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1w:1h]\n)",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -2479,7 +2450,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
@@ -2489,7 +2462,7 @@
         "description": "Name of K8s cluster",
         "hide": 0,
         "includeAll": true,
-        "label": "K8s cluster name",
+        "label": "cluster_name",
         "multi": false,
         "name": "k8s_cluster_name",
         "options": [],
@@ -2515,9 +2488,9 @@
         "description": "User namespace",
         "hide": 0,
         "includeAll": false,
-        "label": "User namespace",
+        "label": "ping-cloud namespace",
         "multi": false,
-        "name": "user_namespace",
+        "name": "ping_cloud_namespace",
         "options": [],
         "query": {
           "query": "label_values(kube_namespace_labels, namespace)",
@@ -2580,6 +2553,6 @@
   "timezone": "",
   "title": "Kubernetes Storage Volumes (Cluster)",
   "uid": "feAoiE84k",
-  "version": 2,
+  "version": 7,
   "weekStart": ""
 }
