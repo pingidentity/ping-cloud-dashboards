@@ -31,7 +31,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "fPADfUs4k"
+        "uid": "muQHLUs4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -123,7 +123,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "fPADfUs4k"
+            "uid": "muQHLUs4k"
           },
           "format": "table",
           "metrics": [
