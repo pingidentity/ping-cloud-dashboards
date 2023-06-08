@@ -7,6 +7,7 @@
 - Added Grafana Dashboards to visualize Kubernetes API metrics and Autoscaler stats
 - OpenSearch migration: Implement Monitoring
 - Fix: kubernetes-dashboards configmap "Too long" error
+- Fix: PingAccess OSD dashboard incorrect visualisations
 
 _Changes_
 
@@ -14,6 +15,7 @@ _Changes_
 - [X] PDO-5265 Create Grafana Dashboard to visualize Kubernetes volumes metrics
 - [X] PDO-5266 Create Grafana Dashboard to visualize Kubernetes API metrics
 - [X] PDO-5307 Add OpenSearch monitoring
+- [X] PDO-5596 PingAccess OSD dashboard is broken
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
