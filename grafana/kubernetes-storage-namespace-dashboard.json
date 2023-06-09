@@ -284,7 +284,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(count(kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",phase!=\"Bound\"} > 0) or (vector(0)))",
+              "expr": "(count(kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",job=\"kube-state-metrics\",phase!=\"Bound\"} > 0) or (vector(0)))",
               "format": "table",
               "instant": true,
               "refId": "A"
@@ -1054,8 +1054,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2136,7 +2135,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",

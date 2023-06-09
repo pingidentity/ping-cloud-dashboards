@@ -200,14 +200,14 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n  count (\n    (\n      (kubelet_volume_stats_available_bytes {k8s_cluster_name=\"$k8s_cluster_name\",namespace=\"$ping_cloud_namespace\"})\n    )\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes{k8s_cluster_name=\"$k8s_cluster_name\",namespace=\"$ping_cloud_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)\nor\nvector(0)",
+              "expr": "(\n  count (\n    (\n      (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$ping_cloud_namespace\"} == 0)\n    )\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$ping_cloud_namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)\nor\nvector(0)",
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "alerts",
               "refId": "A"
             }
           ],
-          "title": "User Namespace Volumes Full in Week Based on Daily Use Rate",
+          "title": "Ping-cloud Namespace Volumes Full in Week Based on Daily Use Rate",
           "type": "stat"
         },
         {
@@ -367,7 +367,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(count(kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",phase!=\"Bound\"} > 0) or (vector(0)))",
+              "expr": "(count(kube_persistentvolumeclaim_status_phase{k8s_cluster_name=~\"$k8s_cluster_name\",job=\"kube-state-metrics\",phase!=\"Bound\"} > 0) or (vector(0)))",
               "format": "time_series",
               "instant": true,
               "refId": "A"
@@ -881,7 +881,7 @@
               "refId": "A"
             }
           ],
-          "title": "User Namespace Volumes Full in Week Based on Daily Use Rate - Current",
+          "title": "Ping-cloud Namespace Volumes Full in Week Based on Daily Use Rate - Current",
           "transform": "table",
           "type": "table-old"
         },
@@ -917,7 +917,7 @@
             "for": "24h",
             "frequency": "1h",
             "handler": 1,
-            "name": "User Namespace Volumes Full in Week Based on Daily Use Rate Alert",
+            "name": "Ping-cloud Namespace Volumes Full in Week Based on Daily Use Rate Alert",
             "noDataState": "ok",
             "notifications": []
           },
@@ -979,7 +979,7 @@
               },
               "editorMode": "code",
               "expr": "count (\n  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
-              "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate (User Namespace: $ping_cloud_namespace)",
+              "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate (Ping-cloud Namespace: $ping_cloud_namespace)",
               "range": true,
               "refId": "A"
             }
@@ -996,7 +996,7 @@
             }
           ],
           "timeRegions": [],
-          "title": "User Namespace Volumes Full in Week Based on Daily Use Rate - Alert History",
+          "title": "Ping-cloud Namespace Volumes Full in Week Based on Daily Use Rate - Alert History",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1099,7 +1099,7 @@
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "User Namespace Volumes Full in Week Based on Daily Use Rate - Predicted Available Space History",
+          "title": "Ping-cloud Namespace Volumes Full in Week Based on Daily Use Rate - Predicted Available Space History",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -2485,10 +2485,10 @@
           "uid": "P1809F7CD0C75ACF3"
         },
         "definition": "label_values(kube_namespace_labels, namespace)",
-        "description": "User namespace",
+        "description": "Ping-cloud namespace",
         "hide": 0,
         "includeAll": false,
-        "label": "ping-cloud namespace",
+        "label": "Ping-cloud namespace",
         "multi": false,
         "name": "ping_cloud_namespace",
         "options": [],
@@ -2553,6 +2553,6 @@
   "timezone": "",
   "title": "Kubernetes Storage Volumes (Cluster)",
   "uid": "feAoiE84k",
-  "version": 7,
+  "version": 11,
   "weekStart": ""
 }
