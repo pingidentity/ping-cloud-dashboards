@@ -16,6 +16,7 @@ _Changes_
 - [X] PDO-5266 Create Grafana Dashboard to visualize Kubernetes API metrics
 - [X] PDO-5307 Add OpenSearch monitoring
 - [X] PDO-5596 PingAccess OSD dashboard is broken
+- [X] PDO-5601 os-dashboards-pf configMap breaks developer, and new ci/cd deploys
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
