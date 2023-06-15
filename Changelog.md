@@ -8,6 +8,7 @@
 - OpenSearch migration: Implement Monitoring
 - Fix: kubernetes-dashboards configmap "Too long" error
 - Fix: PingAccess OSD dashboard incorrect visualisations
+- Fix: OpenSearch PA-WAS dashboard: Tor/Threat geoIP marks are not displayed on Audit Map
 
 _Changes_
 
@@ -15,6 +16,7 @@ _Changes_
 - [X] PDO-5265 Create Grafana Dashboard to visualize Kubernetes volumes metrics
 - [X] PDO-5266 Create Grafana Dashboard to visualize Kubernetes API metrics
 - [X] PDO-5307 Add OpenSearch monitoring
+- [X] PDO-5500 OpenSearch PA-WAS dashboard: Tor/Threat geoIP marks are not displayed on Audit Map
 - [X] PDO-5596 PingAccess OSD dashboard is broken
 - [X] PDO-5601 os-dashboards-pf configMap breaks developer, and new ci/cd deploys
 
