@@ -17,6 +17,7 @@ _Changes_
 - [X] PDO-5266 Create Grafana Dashboard to visualize Kubernetes API metrics
 - [X] PDO-5307 Add OpenSearch monitoring
 - [X] PDO-5500 OpenSearch PA-WAS dashboard: Tor/Threat geoIP marks are not displayed on Audit Map
+- [X] PDO-5530 Refactor Grafana 'PingAccess Topology Dashboard' queries to exclude healthcheckconnection information from them
 - [X] PDO-5596 PingAccess OSD dashboard is broken
 - [X] PDO-5601 os-dashboards-pf configMap breaks developer, and new ci/cd deploys
 

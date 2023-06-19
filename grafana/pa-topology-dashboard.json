@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -110,7 +109,7 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "alias": "",
+          "alias": "Count",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -128,8 +127,9 @@
           "format": "table",
           "metrics": [
             {
+              "field": "trackingId.keyword",
               "id": "1",
-              "type": "count"
+              "type": "cardinality"
             }
           ],
           "query": "method: \"GET\" AND responseCode: 403 AND cluster_name: $cluster_name",
@@ -336,7 +336,7 @@
       "pluginVersion": "8.4.5",
       "targets": [
         {
-          "alias": "",
+          "alias": "Count",
           "bucketAggs": [
             {
               "field": "@timestamp",
@@ -354,8 +354,9 @@
           "format": "table",
           "metrics": [
             {
+              "field": "trackingId.keyword",
               "id": "1",
-              "type": "count"
+              "type": "cardinality"
             }
           ],
           "query": "((responseCode: 200 AND NOT authMech: NULL) OR responseCode:401) AND cluster_name: $cluster_name",
@@ -376,7 +377,7 @@
       {
         "allValue": "*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -403,7 +404,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
