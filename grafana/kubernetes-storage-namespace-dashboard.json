@@ -69,8 +69,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#299c46",
-                    "value": null
+                    "color": "#299c46"
                   },
                   {
                     "color": "rgba(237, 129, 40, 0.89)",
@@ -117,7 +116,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "(\n count (\n   (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})\n   and\n   (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1d], 7 * 24 * 60 * 60) < 0)\n )\n)\nor\nvector(0)",
+              "expr": "(\n count (\n   (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}[1d], 7 * 24 * 60 * 60) <= 0)\n )\n)\nor\nvector(0)",
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "alerts",
@@ -153,8 +152,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#299c46",
-                    "value": null
+                    "color": "#299c46"
                   },
                   {
                     "color": "#FF9830",
@@ -236,8 +234,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#299c46",
-                    "value": null
+                    "color": "#299c46"
                   },
                   {
                     "color": "rgba(237, 129, 40, 0.89)",
@@ -425,7 +422,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1w:1h]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
+              "expr": "  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
               "format": "table",
               "instant": true,
               "intervalFactor": 1,
@@ -495,7 +492,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "count (\n  (\n    sum by (namespace, persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"}) \n    == \n    0 \n  )\n  or\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1w:1h]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
+              "expr": "count (\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
               "format": "time_series",
               "instant": false,
               "interval": "",
@@ -608,7 +605,7 @@
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1w:1h]), 7 * 24 * 60 * 60) ",
+              "expr": "predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1d:10m]), 7 * 24 * 60 * 60) ",
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "{{persistentvolumeclaim}}",
