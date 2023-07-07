@@ -35,6 +35,7 @@ spec:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
+      "id": 17,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -370,7 +371,7 @@ spec:
                   "type": "cardinality"
                 }
               ],
-              "query": "((responseCode: 200 AND NOT authMech: NULL) OR responseCode:401) AND cluster_name: $cluster_name",
+              "query": "((responseCode: 200 AND NOT authMech: NULL) OR responseCode:401) AND NOT applicationName: Healthcheck AND cluster_name: $cluster_name",
               "queryType": "lucene",
               "refId": "A",
               "timeField": "@timestamp"
@@ -435,6 +436,6 @@ spec:
       "timezone": "",
       "title": "PingAccess Topology Dashboard",
       "uid": "Z4QMfyfMk",
-      "version": 1,
+      "version": 15,
       "weekStart": ""
     }
