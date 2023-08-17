@@ -9,6 +9,7 @@
 - Fix: kubernetes-dashboards configmap "Too long" error
 - Fix: PingAccess OSD dashboard incorrect visualisations
 - Fix: OpenSearch PA-WAS dashboard: Tor/Threat geoIP marks are not displayed on Audit Map
+- Update OpenSearch version to 2.8.0 in dasboards data
 
 _Changes_
 
@@ -20,6 +21,7 @@ _Changes_
 - [X] PDO-5530 Refactor Grafana 'PingAccess Topology Dashboard' queries to exclude healthcheckconnection information from them
 - [X] PDO-5596 PingAccess OSD dashboard is broken
 - [X] PDO-5601 os-dashboards-pf configMap breaks developer, and new ci/cd deploys
+- [X] PDO-5873 Update OpenSearch/OSD to v2.8
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
