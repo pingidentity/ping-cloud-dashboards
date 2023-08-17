@@ -971,7 +971,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (pod)",
+              "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (pod)",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "{{ pod }}",
@@ -1094,7 +1094,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name=~\"^k8s_.*\",container!=\"POD\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (container, pod)",
+              "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",container!=\"POD\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (container, pod)",
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
@@ -1366,7 +1366,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum (container_memory_working_set_bytes{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}) by (pod)",
+              "expr": "sum (container_memory_working_set_bytes{image!=\"\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}) by (pod)",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "{{ pod }}",
@@ -1486,7 +1486,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum (container_memory_working_set_bytes{image!=\"\",name=~\"^k8s_.*\",container!=\"POD\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)",
+              "expr": "sum (container_memory_working_set_bytes{image!=\"\",container!=\"POD\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "pod: {{ pod }} | {{ container }}",
@@ -1754,7 +1754,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (pod)",
+              "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (pod)",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "-> {{ pod }}",
@@ -1768,7 +1768,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (pod)",
+              "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (pod)",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "<- {{ pod }}",
@@ -1888,7 +1888,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (container, pod)",
+              "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (container, pod)",
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
@@ -1903,7 +1903,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (container, pod)",
+              "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",kubernetes_io_hostname=~\"^$Node$\",k8s_cluster_name=~\"$cluster_name\"}[1m])) by (container, pod)",
               "hide": false,
               "interval": "10s",
               "intervalFactor": 1,
