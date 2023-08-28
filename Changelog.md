@@ -1,12 +1,48 @@
 # Changelog
 
-### 1.18.0.0
+### 1.19.0.0
 
-- Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
+- Created Grafana Dashboard to visualize Kubernetes volumes metrics
+- OpenSearch migration: update grafana dashboards datasource
+- Added Grafana Dashboards to visualize Kubernetes API metrics and Autoscaler stats
+- OpenSearch migration: Implement Monitoring
+- Fix: kubernetes-dashboards configmap "Too long" error
+- Fix: PingAccess OSD dashboard incorrect visualisations
+- Fix: OpenSearch PA-WAS dashboard: Tor/Threat geoIP marks are not displayed on Audit Map
+- Fix: Pods CPU usage/memory usage/network I/O graphs have No data on the Kubernetes Cluster Monitoring dashboard
+- Update OpenSearch version to 2.8.0 in dasboards data
 
 _Changes_
 
+- [X] PDO-5245 Update grafana dashboards datasource
+- [X] PDO-5265 Create Grafana Dashboard to visualize Kubernetes volumes metrics
+- [X] PDO-5266 Create Grafana Dashboard to visualize Kubernetes API metrics
+- [X] PDO-5307 Add OpenSearch monitoring
+- [X] PDO-5500 OpenSearch PA-WAS dashboard: Tor/Threat geoIP marks are not displayed on Audit Map
+- [X] PDO-5530 Refactor Grafana 'PingAccess Topology Dashboard' queries to exclude healthcheckconnection information from them
+- [X] PDO-5596 PingAccess OSD dashboard is broken
+- [X] PDO-5601 os-dashboards-pf configMap breaks developer, and new ci/cd deploys
+- [X] PDO-5830 Pods CPU usage/memory usage/network I/O graphs have No data on the Kubernetes Cluster Monitoring dashboard
+- [X] PDO-5873 Update OpenSearch/OSD to v2.8
+
+### 1.18.0.0
+- Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
+- Refactor 'Kibana PA Dashboard' queries to exclude healcheckconnection information from them
+- PA dashboard migrated from Elasticsearch to Opensearch
+- OpenSearch migration: Migrate PF dashboards
+- OpenSearch migration: Migrate PA-WAS dashboard
+- Add Logstash dashboard
+- Fix: Splitted Grafana dashboards into different CMs to avoid length limit issue
+
+_Changes_
+
+- [X] PDO-4722 Grafana: replacement of "grafana-kubernetes-app" plugin
 - [X] PDO-4952 Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
+- [X] PDO-5114 OpenSearch migration: Migrate PA dashboard
+- [X] PDO-5116 OpenSearch migration: Migrate PF dashboards
+- [X] PDO-5117 OpenSearch migration: Migrate PA-WAS dashboard
+- [X] PDO-5142 Add logstash metrics to prometheus
+- [X] PDO-5163 Refactor 'Kibana PA Dashboard' queries to exclude healcheckconnection information from them
 
 ### 1.17.0.0
 
