@@ -10,6 +10,7 @@
 - Add Logstash dashboard
 - Fix: Splitted Grafana dashboards into different CMs to avoid length limit issue
 - Fix: No data on the Kubernetes Cluster Monitoring dashboard
+- Fix: P1AS Ingress Dashboard
 
 _Changes_
 
@@ -21,6 +22,7 @@ _Changes_
 - [X] PDO-5142 Add logstash metrics to prometheus
 - [X] PDO-5163 Refactor 'Kibana PA Dashboard' queries to exclude healcheckconnection information from them
 - [X] PDO-5437 Pods CPU usage/memory usage/network I/O graphs have No data on the Kubernetes Cluster Monitoring dashboard
+- [X] PDO-6231 Fix P1AS Ingress Dashboard
 
 ### 1.17.0.0
 
