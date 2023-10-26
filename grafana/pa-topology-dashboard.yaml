@@ -35,7 +35,7 @@ spec:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 17,
+      "id": 14,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -156,7 +156,7 @@ spec:
         {
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "fPADfUs4k"
+            "uid": "muQHLUs4k"
           },
           "fieldConfig": {
             "defaults": {
@@ -257,7 +257,7 @@ spec:
                   "type": "count"
                 }
               ],
-              "query": "NOT client: 127.0.0.1 AND cluster_name: $cluster_name",
+              "query": "kubernetes.container_name: pingaccess-admin AND NOT client: 127.0.0.1 AND cluster_name: $cluster_name",
               "queryType": "lucene",
               "refId": "A",
               "timeField": "@timestamp"
@@ -436,6 +436,6 @@ spec:
       "timezone": "",
       "title": "PingAccess Topology Dashboard",
       "uid": "Z4QMfyfMk",
-      "version": 15,
+      "version": 82,
       "weekStart": ""
     }

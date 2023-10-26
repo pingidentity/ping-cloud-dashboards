@@ -35,7 +35,7 @@ spec:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 5,
+      "id": 13,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -494,7 +494,7 @@ spec:
         {
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "HZX0Y8yVz"
+            "uid": "xCysL8y4z"
           },
           "fieldConfig": {
             "defaults": {
@@ -586,7 +586,7 @@ spec:
               ],
               "datasource": {
                 "type": "grafana-opensearch-datasource",
-                "uid": "HZX0Y8yVz"
+                "uid": "xCysL8y4z"
               },
               "format": "table",
               "metrics": [
@@ -595,7 +595,7 @@ spec:
                   "type": "count"
                 }
               ],
-              "query": "NOT clientIp: 127.0.0.1 AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name",
+              "query": "kubernetes.container_name: pingfederate-admin AND NOT clientIp: \"0:0:0:0:0:0:0:1\" AND NOT clientIp: 127.0.0.1 AND NOT connectionId: healthcheckconnection AND cluster_name: $cluster_name",
               "queryType": "lucene",
               "refId": "A",
               "timeField": "@timestamp"
@@ -613,7 +613,7 @@ spec:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
@@ -660,6 +660,6 @@ spec:
       "timezone": "",
       "title": "PingFederate Topology Dashboard",
       "uid": "dN1PasBMk",
-      "version": 1,
+      "version": 84,
       "weekStart": ""
     }
