@@ -19,3 +19,5 @@ resources:
   - monitoring-dashboards-folder.yaml
   - logging-dashboard.yaml
   - opensearch-dashboard.yaml
+  - karpenter-performance-dashboard.yaml
+  - karpenter-capacity-dashboard.yaml
