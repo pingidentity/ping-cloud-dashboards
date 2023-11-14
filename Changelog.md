@@ -15,6 +15,7 @@
 - Add Karpenter capacity and performance Grafana dashboard
 - Add new metric for Kubernetes API Server Performance dashboard
 - Fix P1AS Ingress Dashboard
+- Add volume-autoscaler dashboard
 
 _Changes_
 
@@ -32,6 +33,7 @@ _Changes_
 - [X] PDO-5923 Karpenter capacity and performance Grafana dashboard
 - [X] PDO-6091 Add new metric for Kubernetes API Server Performance dashboard
 - [X] PDO-6231 Fix P1AS Ingress Dashboard
+- [X] PDO-6334 Kubernetes-Volume-Autoscaler: create the Grafana Dashboard
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
