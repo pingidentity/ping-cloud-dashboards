@@ -2283,6 +2283,6 @@ spec:
       "timezone": "",
       "title": "Kubernetes Storage Volumes (Namespace)",
       "uid": "Gg1oiE8Vz",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }

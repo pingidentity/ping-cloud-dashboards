@@ -29,7 +29,6 @@ spec:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 20,
       "links": [],
       "liveNow": true,
       "panels": [
@@ -330,7 +329,7 @@ spec:
           "type": "stat"
         }
       ],
-      "refresh": "auto",
+      "refresh": "1m",
       "schemaVersion": 38,
       "style": "dark",
       "tags": [],
@@ -345,6 +344,6 @@ spec:
       "timezone": "",
       "title": "Volume Autoscaler",
       "uid": "b52bcc76-7916-47b0-9296-0d739882bf5b",
-      "version": 9,
+      "version": 1,
       "weekStart": ""
     }
