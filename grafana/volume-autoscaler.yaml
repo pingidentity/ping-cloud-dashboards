@@ -116,7 +116,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "max(volume_autoscaler_num_valid_pvcs) by (instance)",
+              "expr": "max(volume_autoscaler_num_valid_pvcs{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
               "instant": false,
               "legendFormat": "PVCs",
               "range": true,
@@ -128,7 +128,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "max(volume_autoscaler_num_pvcs_above_threshold) by (instance)",
+              "expr": "max(volume_autoscaler_num_pvcs_above_threshold{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
               "hide": false,
               "instant": false,
               "legendFormat": "PVCs need to be scaled",
@@ -221,7 +221,7 @@ spec:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "increase(volume_autoscaler_resize_attempted_total[5m])",
+              "expr": "increase(volume_autoscaler_resize_attempted_total{k8s_cluster_name=~\"$cluster_name\"}[5m])",
               "format": "time_series",
               "hide": false,
               "instant": false,
@@ -236,7 +236,7 @@ spec:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "increase(volume_autoscaler_resize_failure_total[5m])",
+              "expr": "increase(volume_autoscaler_resize_failure_total{k8s_cluster_name=~\"$cluster_name\"}[5m])",
               "format": "time_series",
               "hide": false,
               "instant": false,
@@ -250,7 +250,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "increase(volume_autoscaler_resize_successful_total[5m])",
+              "expr": "increase(volume_autoscaler_resize_successful_total{k8s_cluster_name=~\"$cluster_name\"}[5m])",
               "format": "time_series",
               "hide": false,
               "instant": false,
@@ -318,7 +318,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "volume_autoscaler_release_info",
+              "expr": "volume_autoscaler_release_info{k8s_cluster_name=~\"$cluster_name\"}",
               "instant": false,
               "legendFormat": "{{version}}",
               "range": true,
@@ -334,7 +334,35 @@ spec:
       "style": "dark",
       "tags": [],
       "templating": {
-        "list": []
+        "list": [
+          {
+            "allValue": ".*",
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P1809F7CD0C75ACF3"
+            },
+            "definition": "label_values(k8s_cluster_name)",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "cluster_name",
+            "options": [],
+            "query": {
+              "query": "label_values(k8s_cluster_name)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          }
+        ]
       },
       "time": {
         "from": "now-3h",
