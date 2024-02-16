@@ -36,6 +36,7 @@ _Changes_
 - [X] PDO-6231 Fix P1AS Ingress Dashboard
 - [X] PDO-6334 Kubernetes-Volume-Autoscaler: create the Grafana Dashboard
 - [X] PDO-6560 Upgrade grafana-operator, grafana-folders
+- [X] PDO-6676 Identify and map numeric fields in Elastic
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
