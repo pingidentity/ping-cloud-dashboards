@@ -5,6 +5,7 @@ metadata:
   name: kubernetesapiserver
 spec:
   folder: "Kubernetes"
+  resyncPeriod: 30m
   instanceSelector:
     matchLabels:
       dashboards: "grafana"

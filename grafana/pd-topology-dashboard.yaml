@@ -5,6 +5,7 @@ metadata:
   name: pdtopology
 spec:
   folder: "Ping"
+  resyncPeriod: 30m
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -266,7 +267,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum by (operation) (throughput{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+              "expr": "sum by (operation) (throughput{k8s_cluster_name=~\"$cluster_name\"})",
               "interval": "",
               "legendFormat": "{{operation}}",
               "refId": "A"
@@ -359,7 +360,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum(throughput{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+              "expr": "sum(throughput{k8s_cluster_name=~\"$cluster_name\"})",
               "interval": "",
               "legendFormat": "Throughput",
               "refId": "A"
@@ -452,7 +453,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "avg by (operation) (response_time{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"} > 0)",
+              "expr": "avg by (operation) (response_time{k8s_cluster_name=~\"$cluster_name\"} > 0)",
               "interval": "",
               "legendFormat": "{{operation}}",
               "refId": "A"
@@ -545,7 +546,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "avg((response_time{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"} > 0))",
+              "expr": "avg((response_time{k8s_cluster_name=~\"$cluster_name\"} > 0))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -638,7 +639,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "sum by (gcType, size, cause) (rate(garbage_collections{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}[1m]))",
+              "expr": "sum by (gcType, size, cause) (rate(garbage_collections{k8s_cluster_name=~\"$cluster_name\"}[1m]))",
               "interval": "",
               "legendFormat": "{{gcType}}-{{size}}-{{cause}}",
               "refId": "A"
@@ -731,7 +732,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "replica_backlog {namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "replica_backlog {k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -824,7 +825,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "avg by (backendID) (backend_entry_count{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+              "expr": "avg by (backendID) (backend_entry_count{k8s_cluster_name=~\"$cluster_name\"})",
               "interval": "",
               "legendFormat": "{{backendID}}",
               "refId": "A"
@@ -917,7 +918,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "avg by (region) (garbage_collection_live_megabytes{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})",
+              "expr": "avg by (region) (garbage_collection_live_megabytes{k8s_cluster_name=~\"$cluster_name\"})",
               "interval": "",
               "legendFormat": "{{region}}",
               "refId": "A"
@@ -933,32 +934,6 @@ spec:
       "tags": [],
       "templating": {
         "list": [
-          {
-            "current": {
-              "selected": false,
-              "text": "ping-cloud",
-              "value": "ping-cloud"
-            },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "P1809F7CD0C75ACF3"
-            },
-            "definition": "label_values(kube_namespace_labels, namespace)",
-            "hide": 0,
-            "includeAll": false,
-            "multi": false,
-            "name": "namespace",
-            "options": [],
-            "query": {
-              "query": "label_values(kube_namespace_labels, namespace)",
-              "refId": "StandardVariableQuery"
-            },
-            "refresh": 1,
-            "regex": "/ping-cloud*/",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
           {
             "allValue": ".*",
             "current": {

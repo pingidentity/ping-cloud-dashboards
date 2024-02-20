@@ -5,6 +5,7 @@ metadata:
   name: pfbyserver
 spec:
   folder: "Ping"
+  resyncPeriod: 30m
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -121,7 +122,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "rate(jvm_gc_collection_seconds_sum{job=\"pf-jmx-exporter\", namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}[1m])",
+              "expr": "rate(jvm_gc_collection_seconds_sum{k8s_cluster_name=~\"$cluster_name\", cluster=\"pingfederate-cluster\"}[1m])",
               "interval": "",
               "legendFormat": "{{instance}} - {{gc}}",
               "refId": "A"
@@ -221,7 +222,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "(java_lang_PS_Old_Gen_CollectionUsage_used{job=\"pf-jmx-exporter\", namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"} or java_lang_Tenured_Gen_CollectionUsage_used{job=\"pf-jmx-exporter\", namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})/(java_lang_PS_Old_Gen_CollectionUsage_max{job=\"pf-jmx-exporter\", namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"} or java_lang_Tenured_Gen_CollectionUsage_max{job=\"pf-jmx-exporter\", namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"})*100",
+              "expr": "(java_lang_PS_Old_Gen_CollectionUsage_used{k8s_cluster_name=~\"$cluster_name\", cluster=\"pingfederate-cluster\"} or java_lang_Tenured_Gen_CollectionUsage_used{k8s_cluster_name=~\"$cluster_name\", cluster=\"pingfederate-cluster\"})/(java_lang_PS_Old_Gen_CollectionUsage_max{k8s_cluster_name=~\"$cluster_name\", cluster=\"pingfederate-cluster\"} or java_lang_Tenured_Gen_CollectionUsage_max{k8s_cluster_name=~\"$cluster_name\", cluster=\"pingfederate-cluster\"})*100",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -316,7 +317,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_total_transactions{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_total_transactions{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -417,7 +418,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_total_failed_transactions{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_total_failed_transactions{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -516,7 +517,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_response_time_statistics_mean{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_response_time_statistics_mean{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -609,7 +610,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "rate(metric_pingfederate_response_time_statistics_90_percentile{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}[5m])",
+              "expr": "rate(metric_pingfederate_response_time_statistics_90_percentile{k8s_cluster_name=~\"$cluster_name\"}[5m])",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -702,7 +703,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_response_concurrency_statistics_mean{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_response_concurrency_statistics_mean{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -795,7 +796,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_response_concurrency_statistics_90_percentile{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_response_concurrency_statistics_90_percentile{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -888,7 +889,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_session_state_attribute_map_size{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_session_state_attribute_map_size{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -981,7 +982,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_response_statistics_count{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_response_statistics_count{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -1080,7 +1081,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_sp_session_registry_session_map_size{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_sp_session_registry_session_map_size{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -1173,7 +1174,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_idp_session_registry_session_map_size{namespace=\"$namespace\",k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "metric_pingfederate_idp_session_registry_session_map_size{k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
               "legendFormat": "{{instance}}",
               "refId": "A"
@@ -1188,32 +1189,6 @@ spec:
       "tags": [],
       "templating": {
         "list": [
-          {
-            "current": {
-              "selected": false,
-              "text": "ping-cloud",
-              "value": "ping-cloud"
-            },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "P1809F7CD0C75ACF3"
-            },
-            "definition": "label_values(kube_namespace_labels, namespace)",
-            "hide": 0,
-            "includeAll": false,
-            "multi": false,
-            "name": "namespace",
-            "options": [],
-            "query": {
-              "query": "label_values(kube_namespace_labels, namespace)",
-              "refId": "StandardVariableQuery"
-            },
-            "refresh": 1,
-            "regex": "/.*ping-cloud.*/",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
           {
             "allValue": ".*",
             "current": {

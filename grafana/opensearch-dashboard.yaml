@@ -5,6 +5,7 @@ metadata:
   name: opensearch
 spec:
   folder: "Monitoring"
+  resyncPeriod: 30m
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
