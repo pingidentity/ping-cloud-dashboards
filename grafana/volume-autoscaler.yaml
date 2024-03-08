@@ -5,7 +5,6 @@ metadata:
   name: volume-autoscaler
 spec:
   folder: "Monitoring"
-  resyncPeriod: 30m
   instanceSelector:
     matchLabels:
       dashboards: "grafana"

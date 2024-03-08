@@ -5,7 +5,6 @@ metadata:
   name: p1asingress
 spec:
   folder: "Ping"
-  resyncPeriod: 30m
   instanceSelector:
     matchLabels:
       dashboards: "grafana"

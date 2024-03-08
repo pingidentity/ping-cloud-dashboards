@@ -5,7 +5,6 @@ metadata:
   name: patopology
 spec:
   folder: "Ping"
-  resyncPeriod: 30m
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
