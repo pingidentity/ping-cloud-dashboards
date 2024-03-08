@@ -787,6 +787,6 @@ spec:
       "timezone": "",
       "title": "Kubernetes API Server Performance",
       "uid": "R6abPf9Zz",
-      "version": 10,
+      "version": 1,
       "weekStart": ""
     }

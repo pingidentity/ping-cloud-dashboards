@@ -2562,6 +2562,6 @@ spec:
       "timezone": "",
       "title": "Kubernetes Storage Volumes (Cluster)",
       "uid": "feAoiE84k",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }

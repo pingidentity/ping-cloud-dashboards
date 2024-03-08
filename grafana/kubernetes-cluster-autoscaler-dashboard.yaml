@@ -1098,6 +1098,6 @@ spec:
       "timezone": "browser",
       "title": "Kubernetes Cluster Autoscaler Stats",
       "uid": "qLaYXlDZk",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }

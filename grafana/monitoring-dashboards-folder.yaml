@@ -9,6 +9,5 @@ spec:
       dashboards: "grafana"
   # If title is not defined, the value will be taken from metadata.name
   title: Monitoring
-  resyncPeriod: 30s
   # "{}" in permissions mean only admin access
   permissions: "{}"

@@ -21,3 +21,4 @@ resources:
   - opensearch-dashboard.yaml
   - karpenter-performance-dashboard.yaml
   - karpenter-capacity-dashboard.yaml
+  - volume-autoscaler.yaml

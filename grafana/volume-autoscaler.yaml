@@ -2,9 +2,9 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: patopology
+  name: volume-autoscaler
 spec:
-  folder: "Ping"
+  folder: "Monitoring"
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -15,19 +15,13 @@ spec:
           {
             "builtIn": 1,
             "datasource": {
-              "type": "datasource",
-              "uid": "grafana"
+              "type": "grafana",
+              "uid": "-- Grafana --"
             },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
-            "target": {
-              "limit": 100,
-              "matchAny": false,
-              "tags": [],
-              "type": "dashboard"
-            },
             "type": "dashboard"
           }
         ]
@@ -35,14 +29,13 @@ spec:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 14,
       "links": [],
-      "liveNow": false,
+      "liveNow": true,
       "panels": [
         {
           "datasource": {
-            "type": "grafana-opensearch-datasource",
-            "uid": "muQHLUs4k"
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
           },
           "fieldConfig": {
             "defaults": {
@@ -56,13 +49,14 @@ spec:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 10,
+                "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -70,7 +64,7 @@ spec:
                   "type": "linear"
                 },
                 "showPoints": "auto",
-                "spanNulls": true,
+                "spanNulls": false,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
@@ -79,7 +73,6 @@ spec:
                   "mode": "off"
                 }
               },
-              "links": [],
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -93,246 +86,17 @@ spec:
                     "value": 80
                   }
                 ]
-              },
-              "unit": "short"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 0
-          },
-          "id": 4,
-          "interval": "1m",
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "8.4.5",
-          "targets": [
-            {
-              "alias": "Count",
-              "bucketAggs": [
-                {
-                  "field": "@timestamp",
-                  "id": "2",
-                  "settings": {
-                    "interval": "auto"
-                  },
-                  "type": "date_histogram"
-                }
-              ],
-              "datasource": {
-                "type": "grafana-opensearch-datasource",
-                "uid": "muQHLUs4k"
-              },
-              "format": "table",
-              "metrics": [
-                {
-                  "field": "trackingId.keyword",
-                  "id": "1",
-                  "type": "cardinality"
-                }
-              ],
-              "query": "method: \"GET\" AND responseCode: 403 AND cluster_name: $cluster_name",
-              "queryType": "lucene",
-              "refId": "A",
-              "timeField": "@timestamp"
-            }
-          ],
-          "title": "Failed Authorizations",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "grafana-opensearch-datasource",
-            "uid": "muQHLUs4k"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "links": [],
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "short"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 0
-          },
-          "id": 6,
-          "interval": "1m",
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "8.4.5",
-          "targets": [
-            {
-              "alias": "",
-              "bucketAggs": [
-                {
-                  "field": "@timestamp",
-                  "id": "2",
-                  "settings": {
-                    "interval": "auto"
-                  },
-                  "type": "date_histogram"
-                }
-              ],
-              "datasource": {
-                "type": "grafana-opensearch-datasource",
-                "uid": "muQHLUs4k"
-              },
-              "format": "table",
-              "metrics": [
-                {
-                  "id": "1",
-                  "type": "count"
-                }
-              ],
-              "query": "kubernetes.container_name: pingaccess-admin AND NOT client: 127.0.0.1 AND cluster_name: $cluster_name",
-              "queryType": "lucene",
-              "refId": "A",
-              "timeField": "@timestamp"
-            }
-          ],
-          "title": "Admin API Calls",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "grafana-opensearch-datasource",
-            "uid": "muQHLUs4k"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "links": [],
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "short"
+              }
             },
             "overrides": []
           },
           "gridPos": {
             "h": 9,
-            "w": 12,
+            "w": 8,
             "x": 0,
-            "y": 8
+            "y": 0
           },
-          "id": 2,
-          "interval": "1m",
+          "id": 1,
           "options": {
             "legend": {
               "calcs": [],
@@ -341,53 +105,238 @@ spec:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "8.4.5",
           "targets": [
             {
-              "alias": "Count",
-              "bucketAggs": [
-                {
-                  "field": "@timestamp",
-                  "id": "2",
-                  "settings": {
-                    "interval": "auto"
-                  },
-                  "type": "date_histogram"
-                }
-              ],
               "datasource": {
-                "type": "grafana-opensearch-datasource",
-                "uid": "muQHLUs4k"
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
               },
-              "format": "table",
-              "metrics": [
-                {
-                  "field": "trackingId.keyword",
-                  "id": "1",
-                  "type": "cardinality"
-                }
-              ],
-              "query": "((responseCode: 200 AND NOT authMech: NULL) OR responseCode:401) AND NOT applicationName: Healthcheck AND cluster_name: $cluster_name",
-              "queryType": "lucene",
-              "refId": "A",
-              "timeField": "@timestamp"
+              "editorMode": "code",
+              "expr": "max(volume_autoscaler_num_valid_pvcs{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
+              "instant": false,
+              "legendFormat": "PVCs",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "max(volume_autoscaler_num_pvcs_above_threshold{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "PVCs need to be scaled",
+              "range": true,
+              "refId": "B"
             }
           ],
-          "title": "Successful Authorizations",
+          "title": "PVCs available for scaling",
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 16,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 8,
+            "x": 8,
+            "y": 0
+          },
+          "id": 3,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "increase(volume_autoscaler_resize_attempted_total{k8s_cluster_name=~\"$cluster_name\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Attempted",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "increase(volume_autoscaler_resize_failure_total{k8s_cluster_name=~\"$cluster_name\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Failed",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "increase(volume_autoscaler_resize_successful_total{k8s_cluster_name=~\"$cluster_name\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Successful",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Attempts vs Fails vs Failed volume autoscaler",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 2,
+            "x": 18,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "name"
+          },
+          "pluginVersion": "10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "volume_autoscaler_release_info{k8s_cluster_name=~\"$cluster_name\"}",
+              "instant": false,
+              "legendFormat": "{{version}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Volume Autoscaler Version",
+          "type": "stat"
         }
       ],
-      "schemaVersion": 37,
+      "refresh": "1m",
+      "schemaVersion": 38,
       "style": "dark",
       "tags": [],
       "templating": {
         "list": [
           {
-            "allValue": "*",
+            "allValue": ".*",
             "current": {
               "selected": false,
               "text": "All",
@@ -405,7 +354,7 @@ spec:
             "options": [],
             "query": {
               "query": "label_values(k8s_cluster_name)",
-              "refId": "StandardVariableQuery"
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
             },
             "refresh": 1,
             "regex": "",
@@ -416,26 +365,13 @@ spec:
         ]
       },
       "time": {
-        "from": "now-1h",
+        "from": "now-3h",
         "to": "now"
       },
-      "timepicker": {
-        "refresh_intervals": [
-          "5s",
-          "10s",
-          "30s",
-          "1m",
-          "5m",
-          "15m",
-          "30m",
-          "1h",
-          "2h",
-          "1d"
-        ]
-      },
+      "timepicker": {},
       "timezone": "",
-      "title": "PingAccess Topology Dashboard",
-      "uid": "Z4QMfyfMk",
+      "title": "Volume Autoscaler",
+      "uid": "b52bcc76-7916-47b0-9296-0d739882bf5b",
       "version": 1,
       "weekStart": ""
     }
