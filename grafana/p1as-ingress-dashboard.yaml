@@ -804,6 +804,6 @@ spec:
       "timezone": "",
       "title": "PingOne Advanced Services Ingress Usage",
       "uid": "bf3495f2-7809-42bb-b4e9-a2c6a0ae913e",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }
