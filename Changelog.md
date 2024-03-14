@@ -17,6 +17,7 @@
 - Fix P1AS Ingress Dashboard
 - Add volume-autoscaler dashboard
 - Upgrade grafana-operator, grafana-folders
+- Fix wrong field in on ‘Ping Access Full System Logs' graph ‘Ping Access dashboard’
 
 _Changes_
 
@@ -37,6 +38,7 @@ _Changes_
 - [X] PDO-6334 Kubernetes-Volume-Autoscaler: create the Grafana Dashboard
 - [X] PDO-6560 Upgrade grafana-operator, grafana-folders
 - [X] PDO-6676 Identify and map numeric fields in Elastic
+- [X] PDO-6872 Fix wrong field in on Ping Access dashboard
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
