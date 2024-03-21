@@ -19,6 +19,7 @@
 - Upgrade grafana-operator, grafana-folders
 - Fix wrong field in on ‘Ping Access Full System Logs' graph ‘Ping Access dashboard’
 - Fix ingress label selector on the "PingOne Advanced Services Ingress Usage" dashboard
+- Fix karpeneter dashboard
 
 _Changes_
 
@@ -40,6 +41,7 @@ _Changes_
 - [X] PDO-6560 Upgrade grafana-operator, grafana-folders
 - [X] PDO-6676 Identify and map numeric fields in Elastic
 - [X] PDO-6872 Fix wrong field in on Ping Access dashboard
+- [X] PDO-6869 Fix karpeneter dashboard
 - [X] PDO-7076 Fix ingress label selector
 
 ### 1.18.0.0
