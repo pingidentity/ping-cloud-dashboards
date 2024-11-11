@@ -128,7 +128,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(\n  count (\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!=\"$ping_cloud_namespace\"}[1d], 7 * 24 * 60 * 60) <= 0)\n  )\n)\nor\nvector(0)",
+                  "expr": "(\n  count (\n    (predict_linear(kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}[1d], 7 * 24 * 60 * 60) <= 0)\n  )\n)\nor\nvector(0)",
                   "instant": false,
                   "intervalFactor": 1,
                   "legendFormat": "alerts",
@@ -211,7 +211,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(\n  count (\n    (predict_linear(kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$ping_cloud_namespace\"}[1d], 7 * 24 * 60 * 60) <= 0)\n  )\n)\nor\nvector(0)",
+                  "expr": "(\n  count (\n    (predict_linear(kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"}[1d], 7 * 24 * 60 * 60) <= 0)\n  )\n)\nor\nvector(0)",
                   "instant": false,
                   "intervalFactor": 1,
                   "legendFormat": "alerts",
@@ -295,7 +295,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "count (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ) and (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) >= ($pvc_percent_used_warning_threshold / 100)) or vector (0)",
+                  "expr": "count (max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ) and (max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) >= ($pvc_percent_used_warning_threshold / 100)) or vector (0)",
                   "format": "time_series",
                   "instant": true,
                   "refId": "A"
@@ -463,23 +463,6 @@ spec:
                   "unit": "bytes"
                 },
                 {
-                  "$$hashKey": "object:616",
-                  "alias": "Namespace",
-                  "align": "auto",
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "namespace",
-                  "thresholds": [],
-                  "type": "string",
-                  "unit": "short"
-                },
-                {
                   "$$hashKey": "object:617",
                   "alias": "PVC",
                   "align": "auto",
@@ -519,7 +502,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
+                  "expr": "  (\n    predict_linear((sum by (persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
                   "format": "table",
                   "instant": true,
                   "intervalFactor": 1,
@@ -624,7 +607,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "count (\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
+                  "expr": "count (\n  (\n    predict_linear((sum by (persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
                   "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate (Infrastructure)",
                   "range": true,
                   "refId": "A"
@@ -734,12 +717,12 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace!~\"$ping_cloud_namespace\"})[1d:10m]), 7 * 24 * 60 * 60)",
+                  "expr": "predict_linear((sum by (persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"})[1d:10m]), 7 * 24 * 60 * 60)",
                   "format": "time_series",
                   "hide": false,
                   "instant": false,
                   "intervalFactor": 1,
-                  "legendFormat": "{{namespace}} ({{persistentvolumeclaim}})",
+                  "legendFormat": "({{persistentvolumeclaim}})",
                   "refId": "A"
                 }
               ],
@@ -826,23 +809,6 @@ spec:
                   "unit": "bytes"
                 },
                 {
-                  "$$hashKey": "object:896",
-                  "alias": "Namespace",
-                  "align": "auto",
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "namespace",
-                  "thresholds": [],
-                  "type": "string",
-                  "unit": "short"
-                },
-                {
                   "$$hashKey": "object:897",
                   "alias": "PVC",
                   "align": "auto",
@@ -883,7 +849,7 @@ spec:
                   },
                   "editorMode": "code",
                   "exemplar": false,
-                  "expr": "  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
+                  "expr": "  (\n    predict_linear((sum by (persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
                   "format": "table",
                   "instant": true,
                   "intervalFactor": 1,
@@ -989,8 +955,8 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "count (\n  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
-                  "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate (Ping-cloud Namespace: $ping_cloud_namespace)",
+                  "expr": "count (\n  (\n    predict_linear((sum by (persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )\n)",
+                  "legendFormat": "Alerts - Volumes Full in Week Based on Daily Use Rate",
                   "range": true,
                   "refId": "A"
                 }
@@ -1099,12 +1065,12 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$ping_cloud_namespace\"})[1d:10m]), 7 * 24 * 60 * 60)",
+                  "expr": "predict_linear((sum by (persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"})[1d:10m]), 7 * 24 * 60 * 60)",
                   "format": "time_series",
                   "hide": false,
                   "instant": false,
                   "intervalFactor": 1,
-                  "legendFormat": "{{namespace}} ({{persistentvolumeclaim}})",
+                  "legendFormat": "({{persistentvolumeclaim}})",
                   "refId": "A"
                 }
               ],
@@ -1268,22 +1234,6 @@ spec:
                   "unit": "short"
                 },
                 {
-                  "$$hashKey": "object:3949",
-                  "alias": "Namespace",
-                  "align": "auto",
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "pattern": "namespace",
-                  "thresholds": [],
-                  "type": "string",
-                  "unit": "short"
-                },
-                {
                   "$$hashKey": "object:3950",
                   "alias": "PVC",
                   "align": "auto",
@@ -1343,7 +1293,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"}) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
+                  "expr": "(kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"}) and ((max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
                   "refId": "E"
@@ -1354,7 +1304,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
+                  "expr": "(max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) and ((max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
                   "intervalFactor": 1,
@@ -1366,7 +1316,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
+                  "expr": "(max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) and ((max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
                   "refId": "B"
@@ -1377,7 +1327,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
+                  "expr": "(max by (persistentvolumeclaim) (kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) and ((max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
                   "refId": "C"
@@ -1388,7 +1338,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100)",
+                  "expr": "(max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) >= ($pvc_percent_used_warning_threshold / 100)",
                   "format": "table",
                   "instant": true,
                   "refId": "D"
@@ -1455,7 +1405,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(\n  ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) * 0 +1)\n  and\n  (\n    (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"}))\n  ) >= ($pvc_percent_used_warning_threshold / 100)\n)",
+                  "expr": "(\n  ((max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) * 0 +1)\n  and\n  (\n    (max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"}))\n  ) >= ($pvc_percent_used_warning_threshold / 100)\n)",
                   "format": "time_series",
                   "instant": false,
                   "intervalFactor": 1,
@@ -1728,22 +1678,6 @@ spec:
                   "unit": "short"
                 },
                 {
-                  "$$hashKey": "object:5214",
-                  "alias": "Namespace",
-                  "align": "auto",
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "pattern": "namespace",
-                  "thresholds": [],
-                  "type": "string",
-                  "unit": "short"
-                },
-                {
                   "$$hashKey": "object:5215",
                   "alias": "PVC",
                   "align": "auto",
@@ -1806,7 +1740,7 @@ spec:
                   "expr": "kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\",job=\"kube-state-metrics\"}",
                   "format": "table",
                   "instant": true,
-                  "refId": "E"
+                  "refId": "Volume Stats Exist?"
                 },
                 {
                   "datasource": {
@@ -1814,7 +1748,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(1-max by (persistentvolumeclaim, namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) unless (max by (namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) or ((max by (persistentvolumeclaim, namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) and (max by (namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )))",
+                  "expr": "(1-max by (persistentvolumeclaim, exported_namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) unless (max by (exported_namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) or ((max by (persistentvolumeclaim, exported_namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) and (max by (exported_namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )))",
                   "format": "table",
                   "instant": true,
                   "refId": "F"
@@ -1825,11 +1759,11 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})",
+                  "expr": "max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})",
                   "format": "table",
                   "instant": true,
                   "intervalFactor": 1,
-                  "refId": "A"
+                  "refId": "Used"
                 },
                 {
                   "datasource": {
@@ -1837,10 +1771,10 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
+                  "expr": "max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
                   "format": "table",
                   "instant": true,
-                  "refId": "B"
+                  "refId": "Capacity"
                 },
                 {
                   "datasource": {
@@ -1848,10 +1782,10 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
+                  "expr": "max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
                   "format": "table",
                   "instant": true,
-                  "refId": "C"
+                  "refId": "Free"
                 },
                 {
                   "datasource": {
@@ -1859,15 +1793,57 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ))",
+                  "expr": "(max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ))",
                   "format": "table",
                   "instant": true,
-                  "refId": "D"
+                  "refId": "% Used"
+              }
+              ],
+              "transformations": [
+                {
+                  "id": "merge",
+                  "options": {
+                    "id": "merge",
+                    "field": "merge"
+                  }
+                },
+                {
+                  "id": "organize",
+                  "options": {
+                    "excludeByName": {
+                      "namespace": true
+                    },
+                    "renameByName": {
+                      "exported_namespace": "Namespace",
+                      "__name__": "Name",
+                      "container": "Container",
+                      "endpoint": "Endpoint",
+                      "instance": "Instance",
+                      "job": "Job",
+                      "k8s_cluster_name": "Cluster name",
+                      "namespace": "",
+                      "persistentvolumeclaim": "Persistent volume claim",
+                      "pod": "Pod",
+                      "prometheus": "Prometheus",
+                      "receive": "Receive",
+                      "service": "Service",
+                      "storageclass": "Storage class",
+                      "tenant_id": "Tenant id",
+                      "volumemode": "Volume mode",
+                      "volumename": "Volume name",
+                      "Value #Volume Stats Exist?": "Volume status exist ?",
+                      "Value #F": "Unused PVC volumes",
+                      "Value #Used": "Used bytes",
+                      "Value #Capacity": "Capacity in bytes",
+                      "Value #Free": "Free bytes",
+                      "Value #% Used": "% Used"
+                    }
+                  }
                 }
               ],
               "title": "PVC Stats",
               "transform": "table",
-              "type": "table-old"
+              "type": "table"
             }
           ],
           "targets": [
@@ -1961,10 +1937,10 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ))",
+                  "expr": "(max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ))",
                   "instant": false,
                   "intervalFactor": 1,
-                  "legendFormat": "{{namespace}} ({{persistentvolumeclaim}})",
+                  "legendFormat": "({{persistentvolumeclaim}})",
                   "refId": "A"
                 }
               ],
@@ -2067,9 +2043,9 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) * 100",
+                  "expr": "(max by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) * 100",
                   "intervalFactor": 1,
-                  "legendFormat": "{{namespace}} ({{persistentvolumeclaim}})",
+                  "legendFormat": "({{persistentvolumeclaim}})",
                   "range": true,
                   "refId": "A"
                 }
@@ -2196,11 +2172,11 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1h:1m]\n)",
+                  "expr": "rate(\n  (sum by (persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1h:1m]\n)",
                   "format": "time_series",
                   "instant": false,
                   "intervalFactor": 1,
-                  "legendFormat": "{{namespace}} ({{persistentvolumeclaim}})",
+                  "legendFormat": "({{persistentvolumeclaim}})",
                   "refId": "A"
                 }
               ],
@@ -2295,11 +2271,11 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1d:10m]\n)",
+                  "expr": "rate(\n  (sum by (persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1d:10m]\n)",
                   "format": "time_series",
                   "instant": false,
                   "intervalFactor": 1,
-                  "legendFormat": "{{namespace}} ({{persistentvolumeclaim}})",
+                  "legendFormat": "({{persistentvolumeclaim}})",
                   "refId": "A"
                 }
               ],
@@ -2396,11 +2372,11 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "rate(\n  (sum by (namespace, persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1w:1h]\n)",
+                  "expr": "rate(\n  (sum by (persistentvolumeclaim) (\n    kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\"}))[1w:1h]\n)",
                   "format": "time_series",
                   "instant": false,
                   "intervalFactor": 1,
-                  "legendFormat": "{{namespace}} ({{persistentvolumeclaim}})",
+                  "legendFormat": "({{persistentvolumeclaim}})",
                   "refId": "A"
                 }
               ],
@@ -2493,24 +2469,7 @@ spec:
             "datasource": {
               "type": "prometheus",
               "uid": "P1809F7CD0C75ACF3"
-            },
-            "definition": "label_values(kube_namespace_labels, namespace)",
-            "description": "Ping-cloud namespace",
-            "hide": 0,
-            "includeAll": false,
-            "label": "Ping-cloud namespace",
-            "multi": false,
-            "name": "ping_cloud_namespace",
-            "options": [],
-            "query": {
-              "query": "label_values(kube_namespace_labels, namespace)",
-              "refId": "StandardVariableQuery"
-            },
-            "refresh": 1,
-            "regex": "/.*ping-cloud.*/",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
+            }
           },
           {
             "allFormat": "",
