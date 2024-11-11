@@ -55,6 +55,7 @@ _Changes_
 - [X] PDO-7568 Grafana remove duplicate graphs
 - [X] PDO-7803 Grafana fix unscheduled pods expression
 - [X] PDO-7814 Grafana fix pa & pf topology dashboard
+- [X] PDO-8873 Grafana: No Namespace is present on Kubernetes Storage Volumes (Namespace) dashboard
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
