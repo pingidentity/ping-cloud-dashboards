@@ -4,11 +4,13 @@
 
 - Fix Grafana cluster autoscaler dashboard
 - Fix Grafana karpenter capacity dashboard
+- Fix the Kubernetes Storage Volumes (Cluster) dashboard
 
 _Changes_
 
 - [X] PDO-7517 Cluster name filter is absent for 'Number of unscheduled pods' graph
 - [X] PDO-7546 Additional columns are added to Nodepool table Karpenter Capacity dashboard
+- [X] PDO-7615 Grafana: PVCs are duplicated on PVCs Stats graph
 
 ### 1.19.0.0
 
