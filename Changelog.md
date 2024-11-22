@@ -10,7 +10,7 @@ _Changes_
 
 - [X] PDO-7517 Cluster name filter is absent for 'Number of unscheduled pods' graph
 - [X] PDO-7546 Additional columns are added to Nodepool table Karpenter Capacity dashboard
-- [X] PDO-8922 Grafana: Fix 'ETCD DB Size' Dashboard
+- [X] PDO-8942 Grafana: Fix 'ETCD DB Size' Dashboard
 
 ### 1.19.0.0
 
