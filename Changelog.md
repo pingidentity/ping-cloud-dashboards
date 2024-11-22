@@ -6,6 +6,7 @@
 - Fix Grafana karpenter capacity dashboard
 - Fix the Kubernetes Storage Volumes (Cluster) dashboard
 - Update Opensearch dashboard to include average active shards
+- Fix Grafana ETCD DB Size view in Kubernetes API Server Performance dashboard
 
 _Changes_
 
@@ -13,6 +14,7 @@ _Changes_
 - [X] PDO-7546 Additional columns are added to Nodepool table Karpenter Capacity dashboard
 - [X] PDO-7615 Grafana: PVCs are duplicated on PVCs Stats graph
 - [X] PDO-8414 Grafana: Opensearch dashboard to include average active shards
+- [X] PDO-8942 Grafana: Fix 'ETCD DB Size' Dashboard
 
 ### 1.19.0.0
 
