@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.2.0.0
+
+- FluentBit: Add Grafana Dashboard
+
+_Changes_
+
+- [X] PDO-9375 FluentBit: Add Grafana Dashboard
+
 ### 2.0.0.0
 
 - Fix Grafana cluster autoscaler dashboard
