@@ -1740,7 +1740,7 @@ spec:
                   "expr": "kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\",job=\"kube-state-metrics\"}",
                   "format": "table",
                   "instant": true,
-                  "refId": "E"
+                  "refId": "Volume Stats Exist?"
                 },
                 {
                   "datasource": {
@@ -1748,7 +1748,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(1-max by (persistentvolumeclaim, namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) unless (max by (namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) or ((max by (persistentvolumeclaim, namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) and (max by (namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )))",
+                  "expr": "(1-max by (persistentvolumeclaim, exported_namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) unless (max by (exported_namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) or ((max by (persistentvolumeclaim, exported_namespace) (kube_persistentvolumeclaim_info{k8s_cluster_name=~\"$k8s_cluster_name\"} ) ) and (max by (exported_namespace, persistentvolumeclaim) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )))",
                   "format": "table",
                   "instant": true,
                   "refId": "F"
@@ -1759,11 +1759,11 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})",
+                  "expr": "max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"})",
                   "format": "table",
                   "instant": true,
                   "intervalFactor": 1,
-                  "refId": "A"
+                  "refId": "Used"
                 },
                 {
                   "datasource": {
@@ -1771,10 +1771,10 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
+                  "expr": "max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
                   "format": "table",
                   "instant": true,
-                  "refId": "B"
+                  "refId": "Capacity"
                 },
                 {
                   "datasource": {
@@ -1782,10 +1782,10 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
+                  "expr": "max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_available_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )",
                   "format": "table",
                   "instant": true,
-                  "refId": "C"
+                  "refId": "Free"
                 },
                 {
                   "datasource": {
@@ -1793,7 +1793,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ))",
+                  "expr": "(max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_used_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} )) / (max by (persistentvolumeclaim,exported_namespace) (kubelet_volume_stats_capacity_bytes{k8s_cluster_name=~\"$k8s_cluster_name\"} ))",
                   "format": "table",
                   "instant": true,
                   "refId": "% Used"
@@ -1843,7 +1843,7 @@ spec:
               ],
               "title": "PVC Stats",
               "transform": "table",
-              "type": "table-old"
+              "type": "table"
             }
           ],
           "targets": [
