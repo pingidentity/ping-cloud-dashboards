@@ -587,24 +587,11 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "etcd_db_total_size_in_bytes{k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "apiserver_storage_size_bytes{k8s_cluster_name=~\"$cluster_name\"}",
               "format": "time_series",
               "legendFormat": "Endpoint {{endpoint}}",
               "range": true,
               "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "editorMode": "code",
-              "expr": "apiserver_storage_db_total_size_in_bytes{k8s_cluster_name=~\"$cluster_name\"}",
-              "format": "time_series",
-              "hide": false,
-              "legendFormat": "Endpoint {{endpoint}}",
-              "range": true,
-              "refId": "B"
             }
           ],
           "title": "ETCD DB Size",
