@@ -596,7 +596,7 @@ spec:
                   "type": "count"
                 }
               ],
-              "query": "kubernetes.container_name: pingfederate-admin AND NOT clientIp: \"0:0:0:0:0:0:0:1\" AND NOT clientIp: 127.0.0.1 AND NOT connectionId: healthcheckconnection AND cluster_name: \"$cluster_name\"",
+              "query": "kubernetes.container_name: \"pingfederate-admin\" AND NOT clientIp: \"0:0:0:0:0:0:0:1\" AND NOT clientIp: \"127.0.0.1\" AND NOT connectionId: \"healthcheckconnection\" AND cluster_name: \"$cluster_name\"",
               "queryType": "lucene",
               "refId": "A",
               "timeField": "@timestamp"
