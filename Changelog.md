@@ -6,6 +6,7 @@
 - Fix Grafana karpenter capacity dashboard
 - Fix Grafana ETCD DB Size view in Kubernetes API Server Performance dashboard
 - Remove 'container network I/O' graphs on Kubernetes Cluster Monitoring Dashboard as its data is identical to 'Pods network I/O' graph panel
+- Fix Grafana dashboard for Kubernetes API Server Performance to load correct data for etcd db size graph
 
 _Changes_
 
@@ -13,6 +14,7 @@ _Changes_
 - [X] PDO-7546 Additional columns are added to Nodepool table Karpenter Capacity dashboard
 - [X] PDO-8942 Grafana: Fix 'ETCD DB Size' Dashboard
 - [X] PDO-9524 Grafana: 'Pods network I/O' and 'container network I/O' graphs on Kubernetes Cluster Monitoring dashboard are identical
+- [X] PDO-9580 Grafana: dashboard for Kubernetes API Server Performance fails to load correct data for etcd db size graph
 
 ### 1.19.0.0
 
