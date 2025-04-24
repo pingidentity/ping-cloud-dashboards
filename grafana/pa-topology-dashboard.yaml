@@ -258,7 +258,7 @@ spec:
                   "type": "count"
                 }
               ],
-              "query": "kubernetes.container_name: pingaccess-admin AND NOT client: 127.0.0.1 AND cluster_name: \"$cluster_name\"",
+              "query": "kubernetes.container_name: \"pingaccess-admin\" AND NOT client: \"127.0.0.1\" AND cluster_name: \"$cluster_name\"",
               "queryType": "lucene",
               "refId": "A",
               "timeField": "@timestamp"
