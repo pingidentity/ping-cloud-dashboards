@@ -65,6 +65,7 @@ _Changes_
 - [X] PDO-6869 Fix karpeneter dashboard
 - [X] PDO-7076 Fix ingress label selector
 - [X] PDO-7081 Grafana PA/PF Topology Dashboard
+- [X] PDO-7814 Grafana fix pa & pf topology dashboard
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
