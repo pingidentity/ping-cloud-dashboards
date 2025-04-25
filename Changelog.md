@@ -8,6 +8,7 @@
 - Fix the Kubernetes Storage Volumes (Cluster) dashboard
 - Update Opensearch dashboard to include average active shards
 - Fix Grafana ETCD DB Size view in Kubernetes API Server Performance dashboard
+- Remove 'container network I/O' graphs on Kubernetes Cluster Monitoring Dashboard as its data is identical to 'Pods network I/O' graph panel
 
 _Changes_
 
@@ -17,6 +18,7 @@ _Changes_
 - [X] PDO-7615 Grafana: PVCs are duplicated on PVCs Stats graph
 - [X] PDO-8414 Grafana: Opensearch dashboard to include average active shards
 - [X] PDO-8942 Grafana: Fix 'ETCD DB Size' Dashboard
+- [X] PDO-9581 Grafana: 'Pods network I/O' and 'container network I/O' graphs on Kubernetes Cluster Monitoring dashboard are identical
 
 ### 1.19.0.0
 
