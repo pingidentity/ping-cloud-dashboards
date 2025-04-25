@@ -589,7 +589,7 @@ spec:
               "editorMode": "code",
               "expr": "apiserver_storage_size_bytes{k8s_cluster_name=~\"$cluster_name\"}",
               "format": "time_series",
-              "legendFormat": "Endpoint {{endpoint}}",
+              "legendFormat": "{{instance}} ({{storage_cluster_id}})",
               "range": true,
               "refId": "A"
             }
