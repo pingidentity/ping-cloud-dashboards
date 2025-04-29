@@ -100,7 +100,7 @@ spec:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 0
+            "y": 16
           },
           "id": 10,
           "interval": "1m",
@@ -199,7 +199,7 @@ spec:
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 0
+            "y": 18
           },
           "id": 12,
           "interval": "1m",
@@ -295,10 +295,10 @@ spec:
             "overrides": []
           },
           "gridPos": {
-            "h": 9,
+            "h": 8,
             "w": 12,
-            "x": 0,
-            "y": 8
+            "x": 12,
+            "y": 0
           },
           "id": 2,
           "interval": "1m",
@@ -389,10 +389,10 @@ spec:
             "overrides": []
           },
           "gridPos": {
-            "h": 9,
+            "h": 8,
             "w": 12,
             "x": 12,
-            "y": 8
+            "y": 9
           },
           "id": 4,
           "interval": "1m",
@@ -486,7 +486,7 @@ spec:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 17
+            "y": 0
           },
           "id": 6,
           "options": {
@@ -578,8 +578,8 @@ spec:
           "gridPos": {
             "h": 8,
             "w": 12,
-            "x": 12,
-            "y": 17
+            "x": 0,
+            "y": 8
           },
           "id": 8,
           "options": {
@@ -621,6 +621,401 @@ spec:
           ],
           "title": "Logstash heap usage",
           "type": "timeseries"
+        },
+        {
+          "id": 22,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 24
+          },
+          "title": "FluentBit Input vs Output & Data Volume",
+          "description": "Tracks FluentBit’s end-to-end log processing — from records ingested to records delivered, along with the volume of outgoing log data.\n\nMismatch between record rate and byte rate – High records/sec with low KB/sec may indicate malformed or empty logs.\n\nFlat lines – FluentBit may be stalled, misconfigured, or not ingesting logs.\n\nSudden spikes or drops – Possible log bursts, restarts, or downstream issues.",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(rate(fluentbit_input_records_total[5m]))",
+              "legendFormat": "Input Records/sec",
+              "range": true,
+              "instant": false,
+              "editorMode": "code"
+            },
+            {
+              "refId": "B",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(rate(fluentbit_output_proc_records_total[5m]))",
+              "legendFormat": "Output Records/sec",
+              "range": true,
+              "instant": false,
+              "editorMode": "code",
+              "hide": false
+            },
+            {
+              "refId": "C",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(rate(fluentbit_output_proc_bytes_total[5m])) / 1024",
+              "legendFormat": "Output KB/sec",
+              "range": true,
+              "instant": false,
+              "editorMode": "code",
+              "hide": false
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "legend": {
+              "showLegend": true,
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          }
+        },
+        {
+          "id": 21,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 40
+          },
+          "title": "FluentBit Output Issues (Errors, Drops, Retries)",
+          "description": "Detects issues in FluentBit output processing such as plugin errors, dropped records and retry storms.",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(rate(fluentbit_output_retries_total[5m]))",
+              "legendFormat": "Retries/sec",
+              "range": true,
+              "instant": false,
+              "editorMode": "code"
+            },
+            {
+              "refId": "B",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(rate(fluentbit_output_errors_total[5m]))",
+              "legendFormat": "Errors/sec",
+              "range": true,
+              "instant": false,
+              "editorMode": "code",
+              "hide": false
+            },
+            {
+              "refId": "C",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(rate(fluentbit_output_dropped_records_total[5m]))",
+              "legendFormat": "Dropped Records/sec",
+              "range": true,
+              "instant": false,
+              "editorMode": "code",
+              "hide": false
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            },
+            "legend": {
+              "showLegend": true,
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          }
+        },
+        {
+          "id": 16,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 34
+          },
+          "title": "Fluentbit Memory Usage (%)",
+          "description": "FluentBit's Memory utilization in percentage",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "(sum(container_memory_working_set_bytes{container=\"fluent-bit\"}) / sum(machine_memory_bytes)) * 100",
+              "legendFormat": "Memory Usage %",
+              "range": true,
+              "instant": false,
+              "editorMode": "code"
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "legend": {
+              "showLegend": true,
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          }
+        },
+        {
+          "id": 19,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 32
+          },
+          "title": "Fluentbit CPU Usage (%)",
+          "description": "FluentBit's CPU utilization in percentage",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(rate(container_cpu_usage_seconds_total{container=\"fluent-bit\"}[1m])) * 100",
+              "legendFormat": "CPU usage %",
+              "range": true,
+              "instant": false,
+              "editorMode": "code"
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            },
+            "legend": {
+              "showLegend": true,
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          }
+        },
+        {
+          "id": 18,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 42
+          },
+          "title": "FluentBit In-Memory Buffer Usage Bytes",
+          "description": "Displays the total size of logs currently buffered in memory across all Fluent Bit input plugins.",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(fluentbit_input_storage_memory_bytes)",
+              "legendFormat": "Total In-Memory Buffer (Bytes)",
+              "range": true,
+              "editorMode": "code"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 50
+          },
+          "title": "FluentBit Disk Buffer (Filesystem) Usage in Bytes",
+          "description": "The total size in bytes of all busy (in-use) chunks stored on disk",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(fluentbit_input_storage_chunks_busy_bytes)",
+              "legendFormat": "Total Filesystem Buffer (Bytes)",
+              "range": true,
+              "editorMode": "code"
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "legend": {
+              "showLegend": true,
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          }
+        },
+        {
+          "id": 17,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 26
+          },
+          "title": "FluentBit Input Plugin Memory Overlimit",
+          "description": "Displays which Fluent Bit input plugins are currently over the memory buffer limit. A flatline means all are correctly under the memory limit.",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(fluentbit_input_storage_overlimit) by (pod, name)",
+              "legendFormat": "Overlimit: {{name}}",
+              "range": true,
+              "editorMode": "code"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 48
+          },
+          "title": "FluentBit Chunk Distribution (Memory vs Filesystem)",
+          "description": "Shows memory and filesystem chunk usage per pod",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(fluentbit_storage_mem_chunks) by (pod)",
+              "legendFormat": "Memory Chunks",
+              "range": true,
+              "editorMode": "code"
+            },
+            {
+              "refId": "B",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(fluentbit_storage_fs_chunks) by (pod)",
+              "legendFormat": "Filesystem Chunks",
+              "range": true,
+              "editorMode": "code"
+            }            
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "options": {
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "orientation": "auto",
+            "textMode": "auto",
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto"
+          },
+          "pluginVersion": "10.1.0"
         }
       ],
       "refresh": "1m",
