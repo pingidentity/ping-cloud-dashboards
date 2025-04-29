@@ -25,6 +25,7 @@
 - Grafana remove duplicate graphs
 - Add 'source cluster' identifier to graphs legend for Volume Autoscaler dashboard
 - Fix Grafana 'No data' message on 'ETCD DB Size' graph
+- FluentBit: Add Grafana Dashboard
 
 _Changes_
 
@@ -56,6 +57,7 @@ _Changes_
 - [X] PDO-7803 Grafana fix unscheduled pods expression
 - [X] PDO-7814 Grafana fix pa & pf topology dashboard
 - [X] PDO-8873 Grafana: No Namespace is present on Kubernetes Storage Volumes (Namespace) dashboard
+- [X] PDO-9375 FluentBit: Add Grafana Dashboard
 
 ### 1.18.0.0
 - Refactor 'Grafana PingFederate Topology Dashboard' queries to exclude healcheckconnection information from them
