@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.19.2.0
+
+- Update queries for FluentBit panels In logging Dashboard
+
+_Changes_
+
+- [X] PDO-9634 FluentBit: Update metrics for FluentBit panels In logging Dashboard
+
 ### 1.19.0.0
 
 - Created Grafana Dashboard to visualize Kubernetes volumes metrics
