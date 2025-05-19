@@ -631,7 +631,7 @@ spec:
             "y": 32
           },
           "title": "FluentBit Input vs Output Record Rate",
-          "description": "Tracks FluentBit’s end-to-end log processing — from records ingested to records delivered.,
+          "description": "Tracks FluentBit’s end-to-end log processing — from records ingested to records delivered.",
           "type": "timeseries",
           "datasource": {
             "type": "prometheus",
