@@ -3,12 +3,10 @@
 ### 2.2.0.0
 
 - FluentBit: Add Grafana Dashboard
-- Remove GrafanaFolder resources as part of "Add p1as-observability to PCB: Grafana" ticket
 
 _Changes_
 
 - [X] PDO-9375 FluentBit: Add Grafana Dashboard
-- [X] PDO-9231 To remove GrafanaFolder resources as part of "Add p1as-observability to PCB: Grafana" ticket
 
 ### 2.0.0.0
 
