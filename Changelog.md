@@ -30,6 +30,14 @@ _Changes_
 - [X] PDO-9580 Grafana: dashboard for Kubernetes API Server Performance fails to load correct data for etcd db size graph
 - [X] PDO-9581 Grafana: 'Pods network I/O' and 'container network I/O' graphs on Kubernetes Cluster Monitoring dashboard are identical
 
+### 1.19.2.0
+
+- Update queries for FluentBit panels In logging Dashboard
+
+_Changes_
+
+- [X] PDO-9634 FluentBit: Update metrics for FluentBit panels In logging Dashboard
+
 ### 1.19.0.0
 
 - Created Grafana Dashboard to visualize Kubernetes volumes metrics
