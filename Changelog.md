@@ -26,6 +26,14 @@ _Changes_
 - [X] PDO-8414 Grafana: Opensearch dashboard to include average active shards
 - [X] PDO-8942 Grafana: Fix 'ETCD DB Size' Dashboard
 
+### 1.19.2.0
+
+- Update queries for FluentBit panels In logging Dashboard
+
+_Changes_
+
+- [X] PDO-9634 FluentBit: Update metrics for FluentBit panels In logging Dashboard
+
 ### 1.19.0.0
 
 - Created Grafana Dashboard to visualize Kubernetes volumes metrics
