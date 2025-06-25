@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.0.1.0
+
+- Add Cluster Filter Support and dynamic rate window for counter-based queries
+
+_Changes_
+
+-[X] PDO-9790 Grafana: Data is not filtered per cluster_name in Logging metrics Grafana dashboard
+
 ### 2.0.0.0
 
 - Fix Grafana cluster autoscaler dashboard
