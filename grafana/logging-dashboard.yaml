@@ -123,7 +123,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "sum(increase(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\",name=~\"tail.*\"}[1m])) by (instance)",
+              "expr": "sum(increase(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\",name=~\"tail.*\"}[$__rate_interval])) by (instance)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -222,7 +222,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "sum(increase(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[1m])) by (instance)",
+              "expr": "sum(increase(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])) by (instance)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -321,7 +321,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "builder",
-              "expr": "increase(logstash_node_pipeline_events_in_total{k8s_cluster_name=~\"$cluster_name\"}[1m])",
+              "expr": "increase(logstash_node_pipeline_events_in_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])",
               "legendFormat": "{{pipeline}} pipe on {{instance}}",
               "range": true,
               "refId": "A"
@@ -415,7 +415,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "builder",
-              "expr": "increase(logstash_node_pipeline_events_out_total{k8s_cluster_name=~\"$cluster_name\"}[1m])",
+              "expr": "increase(logstash_node_pipeline_events_out_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])",
               "legendFormat": "{{pipeline}} pipe on {{instance}}",
               "range": true,
               "refId": "A"
@@ -612,7 +612,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "builder",
-              "expr": "logstash_node_mem_heap_used_bytes",
+              "expr": "logstash_node_mem_heap_used_bytes{k8s_cluster_name=~\"$cluster_name\"}",
               "hide": false,
               "legendFormat": "Heap used on {{instance}}",
               "range": true,
@@ -644,7 +644,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(rate(fluentbit_input_records_total[5m]))",
+              "expr": "sum(rate(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
               "legendFormat": "Input Records",
               "range": true,
               "instant": false,
@@ -656,7 +656,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(rate(fluentbit_output_proc_records_total[5m]))",
+              "expr": "sum(rate(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
               "legendFormat": "Output Records",
               "range": true,
               "instant": false,
@@ -695,7 +695,7 @@ spec:
           "targets": [
             {
               "refId": "A",
-              "expr": "sort_desc((sum(rate(container_cpu_usage_seconds_total{container=\"logstash\"}[5m])) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"logstash\"}) by (container, pod)) * 100)",
+              "expr": "sort_desc((sum(rate(container_cpu_usage_seconds_total{container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}[5m])) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
               "legendFormat": "{{pod}} - CPU %",
               "range": true,
               "instant": false,
@@ -737,7 +737,7 @@ spec:
           "targets": [
             {
               "refId": "A",
-              "expr": "sort_desc((sum(container_memory_working_set_bytes{container=\"logstash\"}) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"logstash\"}) by (container, pod)) * 100)",
+              "expr": "sort_desc((sum(container_memory_working_set_bytes{container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
               "legendFormat": "{{pod}} - Memory %",
               "range": true,
               "instant": false,
@@ -783,7 +783,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(rate(fluentbit_output_retries_total[5m]))",
+              "expr": "sum(rate(fluentbit_output_retries_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
               "legendFormat": "Retries",
               "range": true,
               "instant": false,
@@ -795,7 +795,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(rate(fluentbit_output_errors_total[5m]))",
+              "expr": "sum(rate(fluentbit_output_errors_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
               "legendFormat": "Errors",
               "range": true,
               "instant": false,
@@ -808,7 +808,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(rate(fluentbit_output_dropped_records_total[5m]))",
+              "expr": "sum(rate(fluentbit_output_dropped_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
               "legendFormat": "Dropped Records",
               "range": true,
               "instant": false,
@@ -851,7 +851,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sort_desc((sum(container_memory_working_set_bytes{container=\"fluent-bit\"}) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"fluent-bit\"}) by (container, pod)) * 100)",
+              "expr": "sort_desc((sum(container_memory_working_set_bytes{container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
               "legendFormat": "{{pod}} - Memory %",
               "range": true,
               "instant": false,
@@ -893,7 +893,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(logstash_node_up)",
+              "expr": "sum(logstash_node_up{k8s_cluster_name=~\"$cluster_name\"})",
               "legendFormat": "Total Up Nodes",
               "range": true,
               "instant": false,
@@ -935,7 +935,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sort_desc((sum(rate(container_cpu_usage_seconds_total{container=\"fluent-bit\"}[5m])) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"fluent-bit\"}) by (container, pod)) * 100)",
+              "expr": "sort_desc((sum(rate(container_cpu_usage_seconds_total{container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}[5m])) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
               "legendFormat": "{{pod}} - CPU %",
               "range": true,
               "instant": false,
@@ -977,7 +977,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(fluentbit_input_storage_memory_bytes) / 1024 / 1024",
+              "expr": "sum(fluentbit_input_storage_memory_bytes{k8s_cluster_name=~\"$cluster_name\"}) by (instance, name) / 1024 / 1024",
               "legendFormat": "In-Memory Buffer (MB)",
               "range": true,
               "editorMode": "code"
@@ -1006,7 +1006,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(fluentbit_input_storage_chunks_busy_bytes) / 1024 / 1024",
+              "expr": "sum(fluentbit_input_storage_chunks_busy_bytes{k8s_cluster_name=~\"$cluster_name\"}) by (instance, name) / 1024 / 1024",
               "legendFormat": "Total Disk Buffer (MB)",
               "range": true,
               "editorMode": "code"
@@ -1047,12 +1047,54 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(fluentbit_input_storage_overlimit) by (pod, name)",
+              "expr": "sum(fluentbit_input_storage_overlimit{k8s_cluster_name=~\"$cluster_name\"}) by (pod, name)",
               "legendFormat": "Overlimit: {{name}}",
               "range": true,
               "editorMode": "code"
             }
           ]
+        },
+        {
+          "id": 29,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 72
+          },
+          "title": "Fluent Bit Output Chunk Available Capacity (%)",
+          "description": "Displays the current available buffer capacity (as a percentage) for each Fluent Bit output plugin, grouped by instance and plugin name. A lower percentage may indicate that output chunks are nearing capacity, which can lead to dropped records if sustained.",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "expr": "sum(fluentbit_output_chunk_available_capacity_percent{k8s_cluster_name=~\"$cluster_name\"}) by (instance, name)",
+              "legendFormat": "{{instance}} - {{name}}",
+              "range": true,
+              "instant": false,
+              "editorMode": "code"
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "legend": {
+              "showLegend": true,
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          }
         },
         {
           "id": 28,
@@ -1076,7 +1118,7 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "expr": "sum(fluentbit_input_ingestion_paused) by (instance)",
+              "expr": "sum(fluentbit_input_ingestion_paused{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
               "legendFormat": "Paused - {{instance}}",
               "range": true,
               "instant": false,
@@ -1095,7 +1137,7 @@ spec:
               "calcs": []
             }
           }
-        },
+        },      
         {
           "id": 15,
           "gridPos": {
@@ -1115,7 +1157,7 @@ spec:
           "targets": [
             {
               "refId": "A",
-              "expr": "sum(fluentbit_storage_fs_chunks_up) by (instance)",
+              "expr": "sum(fluentbit_storage_fs_chunks_up{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
               "legendFormat": "In-Memory Chunks - {{instance}}",
               "range": true,
               "editorMode": "code",
@@ -1126,7 +1168,7 @@ spec:
             },
             {
               "refId": "B",
-              "expr": "sum(fluentbit_storage_fs_chunks) by (instance)",
+              "expr": "sum(fluentbit_storage_fs_chunks{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
               "legendFormat": "Total Chunks (Memory + On-Disk) - {{instance}}",
               "range": true,
               "editorMode": "code",
@@ -1137,7 +1179,7 @@ spec:
             },
             {
               "refId": "C",
-              "expr": "sum(fluentbit_storage_fs_chunks_down) by (instance)",
+              "expr": "sum(fluentbit_storage_fs_chunks_down{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
               "legendFormat": "On-Disk Chunks - {{instance}}",
               "range": true,
               "instant": false,
