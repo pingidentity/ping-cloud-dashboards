@@ -3,10 +3,12 @@
 ### 1.19.2.0
 
 - Update queries for FluentBit panels In logging Dashboard
+- Update to include the OpenSearch dashboard for PingFederate unique user counts
 
 _Changes_
 
 - [X] PDO-9634 FluentBit: Update metrics for FluentBit panels In logging Dashboard
+- [X] PDO-10029 Implement OpenSearch for PF User Count Monitoring
 
 ### 1.19.0.0
 
