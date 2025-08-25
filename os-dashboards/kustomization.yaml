@@ -19,6 +19,9 @@ configMapGenerator:
   - name: os-dashboards-pa-was
     files:
       - os-dashboard-pa-was.ndjson
+  - name: os-dashboard-pf-unique-users
+    files:
+      - os-dashboard-pf-unique-users.ndjson
 
 generatorOptions:
  annotations:
