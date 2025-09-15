@@ -1,5 +1,23 @@
 # Changelog
 
+### 2.2.0.0
+
+- FluentBit: Add Grafana Dashboard
+- Remove Grafana Folder yamls as it is now managed by p1as-grafana chart in p1as-observability repo
+
+_Changes_
+
+- [X] PDO-9231 Remove Grafana Folders as part of Grafana mircoservice transition
+- [X] PDO-9375 FluentBit: Add Grafana Dashboard
+
+### 2.0.1.0
+
+- Add Cluster Filter Support and dynamic rate window for counter-based queries
+
+_Changes_
+
+-[X] PDO-9790 Grafana: Data is not filtered per cluster_name in Logging metrics Grafana dashboard
+
 ### 2.0.0.0
 
 - Fix Kubernetes Storage Volumes (Namespace) dashboard
