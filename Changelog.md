@@ -4,11 +4,13 @@
 
 - FluentBit: Add Grafana Dashboard
 - Remove Grafana Folder yamls as it is now managed by p1as-grafana chart in p1as-observability repo
+- Update PingFederate transaction panels to use 5-minute rate() functions for accurate per-second transaction rates.
 
 _Changes_
 
 - [X] PDO-9231 Remove Grafana Folders as part of Grafana mircoservice transition
 - [X] PDO-9375 FluentBit: Add Grafana Dashboard
+- [X] PDO-9907 [TRIAGE-25907] [WU EU - PROD] Grafana: PingFederate "Total Transactions" Queries are Incorrect
 
 ### 2.0.1.0
 
