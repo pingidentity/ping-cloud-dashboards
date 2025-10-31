@@ -4,11 +4,13 @@
 
 - FluentBit: Add Grafana Dashboard
 - Remove Grafana Folder yamls as it is now managed by p1as-grafana chart in p1as-observability repo
+- Remove Fluenbit v2 metrics related panels
 
 _Changes_
 
 - [X] PDO-9231 Remove Grafana Folders as part of Grafana mircoservice transition
 - [X] PDO-9375 FluentBit: Add Grafana Dashboard
+- [X] PDO-10532 FluentBit: The FluentBit panels in the Grafana Logging Metrics Dashboard do not display any data
 
 ### 2.0.1.0
 
