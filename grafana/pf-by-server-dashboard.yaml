@@ -317,13 +317,16 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_total_transactions{k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "rate(metric_pingfederate_total_transactions{k8s_cluster_name=~\"$cluster_name\"}[5m])",
               "interval": "",
               "legendFormat": "{{instance}}",
-              "refId": "A"
+              "refId": "A",
+              "editorMode": "code",
+              "range": true
             }
           ],
-          "title": "Total transactions",
+          "title": "Transaction Throughput Rate",
+          "description": "Average number of total (successful + failed) transactions processed by PingFederate per second, averaged over the last 5 minutes.",
           "transformations": [
             {
               "id": "calculateField",
@@ -345,6 +348,8 @@ spec:
               "custom": {
                 "axisLabel": "Amount",
                 "axisPlacement": "auto",
+                "axisColorMode": "text",
+                "axisCenteredZero": false,
                 "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 10,
@@ -354,6 +359,7 @@ spec:
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -399,6 +405,7 @@ spec:
           "interval": "1m",
           "options": {
             "legend": {
+              "showLegend": true,
               "calcs": [
                 "lastNotNull"
               ],
@@ -418,13 +425,16 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
-              "expr": "metric_pingfederate_total_failed_transactions{k8s_cluster_name=~\"$cluster_name\"}",
+              "expr": "rate(metric_pingfederate_total_failed_transactions{k8s_cluster_name=~\"$cluster_name\"}[5m])",
               "interval": "",
               "legendFormat": "{{instance}}",
-              "refId": "A"
+              "refId": "A",
+              "editorMode": "code",
+              "range": true
             }
           ],
-          "title": "Total failed transactions",
+          "title": "Failed Transaction Rate",
+          "description": "Average rate of failed PingFederate transactions per second over the last 5 minutes.",
           "transformations": [
             {
               "id": "calculateField",
@@ -446,6 +456,8 @@ spec:
               "custom": {
                 "axisLabel": "Units",
                 "axisPlacement": "auto",
+                "axisColorMode": "text",
+                "axisCenteredZero": false,
                 "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 10,
@@ -455,6 +467,7 @@ spec:
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -500,6 +513,7 @@ spec:
           "interval": "1m",
           "options": {
             "legend": {
+              "showLegend": true,
               "calcs": [],
               "displayMode": "list",
               "placement": "bottom"
