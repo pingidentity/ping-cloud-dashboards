@@ -734,12 +734,24 @@ spec:
               "exemplar": true,
               "expr": "replica_backlog {k8s_cluster_name=~\"$cluster_name\"}",
               "interval": "",
-              "legendFormat": "{{instance}}",
+              "legendFormat": "user-base-dn ({{instance}})",
               "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "exemplar": true,
+              "expr": "o_appintegrations_replica_backlog{k8s_cluster_name=~\"$cluster_name\"}",
+              "interval": "",
+              "legendFormat": "appintegrations ({{instance}})",
+              "refId": "B"
             }
           ],
-          "title": "Replication Backlog",
-          "type": "timeseries"
+          "title": "Replication Backlog for user-base-dn & appintegrations",
+          "type": "timeseries",
+          "description": "Shows PingDirectory replication backlog for user-base-dn (replica_backlog) and the appintegrations backend (o_appintegrations_replica_backlog) grouped by pod instance."
         },
         {
           "datasource": {

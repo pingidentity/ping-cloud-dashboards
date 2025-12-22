@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.3.0.0
+
+- Add appintegrations to replication backlog panel in PD topology dashboard
+
+_Changes_
+
+- [X] PDO-10657 Grafana: Add PD backends to replication backlog dashboard
+
 ### 2.2.0.0
 
 - FluentBit: Add Grafana Dashboard
