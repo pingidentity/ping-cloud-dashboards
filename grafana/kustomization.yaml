@@ -2,13 +2,11 @@ kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
 resources:
-  - kubernetes-dashboards-folder.yaml
   - kubernetes-api-server-dashboard.yaml
   - kubernetes-cluster-autoscaler-dashboard.yaml
   - kubernetes-dashboard.yaml
   - kubernetes-storage-cluster-dashboard.yaml
   - kubernetes-storage-namespace-dashboard.yaml
-  - ping-dashboards-folder.yaml
   - p1as-ingress-dashboard.yaml
   - pa-by-server-dashboard.yaml
   - pa-topology-dashboard.yaml
@@ -16,7 +14,6 @@ resources:
   - pd-topology-dashboard.yaml
   - pf-by-server-dashboard.yaml
   - pf-topology-dashboard.yaml
-  - monitoring-dashboards-folder.yaml
   - logging-dashboard.yaml
   - opensearch-dashboard.yaml
   - karpenter-performance-dashboard.yaml
