@@ -35,7 +35,20 @@ spec:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "iteration": 1669984015792,
-      "links": [],
+      "links": [
+        {
+          "asDropdown": false,
+          "icon": "external link",
+          "includeVars": false,
+          "keepTime": false,
+          "tags": [],
+          "targetBlank": true,
+          "title": "PF Metric Doc Link",
+          "tooltip": "",
+          "type": "link",
+          "url": "https://docs.pingidentity.com/pingfederate/12.2/pingfederate_monitoring_guide/pf_liveliness_responsiveness.html#:~:text=and%20responsiveness.-,Server%20metrics,-Description"
+        }
+      ],
       "liveNow": false,
       "panels": [
         {
@@ -43,6 +56,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance JVM garbage collection CPU usage percentage, derived from JVM metrics emitted by PingFederate instances. Calculated as the rate of `jvm_gc_collection_seconds_sum` over a 1 minute interval. For JVM metric definitions, refer to JVM documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -136,7 +150,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "description": "JVM GC Old Gen (Tenured) Collected, %\\n\\nFormula: GC Old Gen (Tenured) Collection Usage Used / GC Old Gen (Tenured) Collection Usage Max * 100",
+          "description": "Per-instance JVM garbage collection old generation (tenured) usage percentage, derived from JVM metrics emitted by PingFederate instances. Calculated as (used / max) * 100. For JVM metric definitions, refer to JVM documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -236,6 +250,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate total transactions, derived from the `total.transactions` metric emitted by PingFederate. For the metric definition, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -337,6 +352,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate total failed transactions, derived from the `total.failed.transactions` metric emitted by PingFederate. For the metric definition, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -438,6 +454,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate response time statistics mean, derived from the `response.time.statistics.mean` metric emitted by PingFederate. For the metric definition, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -531,6 +548,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate response time statistics 90 percentile, derived from the `response.time.statistics.90.percentile` metric emitted by PingFederate. For the metric definition, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -624,6 +642,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate response concurrency statistics mean, derived from the `response.concurrency.statistics.mean` metric emitted by PingFederate. For the metric definition and semantics, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -717,6 +736,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate response concurrency statistics 90 percentile, derived from the `response.concurrency.statistics.90.percentile` metric emitted by PingFederate. For the metric definition and semantics, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -810,6 +830,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate session state attribute map size, derived from the `session.state.attribute.map.size` metric emitted by PingFederate. For the metric definition and semantics, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -903,6 +924,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate response statistics count (HTTP requests), derived from the `response.statistics.count` metric emitted by PingFederate. For the metric definition and semantics, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1002,6 +1024,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate SP session registry session map size, derived from the `session.registry.session.map.size` metric emitted by PingFederate. For the metric definition and semantics, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1095,6 +1118,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingFederate IDP session registry session map size, derived from the `idp.session.registry.session.map.size` metric emitted by PingFederate. For the metric definition and semantics, refer to the PingFederate product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {

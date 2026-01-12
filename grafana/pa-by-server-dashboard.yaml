@@ -136,7 +136,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "description": "JVM GC Old Gen (Tenured) Collected, %\\n\\nFormula: GC Old Gen (Tenured) Collection Usage Used / GC Old Gen (Tenured) Collection Usage Max * 100 ",
+          "description": "JVM GC Old Gen (Tenured) Collected, Formula: GC Old Gen (Tenured) Collection Usage Used / GC Old Gen (Tenured) Collection Usage Max * 100 ",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -236,6 +236,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingAccess 90th percentile response time (ms), derived from the `.response.time.statistics.90.percentile` metric emitted by PingAccess. For the metric definition, refer to PingAccess product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -330,6 +331,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingAccess mean response time (ms), derived from the `.response.time.statistics.mean` metric emitted by PingAccess. For the metric definition, refer to PingAccess product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -423,6 +425,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingAccess 90th percentile response concurrency, derived from the `.response.concurrency.statistics.90.percentile` metric emitted by PingAccess. For the metric definition, refer to PingAccess product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -516,6 +519,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingAccess average response concurrency, derived from the `.response.concurrency.statistics.mean` metric emitted by PingAccess. For the metric definition, refer to PingAccess product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -609,6 +613,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingAccess total number of requests, derived from the `.response.statistics.count` metric emitted by PingAccess. For the metric definition, refer to PingAccess product documentation.",
           "fieldConfig": {
             "defaults": {
               "color": {
