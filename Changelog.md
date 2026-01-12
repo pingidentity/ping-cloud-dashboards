@@ -3,10 +3,12 @@
 ### 2.3.0.0
 
 - Add appintegrations to replication backlog panel in PD topology dashboard
+- Grafana: Added/Updated Description for Transformed Metrics in Grafana Dashboards
 
 _Changes_
 
 - [X] PDO-10657 Grafana: Add PD backends to replication backlog dashboard
+- [X] PDO-10742 Identify and Document Transformed Metrics in Grafana Dashboards
 
 ### 2.2.0.0
 
