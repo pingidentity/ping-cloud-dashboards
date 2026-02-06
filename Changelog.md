@@ -2,6 +2,7 @@
 
 ### 1.19.2.0
 
+- Update to fix multiple issues in the Ingress dashboard and clean up v2 metric–related panels in the Monitoring dashboard 
 - Update queries for FluentBit panels In logging Dashboard
 - Update to include the OpenSearch dashboard for PingFederate unique user counts
 
@@ -9,6 +10,7 @@ _Changes_
 
 - [X] PDO-9634 FluentBit: Update metrics for FluentBit panels In logging Dashboard
 - [X] PDO-10029 Implement OpenSearch for PF User Count Monitoring
+- [X] PDO-11127 Grafana: Fix Ingress dashboard and incorrect PromQL used in the Average Response Time
 
 ### 1.19.0.0
 
