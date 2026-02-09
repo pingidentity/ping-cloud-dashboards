@@ -6,6 +6,7 @@
 - Remove Grafana Folder yamls as it is now managed by p1as-grafana chart in p1as-observability repo
 - Remove Fluenbit v2 metrics related panels
 - Update PingFederate transaction panels to use 5-minute rate() functions for accurate per-second transaction rates.
+- Update changes in Kubernetes cluster monitoring dashboard in kubernetes-storage-cluster and kubernetes-storage-namespace panels
 
 _Changes_
 
@@ -13,6 +14,7 @@ _Changes_
 - [X] PDO-9375 FluentBit: Add Grafana Dashboard
 - [X] PDO-10532 FluentBit: The FluentBit panels in the Grafana Logging Metrics Dashboard do not display any data
 - [X] PDO-9907 [TRIAGE-25907] [WU EU - PROD] Grafana: PingFederate "Total Transactions" Queries are Incorrect
+- [X] PDO-11137 [Observability]Observations on v2.2.0-RC1.
 
 ### 2.0.1.0
 
