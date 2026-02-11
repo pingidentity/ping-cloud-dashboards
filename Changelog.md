@@ -41,10 +41,12 @@ _Changes_
 ### 1.19.2.0
 
 - Update queries for FluentBit panels In logging Dashboard
+- Update to fix multiple issues in the Ingress dashboard
 
 _Changes_
 
 - [X] PDO-9634 FluentBit: Update metrics for FluentBit panels In logging Dashboard
+- [X] PDO-11127 Grafana: Fix Ingress dashboard and incorrect PromQL used in the Average Response Time
 
 ### 1.19.0.0
 
