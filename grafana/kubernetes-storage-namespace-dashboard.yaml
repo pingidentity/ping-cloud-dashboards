@@ -329,18 +329,137 @@ spec:
           "id": 57,
           "panels": [
             {
-              "columns": [
-                {
-                  "$$hashKey": "object:774",
-                  "text": "Avg",
-                  "value": "avg"
-                }
-              ],
               "datasource": {
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "fontSize": "100%",
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "align": null,
+                    "cellOptions": {
+                      "type": "auto"
+                    },
+                    "inspect": false
+                  },
+                  "decimals": 2,
+                  "displayName": "",
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "percentage",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Value"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Available"
+                      },
+                      {
+                        "id": "unit",
+                        "value": "bytes"
+                      },
+                      {
+                        "id": "decimals",
+                        "value": 2
+                      },
+                      {
+                        "id": "custom.cellOptions",
+                        "value": {
+                          "type": "color-background"
+                        }
+                      },
+                      {
+                        "id": "custom.align",
+                        "value": null
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "percentage",
+                          "steps": [
+                            {
+                              "color": "green",
+                              "value": null
+                            },
+                            {
+                              "color": "red",
+                              "value": 80
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "namespace"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Namespace"
+                      },
+                      {
+                        "id": "unit",
+                        "value": "short"
+                      },
+                      {
+                        "id": "decimals",
+                        "value": 2
+                      },
+                      {
+                        "id": "custom.align",
+                        "value": null
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "persistentvolumeclaim"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "PVC"
+                      },
+                      {
+                        "id": "unit",
+                        "value": "short"
+                      },
+                      {
+                        "id": "decimals",
+                        "value": 2
+                      },
+                      {
+                        "id": "custom.align",
+                        "value": null
+                      }
+                    ]
+                  }
+                ]
+              },
               "gridPos": {
                 "h": 14,
                 "w": 8,
@@ -349,83 +468,19 @@ spec:
               },
               "id": 63,
               "links": [],
-              "showHeader": true,
-              "sort": {
-                "col": 0,
-                "desc": true
+              "options": {
+                "cellHeight": "sm",
+                "footer": {
+                  "countRows": false,
+                  "fields": "",
+                  "reducer": [
+                    "sum"
+                  ],
+                  "show": false
+                },
+                "showHeader": true
               },
-              "styles": [
-                {
-                  "$$hashKey": "object:778",
-                  "alias": "Available",
-                  "align": "auto",
-                  "colorMode": "row",
-                  "colors": [
-                    "rgba(50, 172, 45, 0.97)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(245, 54, 54, 0.9)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "Value",
-                  "thresholds": [
-                    "0",
-                    "0"
-                  ],
-                  "type": "number",
-                  "unit": "bytes"
-                },
-                {
-                  "$$hashKey": "object:779",
-                  "alias": "Namespace",
-                  "align": "auto",
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "namespace",
-                  "thresholds": [],
-                  "type": "string",
-                  "unit": "short"
-                },
-                {
-                  "$$hashKey": "object:780",
-                  "alias": "PVC",
-                  "align": "auto",
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "persistentvolumeclaim",
-                  "thresholds": [],
-                  "type": "string",
-                  "unit": "short"
-                },
-                {
-                  "$$hashKey": "object:781",
-                  "alias": "",
-                  "align": "auto",
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "decimals": 2,
-                  "pattern": "/.*/",
-                  "thresholds": [],
-                  "type": "hidden",
-                  "unit": "short"
-                }
-              ],
+              "pluginVersion": "10.1.0",
               "targets": [
                 {
                   "datasource": {
@@ -433,7 +488,7 @@ spec:
                     "uid": "P1809F7CD0C75ACF3"
                   },
                   "editorMode": "code",
-                  "expr": "  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n    <= \n    0 \n  )",
+                  "expr": "  (\n    predict_linear((sum by (namespace,persistentvolumeclaim) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=~\"$namespace\"})[1d:10m]),7 * 24 * 60 * 60) \n  )",
                   "format": "table",
                   "instant": true,
                   "intervalFactor": 1,
@@ -441,9 +496,17 @@ spec:
                   "refId": "A"
                 }
               ],
-              "title": "Volumes Full in Week Based on Daily Use Rate - Current",
-              "transform": "table",
-              "type": "table-old"
+              "title": "Volume Capacity Forecast - 7-Day Outlook",
+              "description": "Shows predicted available storage space for each volume in the selected namespace 7 days from now, based on recent usage trends. Use the namespace dropdown to filter results. GREEN highlights volumes with healthy capacity (below 80% usage threshold), while RED highlights volumes approaching or exceeding the 80% threshold that may require attention or expansion.",
+              "transformations": [
+                {
+                  "id": "merge",
+                  "options": {
+                    "reducers": []
+                  }
+                }
+              ],
+              "type": "table"
             },
             {
               "aliasColors": {},
@@ -525,7 +588,8 @@ spec:
                 }
               ],
               "timeRegions": [],
-              "title": "Volumes Full in Week Based on Daily Use Rate - Alert History",
+              "title": "Volume Capacity Alerts - Historical Trend",
+              "description": "Displays the historical count of volumes in the selected namespace predicted to run out of storage space within 7 days, based on daily usage rates. Each bar shows how many volumes were forecasted to become full at that point in time. The red threshold line at 1 alert indicates when capacity issues were detected. Use this trend to identify recurring capacity problems or validate if previous expansions resolved forecast alerts.",
               "tooltip": {
                 "shared": true,
                 "sort": 0,
@@ -625,7 +689,8 @@ spec:
               ],
               "thresholds": [],
               "timeRegions": [],
-              "title": "Volumes Full in Week Based on Daily Use Rate -  Predicted Available Space History",
+              "title": "Volume Available Space Forecast - Historical Trend",
+              "description": "Shows the historical trend of predicted available storage space for each volume in the selected namespace, forecasted 7 days ahead based on daily usage patterns. Each line represents a different volume's capacity projection over time. Lines trending toward zero or crossing below indicate volumes at risk of running out of space. Use this to monitor how capacity forecasts have changed and whether storage expansions have improved projections.",
               "tooltip": {
                 "shared": true,
                 "sort": 0,
@@ -667,13 +732,13 @@ spec:
               "error": false,
               "fontSize": "100%",
               "gridPos": {
-                "h": 6,
-                "w": 8,
+                "h": 7,
+                "w": 24,
                 "x": 0,
                 "y": 16
               },
               "id": 12,
-              "isNew": false,
+              "pageSize": null,
               "scroll": false,
               "showHeader": true,
               "sort": {
@@ -857,17 +922,6 @@ spec:
                     "type": "prometheus",
                     "uid": "P1809F7CD0C75ACF3"
                   },
-                  "editorMode": "code",
-                  "expr": "(\n  (kube_persistentvolumeclaim_info {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})\n  and\n  (\n    (\n      (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}))\n      /\n      (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}))\n    ) >= ($pvc_percent_used_warning_threshold / 100)\n  )\n)",
-                  "format": "table",
-                  "instant": true,
-                  "refId": "E"
-                },
-                {
-                  "datasource": {
-                    "type": "prometheus",
-                    "uid": "P1809F7CD0C75ACF3"
-                  },
                   "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {namespace=\"$namespace\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
@@ -905,109 +959,10 @@ spec:
                   "refId": "D"
                 }
               ],
-              "title": "Running PVCs Above % Used Warning Threshold Stats - Current",
+              "title": "High Usage Volumes - Current Statistics",
+              "description": "Displays detailed statistics for all persistent volume claims (PVCs) currently exceeding the configured usage warning threshold in the selected namespace. Shows Used, Capacity, Free space (in bytes), percentage used, StorageClass, PV name, Namespace, PVC name, and whether volume stats are available.",
               "transform": "table",
               "type": "table-old"
-            },
-            {
-              "aliasColors": {},
-              "bars": true,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "fieldConfig": {
-                "defaults": {
-                  "links": []
-                },
-                "overrides": []
-              },
-              "fill": 5,
-              "fillGradient": 0,
-              "gridPos": {
-                "h": 6,
-                "w": 16,
-                "x": 8,
-                "y": 16
-              },
-              "hiddenSeries": false,
-              "id": 65,
-              "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": false,
-                "total": false,
-                "values": false
-              },
-              "lines": false,
-              "linewidth": 1,
-              "links": [],
-              "nullPointMode": "null as zero",
-              "options": {
-                "alertThreshold": true
-              },
-              "percentage": false,
-              "pluginVersion": "9.3.6",
-              "pointradius": 2,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "stack": true,
-              "steppedLine": true,
-              "targets": [
-                {
-                  "datasource": {
-                    "type": "prometheus",
-                    "uid": "P1809F7CD0C75ACF3"
-                  },
-                  "editorMode": "code",
-                  "expr": "(\n  ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) * 0 +1)\n  and\n  (\n    (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"}))\n  ) >= ($pvc_percent_used_warning_threshold / 100)\n)",
-                  "format": "time_series",
-                  "instant": false,
-                  "intervalFactor": 1,
-                  "legendFormat": "PVC Running Above % Used Warning Threshold - {{persistentvolumeclaim}}",
-                  "refId": "A"
-                }
-              ],
-              "thresholds": [],
-              "timeRegions": [],
-              "title": "Running PVCs Above % Used Warning Threshold",
-              "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "$$hashKey": "object:1546",
-                  "decimals": 0,
-                  "format": "short",
-                  "label": "Total # of Alerts",
-                  "logBase": 1,
-                  "min": "0",
-                  "show": true
-                },
-                {
-                  "$$hashKey": "object:1547",
-                  "format": "short",
-                  "logBase": 1,
-                  "show": true
-                }
-              ],
-              "yaxis": {
-                "align": false
-              }
             }
           ],
           "targets": [
