@@ -16,11 +16,13 @@ _Changes_
 
 - FluentBit: Add Grafana Dashboard
 - Remove Grafana Folder yamls as it is now managed by p1as-grafana chart in p1as-observability repo
+- Update changes in Kubernetes cluster monitoring dashboard in kubernetes-storage-cluster and kubernetes-storage-namespace panels
 
 _Changes_
 
 - [X] PDO-9231 Remove Grafana Folders as part of Grafana mircoservice transition
 - [X] PDO-9375 FluentBit: Add Grafana Dashboard
+- [X] PDO-11137 [Observability]Observations on v2.2.0-RC1.
 
 ### 2.0.1.0
 
