@@ -19,3 +19,4 @@ resources:
   - karpenter-performance-dashboard.yaml
   - karpenter-capacity-dashboard.yaml
   - volume-autoscaler.yaml
+  - prometheus-monitoring.yaml
