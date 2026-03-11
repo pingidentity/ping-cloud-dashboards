@@ -5,12 +5,14 @@
 - Add appintegrations to replication backlog panel in PD topology dashboard
 - Grafana: Added/Updated Description for Transformed Metrics in Grafana Dashboards
 - Decouple Impossible Login panels into optional PF Opensearch dashboards
+- Add Prometheus "All Metrics" dashboard to monitoring folder in Grafana
 
 _Changes_
 
 - [X] PDO-10657 Grafana: Add PD backends to replication backlog dashboard
 - [X] PDO-10742 Identify and Document Transformed Metrics in Grafana Dashboards
 - [X] PDO-11030 Opensearch: Decouple Impossible Login panels into optional PF dashboards
+- [X] PDO-11368 - Prometheus: Add Grafana Dashboard for Prometheus Monitoring
 
 ### 2.2.0.0
 
