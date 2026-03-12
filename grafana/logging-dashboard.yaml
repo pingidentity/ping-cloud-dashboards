@@ -9,7 +9,7 @@ spec:
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
-  json: >
+  json: |
     {
       "annotations": {
         "list": [
@@ -36,14 +36,341 @@ spec:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
+      "id": 17,
       "links": [],
       "liveNow": false,
       "panels": [
         {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 100,
+          "title": "🟢 Health Summary",
+          "type": "row"
+        },
+        {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Current number of Logstash nodes reporting as Up. Green = all up, Red = node down.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  },
+                  {
+                    "color": "green",
+                    "value": 2
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 0,
+            "y": 1
+          },
+          "id": 101,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "center",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(logstash_node_up{k8s_cluster_name=~\"$cluster_name\"})",
+              "instant": true,
+              "legendFormat": "Nodes Up",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Logstash Nodes Up",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Total log events entering Logstash per minute across all pipelines.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  },
+                  {
+                    "color": "green",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 6,
+            "y": 1
+          },
+          "id": 102,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "center",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(logstash_node_pipeline_events_in_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "instant": true,
+              "legendFormat": "Events/Min",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Total Logstash Events / Min",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Total FluentBit records dropped (permanently lost). Should always be zero. Any value above 0 requires immediate investigation.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 12,
+            "y": 1
+          },
+          "id": 103,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "center",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(fluentbit_output_dropped_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "instant": true,
+              "legendFormat": "Dropped/Min",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "FluentBit Dropped Records / Min",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Total events currently queued in Logstash across all pipelines. A growing queue indicates backpressure.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1000
+                  },
+                  {
+                    "color": "red",
+                    "value": 5000
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 18,
+            "y": 1
+          },
+          "id": 104,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "center",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(logstash_node_queue_events{k8s_cluster_name=~\"$cluster_name\"})",
+              "instant": true,
+              "legendFormat": "Queue Depth",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Total Logstash Queue Depth",
+          "type": "stat"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 5
+          },
+          "id": 700,
+          "panels": [],
+          "title": "🔄 Pipeline Flow — End-to-End Overview",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the rate of log records ingested by Fluent Bit tail input plugins per minute, grouped by instance.\nA drop in ingestion may indicate a file permission issue, log rotation problem, or node-level resource pressure.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -52,17 +379,18 @@ spec:
               "custom": {
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
-                "axisLabel": "",
+                "axisLabel": "events / min",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 10,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -80,30 +408,77 @@ spec:
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
                     "color": "green",
                     "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
                   },
                   {
-                    "color": "red",
-                    "value": 80
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "fill": "solid"
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "text",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "Total"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 24
+            "y": 6
           },
           "id": 10,
-          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -112,8 +487,8 @@ spec:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -123,19 +498,27 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "sum(increase(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\",name=~\"tail.*\"}[$__rate_interval])) by (instance)",
-              "legendFormat": "__auto",
+              "expr": "sum by (instance)(rate(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\", name=~\"tail.*\"}[$__rate_interval]) * 60)",
+              "legendFormat": "{{instance}}",
               "range": true,
               "refId": "A"
-            }
-          ],
-          "title": "Fluent-bit incoming events per minute",
-          "transformations": [
+            },
             {
-              "id": "calculateField",
-              "options": {}
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\", name=~\"tail.*\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "B"
             }
           ],
+          "title": "Fluent Bit Incoming Events / Min",
+          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -143,6 +526,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Shows the rate of log records successfully delivered by Fluent Bit output plugins per minute, grouped by instance.\nCompare the Total line against Fluent Bit Incoming Events / Min — a growing gap between the two indicates output backpressure, retries, or dropped records.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -151,17 +535,18 @@ spec:
               "custom": {
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
-                "axisLabel": "",
+                "axisLabel": "events / min",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 10,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -179,30 +564,47 @@ spec:
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
                     "color": "green",
                     "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
                   },
                   {
-                    "color": "red",
-                    "value": 80
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "text",
+                      "mode": "fixed"
+                    }
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 24
+            "y": 6
           },
           "id": 12,
-          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -211,8 +613,8 @@ spec:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -222,19 +624,27 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "sum(increase(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])) by (instance)",
-              "legendFormat": "__auto",
+              "expr": "sum by (instance)(rate(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "legendFormat": "{{instance}}",
               "range": true,
               "refId": "A"
-            }
-          ],
-          "title": "Fluent-bit outgoing events per minute",
-          "transformations": [
+            },
             {
-              "id": "calculateField",
-              "options": {}
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "B"
             }
           ],
+          "title": "Fluent Bit Outgoing Events / Min",
+          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -242,6 +652,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Compares total Fluent Bit input ingestion rate vs output delivery rate per minute.\nA persistent gap where Input exceeds Output indicates backpressure, output errors, or dropped records.\nCheck the FluentBit Output Issues panel if lines diverge.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -250,17 +661,163 @@ spec:
               "custom": {
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
-                "axisLabel": "",
+                "axisLabel": "events / min",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 15,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Input Records / Min"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-blue",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Output Records / Min"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-green",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 14
+          },
+          "id": 22,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\", name=~\"tail.*\"}[$__rate_interval]) * 60)",
+              "instant": false,
+              "legendFormat": "Input Records / Min",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Output Records / Min",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "FluentBit Input vs Output Record Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the rate of events entering each Logstash pipeline per minute, grouped by pod and pipeline.\nA sudden drop may indicate an upstream issue with Fluent Bit or the log source.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "events / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -278,30 +835,47 @@ spec:
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
                     "color": "green",
                     "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
                   },
                   {
-                    "color": "red",
-                    "value": 80
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "text",
+                      "mode": "fixed"
+                    }
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 16
+            "y": 22
           },
           "id": 2,
-          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -310,8 +884,8 @@ spec:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -320,14 +894,27 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "editorMode": "builder",
-              "expr": "increase(logstash_node_pipeline_events_in_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])",
-              "legendFormat": "{{pipeline}} pipe on {{instance}}",
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_pipeline_events_in_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "legendFormat": "{{instance}} - {{pipeline}}",
               "range": true,
               "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(logstash_node_pipeline_events_in_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "B"
             }
           ],
-          "title": "Logstash incoming events per minute",
+          "title": "Logstash Incoming Events / Min",
           "transformations": [],
           "type": "timeseries"
         },
@@ -336,6 +923,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Shows the rate of events successfully output from each Logstash pipeline per minute, grouped by pod and pipeline.\nCompare against incoming events panel — a growing gap between in and out indicates pipeline backpressure or processing delays.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -344,17 +932,18 @@ spec:
               "custom": {
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
-                "axisLabel": "",
+                "axisLabel": "events / min",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 10,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -372,30 +961,47 @@ spec:
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
                     "color": "green",
                     "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
                   },
                   {
-                    "color": "red",
-                    "value": 80
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "text",
+                      "mode": "fixed"
+                    }
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 16
+            "y": 22
           },
           "id": 4,
-          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -404,8 +1010,8 @@ spec:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -414,14 +1020,27 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "editorMode": "builder",
-              "expr": "increase(logstash_node_pipeline_events_out_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])",
-              "legendFormat": "{{pipeline}} pipe on {{instance}}",
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_pipeline_events_out_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "legendFormat": "{{instance}} - {{pipeline}}",
               "range": true,
               "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(logstash_node_pipeline_events_out_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "B"
             }
           ],
-          "title": "Logstash outgoing events per minute",
+          "title": "Logstash Outgoing Events / Min",
           "transformations": [],
           "type": "timeseries"
         },
@@ -430,6 +1049,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Shows the current number of events waiting in each Logstash pipeline queue, per pod.\nA queue growing over time means Logstash outputs cannot keep up with incoming events.\nCross-reference with Logstash Incoming vs Outgoing Events panels to confirm backpressure.\nWarning at 1000 events, critical at 5000 events.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -438,17 +1058,18 @@ spec:
               "custom": {
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
-                "axisLabel": "",
+                "axisLabel": "events in queue",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 10,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -466,6 +1087,7 @@ spec:
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -474,19 +1096,44 @@ spec:
                     "value": null
                   },
                   {
+                    "color": "#EAB839",
+                    "value": 1000
+                  },
+                  {
                     "color": "red",
-                    "value": 80
+                    "value": 5000
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "text",
+                      "mode": "fixed"
+                    }
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
-            "x": 12,
-            "y": 32
+            "x": 0,
+            "y": 30
           },
           "id": 6,
           "options": {
@@ -497,8 +1144,8 @@ spec:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -507,14 +1154,27 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "editorMode": "builder",
-              "expr": "logstash_node_queue_events{k8s_cluster_name=~\"$cluster_name\"}",
-              "legendFormat": "{{pipeline}} on {{instance}}",
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(logstash_node_queue_events{k8s_cluster_name=~\"$cluster_name\"})",
+              "legendFormat": "{{instance}} - {{pipeline}}",
               "range": true,
               "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum(logstash_node_queue_events{k8s_cluster_name=~\"$cluster_name\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "B"
             }
           ],
-          "title": "Logstash events in queue",
+          "title": "Logstash Events in Queue",
           "type": "timeseries"
         },
         {
@@ -522,6 +1182,171 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Compares current queue disk usage against the configured maximum queue size per pod and pipeline.\nA queue approaching its max will cause Logstash to apply backpressure to inputs, eventually blocking Fluent Bit delivery.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Used.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Max.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "text",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 30
+          },
+          "id": 32,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(logstash_node_queue_size_bytes{k8s_cluster_name=~\"$cluster_name\"})",
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}} Used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(logstash_node_queue_max_size_bytes{k8s_cluster_name=~\"$cluster_name\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}} Max",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Logstash Queue Size vs Max (Bytes)",
+          "type": "timeseries"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 38
+          },
+          "id": 200,
+          "panels": [],
+          "title": "📊 Logstash — Resources & Performance",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the number of Logstash nodes currently reporting as Up (1), grouped by kubernetes_name.\nA drop below expected count indicates a node is down or not scraping.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -541,6 +1366,110 @@ spec:
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 0,
+              "mappings": [],
+              "max": 15,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  },
+                  {
+                    "color": "green",
+                    "value": 2
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 39
+          },
+          "id": 27,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (kubernetes_name)(\n  logstash_node_up{k8s_cluster_name=~\"$cluster_name\"}\n)",
+              "instant": false,
+              "legendFormat": "{{kubernetes_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Logstash Nodes Up Count",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows JVM heap memory — max allocated vs currently used — per Logstash pod.\nRight axis shows heap utilization %. Warning at 70%, critical at 85%.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -558,28 +1487,68 @@ spec:
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
                     "color": "green",
                     "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
                   }
                 ]
               },
               "unit": "bytes"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Heap Used %.*"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 70
+                        },
+                        {
+                          "color": "red",
+                          "value": 85
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.thresholdsStyle",
+                    "value": {
+                      "mode": "off"
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 0
+            "y": 39
           },
           "id": 8,
           "options": {
@@ -590,8 +1559,8 @@ spec:
               "showLegend": true
             },
             "tooltip": {
-              "mode": "single",
-              "sort": "none"
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -600,9 +1569,9 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "editorMode": "builder",
-              "expr": "logstash_node_mem_heap_max_bytes{k8s_cluster_name=~\"$cluster_name\"}",
-              "legendFormat": "Heap max on {{instance}}",
+              "editorMode": "code",
+              "expr": "max by (instance)(logstash_node_mem_heap_max_bytes{k8s_cluster_name=~\"$cluster_name\"})",
+              "legendFormat": "{{instance}} - Heap Max",
               "range": true,
               "refId": "A"
             },
@@ -611,635 +1580,1440 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
-              "editorMode": "builder",
-              "expr": "logstash_node_mem_heap_used_bytes{k8s_cluster_name=~\"$cluster_name\"}",
+              "editorMode": "code",
+              "expr": "max by (instance)(logstash_node_mem_heap_used_bytes{k8s_cluster_name=~\"$cluster_name\"})",
               "hide": false,
-              "legendFormat": "Heap used on {{instance}}",
+              "legendFormat": "{{instance}} - Heap Used",
               "range": true,
               "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "(max by (instance)(logstash_node_mem_heap_used_bytes{k8s_cluster_name=~\"$cluster_name\"}) / max by (instance)(logstash_node_mem_heap_max_bytes{k8s_cluster_name=~\"$cluster_name\"})) * 100",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - Heap Used %",
+              "range": true,
+              "refId": "C"
             }
           ],
-          "title": "Logstash heap usage",
+          "title": "Logstash Heap Usage",
           "type": "timeseries"
         },
         {
-          "id": 22,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 32
-          },
-          "title": "FluentBit Input vs Output Record Rate",
-          "description": "Tracks FluentBit’s end-to-end log processing — from records ingested to records delivered.",
-          "type": "timeseries",
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(rate(fluentbit_input_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
-              "legendFormat": "Input Records",
-              "range": true,
-              "instant": false,
-              "editorMode": "code"
-            },
-            {
-              "refId": "B",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(rate(fluentbit_output_proc_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
-              "legendFormat": "Output Records",
-              "range": true,
-              "instant": false,
-              "editorMode": "code",
-              "hide": false
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 24,
-          "gridPos": {
-            "x": 0,
-            "y": 8,
-            "w": 12,
-            "h": 8
-          },
-          "title": "Logstash CPU Usage (% of Limit)",
-          "description": "Shows Logstash CPU usage as a percentage of the container's CPU limit, grouped by pod.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "expr": "sort_desc((sum(rate(container_cpu_usage_seconds_total{container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}[5m])) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
-              "legendFormat": "{{pod}} - CPU %",
-              "range": true,
-              "instant": false,
-              "editorMode": "code",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              }
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 25,
-          "gridPos": {
-            "x": 12,
-            "y": 8,
-            "w": 12,
-            "h": 8
-          },
-          "title": "Logstash Memory Usage (% of Limit)",
-          "description": "Shows Logstash memory usage as a percentage of the container's memory limit, grouped by pod.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "expr": "sort_desc((sum(container_memory_working_set_bytes{container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
-              "legendFormat": "{{pod}} - Memory %",
-              "range": true,
-              "instant": false,
-              "editorMode": "code",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              }
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 21,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 48
-          },
-          "title": "FluentBit Output Issues (Errors, Drops, Retries)",
-          "description": "Detects issues in FluentBit output processing such as plugin errors, dropped records and retry storms.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(rate(fluentbit_output_retries_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
-              "legendFormat": "Retries",
-              "range": true,
-              "instant": false,
-              "editorMode": "code"
-            },
-            {
-              "refId": "B",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(rate(fluentbit_output_errors_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
-              "legendFormat": "Errors",
-              "range": true,
-              "instant": false,
-              "editorMode": "code",
-              "hide": false
-            },
-            {
-              "refId": "C",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(rate(fluentbit_output_dropped_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
-              "legendFormat": "Dropped Records",
-              "range": true,
-              "instant": false,
-              "editorMode": "code",
-              "hide": false
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 16,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 40
-          },
-          "title": "FluentBit Memory Usage (% of Limit)",
-          "description": "Shows FluentBit memory usage as a percentage of the container's memory limit, grouped by pod.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sort_desc((sum(container_memory_working_set_bytes{container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
-              "legendFormat": "{{pod}} - Memory %",
-              "range": true,
-              "instant": false,
-              "editorMode": "code"
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 27,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 0
-          },
-          "title": "Logstash Nodes Up Count",
-          "description": "Displays the total number of active Logstash nodes reporting as Up",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(logstash_node_up{k8s_cluster_name=~\"$cluster_name\"})",
-              "legendFormat": "Total Up Nodes",
-              "range": true,
-              "instant": false,
-              "editorMode": "code"
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 19,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 40
-          },
-          "title": "FluentBit CPU Usage (% of Limit)",
-          "description": "Shows FluentBit CPU usage as a percentage of the container's CPU limit, grouped by pod.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sort_desc((sum(rate(container_cpu_usage_seconds_total{container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}[5m])) by (container, pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (container, pod)) * 100)",
-              "legendFormat": "{{pod}} - CPU %",
-              "range": true,
-              "instant": false,
-              "editorMode": "code"
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 18,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 56
-          },
-          "title": "FluentBit In-Memory Buffer Usage (MB)",
-          "description": "Displays the total size (in MB) of logs currently buffered in memory across all FluentBit input plugins.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(fluentbit_input_storage_memory_bytes{k8s_cluster_name=~\"$cluster_name\"}) by (instance, name) / 1024 / 1024",
-              "legendFormat": "In-Memory Buffer (MB)",
-              "range": true,
-              "editorMode": "code"
-            }
-          ]
-        },
-        {
-          "id": 23,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 56
-          },
-          "title": "FluentBit Disk Buffer Usage (MB)",
-          "description": "Shows total size (in MB) of busy chunks written to disk by FluentBit input plugins.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(fluentbit_input_storage_chunks_busy_bytes{k8s_cluster_name=~\"$cluster_name\"}) by (instance, name) / 1024 / 1024",
-              "legendFormat": "Total Disk Buffer (MB)",
-              "range": true,
-              "editorMode": "code"
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 17,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 48
-          },
-          "title": "FluentBit Input Plugin Memory Overlimit",
-          "description": "Displays which FluentBit input plugins are currently over the memory buffer limit. A flatline means all are correctly under the memory limit.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(fluentbit_input_storage_overlimit{k8s_cluster_name=~\"$cluster_name\"}) by (pod, name)",
-              "legendFormat": "Overlimit: {{name}}",
-              "range": true,
-              "editorMode": "code"
-            }
-          ]
-        },
-        {
-          "id": 29,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 72
-          },
-          "title": "Fluent Bit Output Chunk Available Capacity (%)",
-          "description": "Displays the current available buffer capacity (as a percentage) for each Fluent Bit output plugin, grouped by instance and plugin name. A lower percentage may indicate that output chunks are nearing capacity, which can lead to dropped records if sustained.",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(fluentbit_output_chunk_available_capacity_percent{k8s_cluster_name=~\"$cluster_name\"}) by (instance, name)",
-              "legendFormat": "{{instance}} - {{name}}",
-              "range": true,
-              "instant": false,
-              "editorMode": "code"
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },
-        {
-          "id": 28,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 64
-          },
-          "title": "FluentBit Input Ingestion Paused Status",
-          "description": "Indicates whether FluentBit input ingestion is currently paused per instance.(Greater than 0 = paused, 0 = active.)",
-          "type": "timeseries",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "sum(fluentbit_input_ingestion_paused{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
-              "legendFormat": "Paused - {{instance}}",
-              "range": true,
-              "instant": false,
-              "editorMode": "code"
-            }
-          ],
-          "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
-            "legend": {
-              "showLegend": true,
-              "displayMode": "list",
-              "placement": "bottom",
-              "calcs": []
-            }
-          }
-        },      
-        {
-          "id": 15,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 64
-          },
-          "title": "FluentBit Chunk distribution: In-Memory, On-Disk, Total",
-          "description": "Tracks how FluentBit distributes log chunks between memory and disk.",
-          "type": "timeseries",
-          "pluginVersion": "10.1.0",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "targets": [
-            {
-              "refId": "A",
-              "expr": "sum(fluentbit_storage_fs_chunks_up{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
-              "legendFormat": "In-Memory Chunks - {{instance}}",
-              "range": true,
-              "editorMode": "code",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              }
-            },
-            {
-              "refId": "B",
-              "expr": "sum(fluentbit_storage_fs_chunks{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
-              "legendFormat": "Total Chunks (Memory + On-Disk) - {{instance}}",
-              "range": true,
-              "editorMode": "code",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              }
-            },
-            {
-              "refId": "C",
-              "expr": "sum(fluentbit_storage_fs_chunks_down{k8s_cluster_name=~\"$cluster_name\"}) by (instance)",
-              "legendFormat": "On-Disk Chunks - {{instance}}",
-              "range": true,
-              "instant": false,
-              "hide": false,
-              "editorMode": "code",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              }
-            }
-          ],
+          "description": "Shows Logstash CPU usage as a percentage of each pod's CPU limit.\nWarning at 70%, critical at 90%. Sustained high CPU may indicate pipeline backpressure.",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "thresholds"
+                "mode": "palette-classic"
               },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
-                  { "color": "green", "value": null },
-                  { "color": "red", "value": 80 }
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 90
+                  }
                 ]
               },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 47
+          },
+          "id": 24,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "(sum(rate(container_cpu_usage_seconds_total{container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])) by (pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (pod)) * 100",
+              "instant": false,
+              "legendFormat": "{{pod}} - CPU %",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Logstash CPU Usage (% of Limit)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows Logstash memory (working set) as a percentage of each pod's memory limit.\nWarning at 75%, critical at 90%. Sustained high memory risks OOMKill.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
               "custom": {
-                "drawStyle": "line",
-                "lineInterpolation": "linear",
-                "barAlignment": 0,
-                "lineWidth": 1,
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "spanNulls": false,
-                "insertNulls": false,
-                "showPoints": "auto",
-                "pointSize": 5,
-                "stacking": { "mode": "none", "group": "A" },
-                "axisPlacement": "auto",
-                "axisLabel": "",
-                "axisColorMode": "text",
-                "scaleDistribution": { "type": "linear" },
                 "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
                 "hideFrom": {
+                  "legend": false,
                   "tooltip": false,
-                  "viz": false,
-                  "legend": false
+                  "viz": false
                 },
-                "thresholdsStyle": { "mode": "off" }
-              }
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 75
+                  },
+                  {
+                    "color": "red",
+                    "value": 90
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 47
+          },
+          "id": 25,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "(sum(container_memory_working_set_bytes{container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"logstash\", k8s_cluster_name=~\"$cluster_name\"}) by (pod)) * 100",
+              "instant": false,
+              "legendFormat": "{{pod}} - Memory %",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Logstash Memory Usage (% of Limit)",
+          "type": "timeseries"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 55
+          },
+          "id": 300,
+          "title": "🔍 Logstash — Health & Reliability",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Tracks the rate of documents successfully processed vs failed per minute.\nAny sustained failures indicate a pipeline filter or output issue causing data loss.\nCross-reference with queue depth panel.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "docs / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "line"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "short"
             },
             "overrides": [
               {
                 "matcher": {
                   "id": "byRegexp",
-                  "options": "^In-Memory Chunks.*"
+                  "options": ".*Successes.*"
                 },
                 "properties": [
                   {
                     "id": "color",
                     "value": {
-                      "mode": "fixed",
-                      "fixedColor": "light-yellow"
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Failures.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 56
+          },
+          "id": 29,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_plugin_documents_successes_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}} Successes",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_plugin_documents_failures_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}} Failures",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Logstash Pipeline Document Success vs Failure Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Tracks OpenSearch bulk request outcomes per minute.\nFailures mean batches are not being delivered to OpenSearch.\nRequests with errors means partial batch delivery — some documents succeeded, some failed.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "requests / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 5,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "line"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Successes.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Failures.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Partial Errors.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 56
+          },
+          "id": 30,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_plugin_bulk_requests_successes_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}} Successes",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_plugin_bulk_requests_failures_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}} Failures",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_plugin_bulk_requests_with_errors_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}} Partial Errors",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Logstash Bulk Request Success vs Failure Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows open file descriptors as a percentage of the process limit per pod.\nExhausting file descriptors causes Logstash to crash. Warning at 70%, critical at 85%.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 85
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 64
+          },
+          "id": 31,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "(logstash_node_process_open_filedescriptors{k8s_cluster_name=~\"$cluster_name\"} / logstash_node_process_max_filedescriptors{k8s_cluster_name=~\"$cluster_name\"}) * 100",
+              "instant": false,
+              "legendFormat": "{{instance}} - FD Usage %",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Logstash File Descriptor Usage (% of Max)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Tracks the time spent pushing events into the Logstash queue per minute.\nA rising push duration is the earliest signal of queue backpressure — it will rise before queue depth or memory become critical.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "sec / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 5
+                  },
+                  {
+                    "color": "red",
+                    "value": 30
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 64
+          },
+          "id": 34,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, pipeline)(rate(logstash_node_plugin_queue_push_duration_seconds_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "instant": false,
+              "legendFormat": "{{instance}} - {{pipeline}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Logstash Queue Push Duration",
+          "type": "timeseries"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 72
+          },
+          "id": 400,
+          "title": "📊 Fluent Bit — Resources & Performance",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows Fluent Bit CPU usage as a percentage of each pod's CPU limit.\nWarning at 70%, critical at 90%. High CPU on Fluent Bit pods may cause input ingestion to pause,\nleading to log gaps or backpressure. Cross-reference with FluentBit Input Ingestion Paused Status panel.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 90
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 73
+          },
+          "id": 19,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "(sum(rate(container_cpu_usage_seconds_total{container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval])) by (pod) / sum(kube_pod_container_resource_limits{resource=\"cpu\", container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (pod)) * 100",
+              "instant": false,
+              "legendFormat": "{{pod}} - CPU %",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "FluentBit CPU Usage (% of Limit)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows Fluent Bit memory (working set) as a percentage of each pod's memory limit, grouped by pod.\nWarning at 75%, critical at 90%. Sustained high memory risks OOMKill which will cause log gaps.\nCross-reference with FluentBit In-Memory Buffer Usage and FluentBit Input Ingestion Paused Status panels.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 75
+                  },
+                  {
+                    "color": "red",
+                    "value": 90
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 73
+          },
+          "id": 16,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "(sum(container_memory_working_set_bytes{container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (pod) / sum(kube_pod_container_resource_limits{resource=\"memory\", container=\"fluent-bit\", k8s_cluster_name=~\"$cluster_name\"}) by (pod)) * 100",
+              "instant": false,
+              "legendFormat": "{{pod}} - Memory %",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "FluentBit Memory Usage (% of Limit)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Tracks Fluent Bit output plugin issues per minute, grouped by instance and plugin name.\nRetries (yellow) — temporary delivery failures being retried, acceptable in small numbers.\nErrors (orange) — output plugin errors requiring attention.\nDropped (red) — records permanently lost and NOT delivered, requires immediate investigation.\nA flatline at zero means all outputs are healthy.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "issues / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 5,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "line"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Retries.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Errors.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Dropped.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 81
+          },
+          "id": 21,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, name)(rate(fluentbit_output_retries_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "instant": false,
+              "legendFormat": "{{instance}} - {{name}} Retries",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, name)(rate(fluentbit_output_errors_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - {{name}} Errors",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance, name)(rate(fluentbit_output_dropped_records_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - {{name}} Dropped",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "FluentBit Output Issues (Errors, Drops, Retries)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the rate of data ingested by Fluent Bit input plugins in bytes per second, grouped by instance.\nA spike in bytes without a spike in records indicates large individual log lines.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "Bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 81
+          },
+          "id": 17,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(fluentbit_input_bytes_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "FluentBit Input Throughput (Bytes/sec)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the rate of data successfully delivered by Fluent Bit output plugins in bytes per second, grouped by instance.\nCompare against Input Throughput panel — a growing gap indicates output backpressure.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "Bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 89
+          },
+          "id": 18,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(fluentbit_output_proc_bytes_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]))",
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "FluentBit Output Throughput (Bytes/sec)",
+          "type": "timeseries"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 97
+          },
+          "id": 600,
+          "panels": [],
+          "title": "🔬 Advanced Diagnostics — Expand for Incident Investigation",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Tracks how Fluent Bit manages tailed log files per minute.\nRotation spikes explain periodic bursts seen in the Incoming Events panel.\nA high rotation rate from a specific instance indicates heavy log rotation on that node.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "file events / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Opened.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
                     }
                   }
                 ]
@@ -1247,14 +3021,14 @@ spec:
               {
                 "matcher": {
                   "id": "byRegexp",
-                  "options": "^On-Disk Chunks.*"
+                  "options": ".*Closed.*"
                 },
                 "properties": [
                   {
                     "id": "color",
                     "value": {
-                      "mode": "fixed",
-                      "fixedColor": "semi-dark-green"
+                      "fixedColor": "blue",
+                      "mode": "fixed"
                     }
                   }
                 ]
@@ -1262,56 +3036,335 @@ spec:
               {
                 "matcher": {
                   "id": "byRegexp",
-                  "options": "^Total Chunks.*"
+                  "options": ".*Rotated.*"
                 },
                 "properties": [
                   {
                     "id": "color",
                     "value": {
-                      "mode": "fixed",
-                      "fixedColor": "semi-dark-blue"
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 98
+          },
+          "id": 15,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(fluentbit_input_files_opened_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "legendFormat": "{{instance}} - Opened",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(fluentbit_input_files_closed_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - Closed",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(fluentbit_input_files_rotated_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - Rotated",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "FluentBit File Handle Activity",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Tracks the rate of log lines being silently truncated due to exceeding buffer limits, per minute.\nAny truncation means partial log data is being lost.\nLong Line = single oversized lines. Multiline = incomplete multiline log assemblies.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "truncations / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 5,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "line"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Long Line.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Multiline.*"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
+                      "mode": "fixed"
                     }
                   }
                 ]
               }
             ]
           },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 98
+          },
+          "id": 23,
           "options": {
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            },
             "legend": {
-              "showLegend": true,
-              "displayMode": "table",
-              "placement": "right",
-              "calcs": []
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
             },
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": ["lastNotNull"],
-              "fields": "",
-              "values": false
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(fluentbit_input_long_line_truncated_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "legendFormat": "{{instance}} - Long Line",
+              "range": true,
+              "refId": "A"
             },
-            "textMode": "auto"
-          }
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(fluentbit_input_multiline_truncated_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{instance}} - Multiline",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "FluentBit Log Line Truncation Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the rate of time spent processing events across plugins per minute.\nA rising duration without a rising event rate means individual events are taking longer to process — indicates filter complexity issues or slow output plugins.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "sec / min",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 106
+          },
+          "id": 33,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance)(rate(logstash_node_plugin_duration_seconds_total{k8s_cluster_name=~\"$cluster_name\"}[$__rate_interval]) * 60)",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Logstash Plugin Processing Duration (sec/min)",
+          "type": "timeseries"
         }
       ],
       "refresh": "1m",
-      "schemaVersion": 37,
+      "schemaVersion": 38,
       "style": "dark",
-      "tags": [],
+      "tags": [
+        "logging",
+        "logstash",
+        "fluentbit"
+      ],
       "templating": {
         "list": [
           {
             "allValue": ".*",
             "current": {
               "selected": false,
-              "text": "All",
-              "value": "$__all"
+              "text": "prod-reef-us-east-2",
+              "value": "prod-reef-us-east-2"
             },
             "datasource": {
               "type": "prometheus",
@@ -1341,8 +3394,8 @@ spec:
       },
       "timepicker": {},
       "timezone": "",
-      "title": "Logging metrics",
-      "uid": "5RHno_aVz",
-      "version": 1,
+      "title": "Logging Metrics",
+      "uid": "a73bff54-a014-415d-9fb3-512022726f67",
+      "version": 2,
       "weekStart": ""
     }
