@@ -5,12 +5,14 @@
 - Add appintegrations to replication backlog panel in PD topology dashboard
 - Grafana: Added/Updated Description for Transformed Metrics in Grafana Dashboards
 - Add k8s_cluster_name filter to High Usage Volumes panel in Kubernetes Storage Volumes Namespace dashboard
+- Revised Monitoring dashboard panels and also included change for s3 dedicated pipeline
 
 _Changes_
 
 - [X] PDO-10657 Grafana: Add PD backends to replication backlog dashboard
 - [X] PDO-10742 Identify and Document Transformed Metrics in Grafana Dashboards
 - [X] PDO-11360 Grafana: Add cluster name filtering to High Usage Volumes panel in Kubernetes storage volumes namespace dashboard
+- [X] PDO-11092 Grafana: Update Dashboards for (Fluent Bit → 2x Logstash)
 
 ### 2.2.0.0
 
