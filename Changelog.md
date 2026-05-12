@@ -6,6 +6,7 @@
 - Grafana: Added/Updated Description for Transformed Metrics in Grafana Dashboards
 - Decouple Impossible Login panels into optional PF Opensearch dashboards
 - Add k8s_cluster_name filter to High Usage Volumes panel in Kubernetes Storage Volumes Namespace dashboard
+- Revised Monitoring dashboard panels and also included change for s3 dedicated pipeline
 
 _Changes_
 
@@ -13,6 +14,7 @@ _Changes_
 - [X] PDO-10742 Identify and Document Transformed Metrics in Grafana Dashboards
 - [X] PDO-11030 Opensearch: Decouple Impossible Login panels into optional PF dashboards
 - [X] PDO-11360 Grafana: Add cluster name filtering to High Usage Volumes panel in Kubernetes storage volumes namespace dashboard
+- [X] PDO-11092 Grafana: Update Dashboards for (Fluent Bit → 2x Logstash)
 
 ### 2.2.0.0
 
