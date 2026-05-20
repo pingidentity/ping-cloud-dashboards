@@ -967,35 +967,6 @@ spec:
       "templating": {
         "list": [
           {
-            "current": {
-              "selected": false,
-              "text": "pingfederate-ingress",
-              "value": "pingfederate-ingress"
-            },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "P1809F7CD0C75ACF3"
-            },
-            "definition": "label_values(kube_ingress_info,ingress)",
-            "hide": 0,
-            "includeAll": false,
-            "multi": false,
-            "name": "ingressName",
-            "options": [],
-            "query": {
-              "query": "label_values(kube_ingress_info,ingress)",
-              "refId": "prometheus-ingressName-Variable-Query"
-            },
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 2,
-            "tagValuesQuery": "",
-            "tagsQuery": "",
-            "type": "query",
-            "useTags": false
-          },
-          {
             "allValue": ".*",
             "datasource": {
               "type": "prometheus",
@@ -1016,9 +987,38 @@ spec:
             "skipUrlSync": false,
             "sort": 0,
             "type": "query"
-        }
-      ]
-    },
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "pingfederate-ingress",
+              "value": "pingfederate-ingress"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P1809F7CD0C75ACF3"
+            },
+            "definition": "label_values(kube_ingress_info{k8s_cluster_name=~\"$cluster_name\"},ingress)",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "ingressName",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_ingress_info{k8s_cluster_name=~\"$cluster_name\"},ingress)",
+              "refId": "prometheus-ingressName-Variable-Query"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 2,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          }
+        ]
+      },
     "time": {
       "from": "now-1h",
       "to": "now"
