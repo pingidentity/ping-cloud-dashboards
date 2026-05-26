@@ -7,7 +7,7 @@
 - Decouple Impossible Login panels into optional PF Opensearch dashboards
 - Add k8s_cluster_name filter to High Usage Volumes panel in Kubernetes Storage Volumes Namespace dashboard
 - Revised Monitoring dashboard panels and also included change for s3 dedicated pipeline
-- Add informational NOTE banner to PingOne Advanced Services Ingress Usage dashboard for No Data panels context
+- Add informational NOTE banner to PingOne Advanced Services Ingress Usage dashboard for No Data panels context, fix ingressName variable to filter by selected cluster_name and ensure cluster_name variable defaults to All
 
 _Changes_
 
@@ -16,7 +16,7 @@ _Changes_
 - [X] PDO-11030 Opensearch: Decouple Impossible Login panels into optional PF dashboards
 - [X] PDO-11360 Grafana: Add cluster name filtering to High Usage Volumes panel in Kubernetes storage volumes namespace dashboard
 - [X] PDO-11092 Grafana: Update Dashboards for (Fluent Bit → 2x Logstash)
-- [X] PDO-11557 Grafana: Add info banner to Ingress Usage dashboard explaining expected No data panels
+- [X] PDO-11557 Grafana: Add info banner to Ingress Usage dashboard explaining expected No data panels, fix cluster-scoped filtering for ingressName variable and ensure cluster_name variable defaults to All on dashboard load
 
 ### 2.2.0.0
 
