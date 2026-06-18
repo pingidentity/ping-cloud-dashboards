@@ -3362,9 +3362,9 @@ spec:
           {
             "allValue": ".*",
             "current": {
-              "selected": false,
-              "text": "prod-reef-us-east-2",
-              "value": "prod-reef-us-east-2"
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
             },
             "datasource": {
               "type": "prometheus",
