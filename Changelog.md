@@ -17,6 +17,7 @@ _Changes_
 - [X] PDO-11360 Grafana: Add cluster name filtering to High Usage Volumes panel in Kubernetes storage volumes namespace dashboard
 - [X] PDO-11092 Grafana: Update Dashboards for (Fluent Bit → 2x Logstash)
 - [X] PDO-11557 Grafana: Add info banner to Ingress Usage dashboard explaining expected No data panels, fix cluster-scoped filtering for ingressName variable and ensure cluster_name variable defaults to All on dashboard load
+- [X] PDO-11788 Grafana: Grafana: Remove hardcoded cluster name from Logging Grafana dashboard
 
 ### 2.2.0.0
 
