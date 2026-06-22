@@ -3,10 +3,12 @@
 ### 2.1.0.0
 
 - FluentBit: Add Grafana Dashboard
+- Fix Volume Autoscaler Grafana panel showing wrong version due to hardcoded version string in upstream app
 
 _Changes_
 
 - [X] PDO-9375 FluentBit: Add Grafana Dashboard
+- [X] PDO-11865 Grafana: Volume Autoscaler Version panel shows incorrect version
 
 ### 2.0.1.0
 
