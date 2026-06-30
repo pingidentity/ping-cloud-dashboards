@@ -268,6 +268,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Displays the deployed Volume Autoscaler version per region (e.g. us-east-2 - 1.0.8).",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -291,9 +292,9 @@ spec:
             "overrides": []
           },
           "gridPos": {
-            "h": 4,
-            "w": 2,
-            "x": 18,
+            "h": 9,
+            "w": 8,
+            "x": 16,
             "y": 0
           },
           "id": 2,
@@ -301,7 +302,7 @@ spec:
             "colorMode": "value",
             "graphMode": "none",
             "justifyMode": "auto",
-            "orientation": "auto",
+            "orientation": "horizontal",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
@@ -320,9 +321,9 @@ spec:
               },
               "editorMode": "code",
               "expr": "volume_autoscaler_release_info{k8s_cluster_name=~\"$cluster_name\"}",
-              "instant": false,
-              "legendFormat": "{{version}}",
-              "range": true,
+              "instant": true,
+              "legendFormat": "{{k8s_cluster_region}} - {{app_kubernetes_io_version}}",
+              "range": false,
               "refId": "A"
             }
           ],
