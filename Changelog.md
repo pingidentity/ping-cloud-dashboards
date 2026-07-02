@@ -7,6 +7,7 @@
 - Update PingFederate transaction panels to use 5-minute rate() functions for accurate per-second transaction rates.
 - Remove Fluenbit v2 metrics related panels
 - Update changes in Kubernetes cluster monitoring dashboard in kubernetes-storage-cluster and kubernetes-storage-namespace panels
+- Fix Volume Autoscaler Grafana panel showing wrong version due to hardcoded version string in upstream app
 
 _Changes_
 
@@ -15,6 +16,7 @@ _Changes_
 - [X] PDO-9907 [TRIAGE-25907] [WU EU - PROD] Grafana: PingFederate "Total Transactions" Queries are Incorrect
 - [X] PDO-10532 FluentBit: The FluentBit panels in the Grafana Logging Metrics Dashboard do not display any data
 - [X] PDO-11137 [Observability]Observations on v2.2.0-RC1.
+- [X] PDO-11865 Grafana: Volume Autoscaler Version panel shows incorrect version
 
 ### 2.0.1.0
 
