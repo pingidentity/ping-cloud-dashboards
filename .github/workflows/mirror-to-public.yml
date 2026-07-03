@@ -8,7 +8,7 @@ jobs:
     uses: ping-internal/p1as-eng-tools/.github/workflows/mirror-repository.yml@master
     with:
       github-ref: ${{ github.ref}}
-      target-repo-ssh-url: "ssh://github.com/pingidentity/ping-cloud-dashboards.git"
+      target-repo-ssh-url: "git@github.com:pingidentity/ping-cloud-dashboards.git"
     secrets:
       mirror-deploy-ssh-key: ${{ secrets.MIRROR_DEPLOY_SSH_KEY }}
     permissions:
