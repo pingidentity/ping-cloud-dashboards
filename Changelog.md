@@ -3,22 +3,37 @@
 ### 2.3.0.0
 
 - Add appintegrations to replication backlog panel in PD topology dashboard
+- Grafana: Added/Updated Description for Transformed Metrics in Grafana Dashboards
+- Decouple Impossible Login panels into optional PF Opensearch dashboards
+- Add k8s_cluster_name filter to High Usage Volumes panel in Kubernetes Storage Volumes Namespace dashboard
+- Revised Monitoring dashboard panels and also included change for s3 dedicated pipeline
+- Add informational NOTE banner to PingOne Advanced Services Ingress Usage dashboard for No Data panels context, fix ingressName variable to filter by selected cluster_name and ensure cluster_name variable defaults to All
+- Fix Volume Autoscaler Grafana panel showing wrong version due to hardcoded version string in upstream app
 
 _Changes_
 
 - [X] PDO-10657 Grafana: Add PD backends to replication backlog dashboard
+- [X] PDO-10742 Identify and Document Transformed Metrics in Grafana Dashboards
+- [X] PDO-11030 Opensearch: Decouple Impossible Login panels into optional PF dashboards
+- [X] PDO-11360 Grafana: Add cluster name filtering to High Usage Volumes panel in Kubernetes storage volumes namespace dashboard
+- [X] PDO-11092 Grafana: Update Dashboards for (Fluent Bit → 2x Logstash)
+- [X] PDO-11557 Grafana: Add info banner to Ingress Usage dashboard explaining expected No data panels, fix cluster-scoped filtering for ingressName variable and ensure cluster_name variable defaults to All on dashboard load
+- [X] PDO-11788 Grafana: Grafana: Remove hardcoded cluster name from Logging Grafana dashboard
+- [X] PDO-12051 Grafana: Volume Autoscaler Version panel shows incorrect version
 
 ### 2.2.0.0
 
 - FluentBit: Add Grafana Dashboard
 - Remove Grafana Folder yamls as it is now managed by p1as-grafana chart in p1as-observability repo
 - Update changes in Kubernetes cluster monitoring dashboard in kubernetes-storage-cluster and kubernetes-storage-namespace panels
+- Fix Volume Autoscaler Grafana panel showing wrong version due to hardcoded version string in upstream app
 
 _Changes_
 
 - [X] PDO-9231 Remove Grafana Folders as part of Grafana mircoservice transition
 - [X] PDO-9375 FluentBit: Add Grafana Dashboard
 - [X] PDO-11137 [Observability]Observations on v2.2.0-RC1.
+- [X] PDO-11865 Grafana: Volume Autoscaler Version panel shows incorrect version
 
 ### 2.0.1.0
 
@@ -49,10 +64,13 @@ _Changes_
 ### 1.19.2.0
 
 - Update queries for FluentBit panels In logging Dashboard
+- Update to fix multiple issues in the Ingress dashboard
 
 _Changes_
 
 - [X] PDO-9634 FluentBit: Update metrics for FluentBit panels In logging Dashboard
+- [X] PDO-11207 Grafana: Fix Ingress dashboard and incorrect PromQL used in the Average Response Time
+
 
 ### 1.19.0.0
 

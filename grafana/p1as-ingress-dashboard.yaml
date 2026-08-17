@@ -40,15 +40,27 @@ spec:
       "fiscalYearStartMonth": 0,
       "gnetId": 11875,
       "graphTooltip": 0,
-      "id": 20,
+      "id": 43,
       "links": [],
       "liveNow": false,
       "panels": [
+        {
+          "type": "text",
+          "id": 100,
+          "gridPos": { "h": 3, "w": 24, "x": 0, "y": 0 },
+          "transparent": true,
+          "title": " ",
+          "options": {
+            "mode": "markdown",
+            "content": "NOTE: For any ingress names, if the panels below show No data, then that usually means the selected ingress simply hasn't received any HTTP traffic in the selected time window. This is expected on a cluster where not all services are actively in use."
+          }
+        },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "This panel shows the average number of requests reaching the ingress, grouped by HTTP method and status code. It provides a clear view of traffic volume and helps identify which methods (GET, POST, etc.) and status codes (200, 404, 500) are most common. This is useful for spotting traffic spikes, understanding read/write patterns, and detecting increases in client or server errors. This replaces the previous panel that incorrectly attempted to calculate latency using a histogram count metric.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -91,7 +103,8 @@ spec:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -99,7 +112,7 @@ spec:
                   }
                 ]
               },
-              "unit": "none"
+              "unit": "reqps"
             },
             "overrides": []
           },
@@ -107,7 +120,7 @@ spec:
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 0
+            "y": 3
           },
           "id": 2,
           "interval": "1m",
@@ -121,7 +134,9 @@ spec:
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Max",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "multi",
@@ -135,16 +150,18 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
+              "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(nginx_ingress_controller_requests{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m]) * 60) by (status)",
+              "expr": "clamp_min(\n  sum by (method, status) (\n    irate(nginx_ingress_controller_requests{ingress=\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m])\n  ),\n  0\n)",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "Status: {{status}}",
+              "legendFormat": "__auto",
+              "range": true,
               "refId": "A"
             }
           ],
-          "title": "Requests / min",
+          "title": "Average Request Rate — by Method & Status",
           "type": "timeseries"
         },
         {
@@ -152,6 +169,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Shows the total volume of data sent per minute by the ingress, grouped by path and status code. Values are in bytes and auto-scaled to KiB or MiB depending on magnitude. Useful for detecting large responses, bandwidth spikes, and path-specific traffic trends.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -194,7 +212,8 @@ spec:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -210,7 +229,7 @@ spec:
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 0
+            "y": 3
           },
           "id": 4,
           "interval": "1m",
@@ -224,7 +243,9 @@ spec:
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Max",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "multi",
@@ -238,27 +259,18 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
+              "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(irate(nginx_ingress_controller_bytes_sent_sum{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m]) * 60) by (path, status)",
+              "expr": "clamp_min( sum by (path, status) ( rate(nginx_ingress_controller_bytes_sent_sum{ingress=\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m]) * 60 ), 0 )",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "Path: {{path}} - Status: {{status}}",
+              "legendFormat": "__auto",
+              "range": true,
               "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "exemplar": true,
-              "expr": "ingress",
-              "interval": "",
-              "legendFormat": "",
-              "refId": "C"
             }
           ],
-          "title": "Bytes transferred / min",
+          "title": "Data Sent per Minute — by Path & Status",
           "type": "timeseries"
         },
         {
@@ -266,6 +278,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Shows the rate of client (4xx) and server (5xx) errors per second. Helps distinguish client‑side vs server‑side issues.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -308,7 +321,8 @@ spec:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -316,7 +330,7 @@ spec:
                   }
                 ]
               },
-              "unit": "none"
+              "unit": "reqps"
             },
             "overrides": []
           },
@@ -324,9 +338,9 @@ spec:
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 9
+            "y": 12
           },
-          "id": 6,
+          "id": 11,
           "interval": "1m",
           "links": [],
           "options": {
@@ -352,14 +366,27 @@ spec:
                 "type": "prometheus",
                 "uid": "P1809F7CD0C75ACF3"
               },
+              "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(irate(nginx_ingress_controller_request_size_count{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m]) * 60) by (method, status)",
-              "interval": "",
-              "legendFormat": "{{method}} - Status: {{status}}",
+              "expr": "sum(rate(nginx_ingress_controller_requests{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\",status=~\"4..\"}[5m]))",
+              "legendFormat": "4xx",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(rate(nginx_ingress_controller_requests{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\",status=~\"5..\"}[5m]))",
+              "legendFormat": "5xx",
+              "range": true,
               "refId": "B"
             }
           ],
-          "title": "Backend requests / min",
+          "title": "Error Rate — 4xx vs 5xx",
           "type": "timeseries"
         },
         {
@@ -367,6 +394,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Shows the total number of 4xx and 5xx errors that occurred during the selected dashboard time range. Useful for quantifying impact and comparing error volume across time windows.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -409,7 +437,228 @@ spec:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 12
+          },
+          "id": 14,
+          "interval": "1m",
+          "links": [],
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(increase(nginx_ingress_controller_requests{ingress=\"$ingressName\", k8s_cluster_name=~\"$cluster_name\", status=~\"4..\"}[$__range]))",
+              "legendFormat": "4xx",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(increase(nginx_ingress_controller_requests{ingress=\"$ingressName\", k8s_cluster_name=~\"$cluster_name\", status=~\"5..\"}[$__range]))",
+              "legendFormat": "5xx",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Total Error Count — 4xx vs 5xx",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the average upstream latency for all ingress requests forwarded to backend services. Useful for detecting backend slowness, routing delays, and saturation under load.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 21
+          },
+          "id": 13,
+          "interval": "1m",
+          "links": [],
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P1809F7CD0C75ACF3"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "clamp_min(\n  (\n    sum by (service) (\n      rate(nginx_ingress_controller_ingress_upstream_latency_seconds_sum{\n        ingress=\"$ingressName\",\n        k8s_cluster_name=~\"$cluster_name\"\n      }[5m])\n    )\n    /\n    clamp_min(\n      sum by (service) (\n        rate(nginx_ingress_controller_ingress_upstream_latency_seconds_count{\n          ingress=\"$ingressName\",\n          k8s_cluster_name=~\"$cluster_name\"\n        }[5m])\n      ),\n      1\n    )\n  ) * 1000,\n  0\n)\n\n",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Average upstream latency - by Service",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "description": "Shows the average end-to-end requests latency as observed by nginx ingress, grouped by HTTP method and status code. Useful for identifying latency trends, performance regressions, and method‑specific slowdowns.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -425,7 +674,7 @@ spec:
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 9
+            "y": 21
           },
           "id": 8,
           "interval": "1m",
@@ -455,16 +704,16 @@ spec:
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "avg(rate(nginx_ingress_controller_response_duration_seconds_count{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m])*1000) by (method, status)",
+              "expr": "clamp_min(\n  (\n    sum by (method, status) (\n      rate(nginx_ingress_controller_request_duration_seconds_sum{\n        ingress=\"$ingressName\",\n        k8s_cluster_name=~\"$cluster_name\"\n      }[5m])\n    )\n    /\n    clamp_min(\n      sum by (method, status) (\n        rate(nginx_ingress_controller_request_duration_seconds_count{\n          ingress=\"$ingressName\",\n          k8s_cluster_name=~\"$cluster_name\"\n        }[5m])\n      ),\n      1\n    )\n  ) * 1000,\n  0\n)\n",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} - Status: {{status}}",
+              "legendFormat": "__auto",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Average response time ms",
+          "title": "Average Response Time - by Method & Status",
           "type": "timeseries"
         },
         {
@@ -472,6 +721,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Shows the average size of incoming HTTP requests handled by the ingress. Useful for detecting large uploads, unusual client behavior, or sudden shifts in traffic patterns that may affect buffering, routing, or backend performance.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -514,7 +764,8 @@ spec:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -522,7 +773,7 @@ spec:
                   }
                 ]
               },
-              "unit": "ms"
+              "unit": "bytes"
             },
             "overrides": []
           },
@@ -530,9 +781,9 @@ spec:
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 18
+            "y": 30
           },
-          "id": 9,
+          "id": 12,
           "interval": "1m",
           "links": [],
           "options": {
@@ -560,16 +811,13 @@ spec:
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "max(rate(nginx_ingress_controller_response_duration_seconds_count{ingress=\"$ingressName\",k8s_cluster_name=~\"$cluster_name\"}[5m])*1000) by (method, status)",
-              "format": "time_series",
-              "interval": "",
-              "intervalFactor": 1,
-              "legendFormat": "{{method}} - Status: {{status}}",
+              "expr": "clamp_min(\n  (\n    sum by (ingress) (\n      rate(nginx_ingress_controller_request_size_sum{ingress=\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m])\n    )\n    /\n    clamp_min(\n      sum by (ingress) (\n        rate(nginx_ingress_controller_request_size_count{ingress=\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m])\n      ),\n      1\n    )\n  ),\n  0\n)\n",
+              "legendFormat": "__auto",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Maximum response time ms",
+          "title": "Request Size — Average",
           "type": "timeseries"
         },
         {
@@ -577,6 +825,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "This panel shows the p50, p90, p95, and p99 request latency. These percentiles tell you how fast most requests finish.\n\np50: half of all requests are faster than this\n\np90: 90% of requests are faster\n\np95: 95% of requests are faster\n\np99: 99% of requests are faster\n\nIf the lines are around 70–80 ms, it means almost all requests complete in under 80 ms, with only a small number taking longer. This helps you spot latency spikes and understand overall performance.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -618,7 +867,8 @@ spec:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -634,7 +884,7 @@ spec:
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 18
+            "y": 30
           },
           "id": 10,
           "options": {
@@ -652,6 +902,7 @@ spec:
               "sort": "none"
             }
           },
+          "pluginVersion": "8.4.5",
           "targets": [
             {
               "datasource": {
@@ -659,7 +910,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.50, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=\"\",ingress=~\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[2m])) by (le, ingress))*1000",
+              "expr": "clamp_min(\n  histogram_quantile(\n    0.50,\n    sum by (le, ingress) (\n      rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress=\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m])\n    )\n  ) * 1000,\n  0\n)\n",
               "instant": false,
               "legendFormat": "50th percentile",
               "range": true,
@@ -671,7 +922,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.90, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=\"\",ingress=~\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[2m])) by (le, ingress))*1000",
+              "expr": "\nclamp_min(\n  histogram_quantile(\n    0.90,\n    sum by (le, ingress) (\n      rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=\"\" , ingress=~\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m])\n    )\n  ) * 1000,\n  0\n)",
               "hide": false,
               "instant": false,
               "legendFormat": "90th percentile",
@@ -684,7 +935,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.95, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=\"\",ingress=~\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[2m])) by (le, ingress))*1000",
+              "expr": "clamp_min(\n  histogram_quantile(\n    0.95,\n    sum by (le, ingress) (\n      rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=\"\" , ingress=~\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m])\n    )\n  ) * 1000,\n  0\n)",
               "hide": false,
               "instant": false,
               "legendFormat": "95th percentile",
@@ -697,7 +948,7 @@ spec:
                 "uid": "P1809F7CD0C75ACF3"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.99, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=\"\",ingress=~\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[2m])) by (le, ingress))*1000",
+              "expr": "\nclamp_min(\n  histogram_quantile(\n    0.99,\n    sum by (le, ingress) (\n      rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=\"\" , ingress=~\"$ingressName\", k8s_cluster_name=~\"$cluster_name\"}[5m])\n    )\n  ) * 1000,\n  0\n)",
               "hide": false,
               "instant": false,
               "legendFormat": "99th percentile",
@@ -705,7 +956,7 @@ spec:
               "refId": "D"
             }
           ],
-          "title": "Ingress percentile response times ms",
+          "title": "Response Time Percentiles (p50/p90/p95/p99)",
           "type": "timeseries"
         }
       ],
@@ -716,38 +967,9 @@ spec:
       "templating": {
         "list": [
           {
-            "current": {
-              "selected": false,
-              "text": "pingaccess-was-ingress",
-              "value": "pingaccess-was-ingress"
-            },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "P1809F7CD0C75ACF3"
-            },
-            "definition": "label_values(kube_ingress_info,ingress)",
-            "hide": 0,
-            "includeAll": false,
-            "multi": false,
-            "name": "ingressName",
-            "options": [],
-            "query": {
-              "query": "label_values(kube_ingress_info,ingress)",
-              "refId": "prometheus-ingressName-Variable-Query"
-            },
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 2,
-            "tagValuesQuery": "",
-            "tagsQuery": "",
-            "type": "query",
-            "useTags": false
-          },
-          {
             "allValue": ".*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": "All",
               "value": "$__all"
             },
@@ -770,41 +992,70 @@ spec:
             "skipUrlSync": false,
             "sort": 0,
             "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "pingfederate-ingress",
+              "value": "pingfederate-ingress"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P1809F7CD0C75ACF3"
+            },
+            "definition": "label_values(kube_ingress_info{k8s_cluster_name=~\"$cluster_name\"},ingress)",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "ingressName",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_ingress_info{k8s_cluster_name=~\"$cluster_name\"},ingress)",
+              "refId": "prometheus-ingressName-Variable-Query"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 2,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
           }
         ]
       },
-      "time": {
-        "from": "now-1h",
-        "to": "now"
-      },
-      "timepicker": {
-        "refresh_intervals": [
-          "5s",
-          "10s",
-          "30s",
-          "1m",
-          "5m",
-          "15m",
-          "30m",
-          "1h",
-          "2h",
-          "1d"
-        ],
-        "time_options": [
-          "5m",
-          "15m",
-          "1h",
-          "6h",
-          "12h",
-          "24h",
-          "2d",
-          "7d",
-          "30d"
-        ]
-      },
-      "timezone": "",
-      "title": "PingOne Advanced Services Ingress Usage",
-      "uid": "bf3495f2-7809-42bb-b4e9-a2c6a0ae913e",
-      "version": 1,
-      "weekStart": ""
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "PingOne Advanced Services Ingress Usage",
+    "uid": "bf3495f2-7809-42bb-b4e9-a2c6a0ae913e",
+    "version": 1,
+    "weekStart": ""
     }
