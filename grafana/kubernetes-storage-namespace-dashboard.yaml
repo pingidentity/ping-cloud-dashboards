@@ -922,7 +922,7 @@ spec:
                     "type": "prometheus",
                     "uid": "P1809F7CD0C75ACF3"
                   },
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {namespace=\"$namespace\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100))",
+                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
                   "intervalFactor": 1,
@@ -933,7 +933,7 @@ spec:
                     "type": "prometheus",
                     "uid": "P1809F7CD0C75ACF3"
                   },
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {namespace=\"$namespace\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100))",
+                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
                   "refId": "B"
@@ -943,7 +943,7 @@ spec:
                     "type": "prometheus",
                     "uid": "P1809F7CD0C75ACF3"
                   },
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_available_bytes {namespace=\"$namespace\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100))",
+                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_available_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) and ((max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100))",
                   "format": "table",
                   "instant": true,
                   "refId": "C"
@@ -953,7 +953,7 @@ spec:
                     "type": "prometheus",
                     "uid": "P1809F7CD0C75ACF3"
                   },
-                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100)",
+                  "expr": "(max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_used_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) / (max by (persistentvolumeclaim,namespace) (kubelet_volume_stats_capacity_bytes {k8s_cluster_name=~\"$k8s_cluster_name\",namespace=\"$namespace\"})) >= ($pvc_percent_used_warning_threshold / 100)",
                   "format": "table",
                   "instant": true,
                   "refId": "D"

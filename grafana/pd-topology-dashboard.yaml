@@ -188,6 +188,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory throughput (ops/sec) by operation type, derived from the `*.*.throughput` metric emitted by PingDirectory. Each line represents an operation. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -281,6 +282,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory total throughput (ops/sec), derived from the `*.*.throughput` metric emitted by PingDirectory. Shows the overall operations per second across the cluster. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -374,6 +376,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory average latency (ms) by operation type, derived from the `*.*.response-time` metric emitted by PingDirectory. Each line represents an operation. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -467,6 +470,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory overall average latency (ms), derived from the `*.*.response-time` metric emitted by PingDirectory. Shows the average response time across all operations in the cluster. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -560,6 +564,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory garbage collection rate (collections per minute) by type, size, and cause, derived from the `*.*.*.garbage-collections` metric emitted by PingDirectory. Each line represents a {gcType, size, cause} combination. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -653,6 +658,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory replication backlog for user-base-dn and appintegrations, derived from the `^dc=(.*)_dc=(.*)\\.replica(.*)` metric emitted by PingDirectory. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -750,14 +756,14 @@ spec:
             }
           ],
           "title": "Replication Backlog for user-base-dn & appintegrations",
-          "type": "timeseries",
-          "description": "Shows PingDirectory replication backlog for user-base-dn (replica_backlog) and the appintegrations backend (o_appintegrations_replica_backlog) grouped by pod instance."
+          "type": "timeseries"
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory average entry count by backend, derived from the `*.backend-entry-count` metric emitted by PingDirectory. Each line represents a backend. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -851,6 +857,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-region PingDirectory average GC live megabytes, derived from the `garbage_collection_live_megabytes` metric emitted by PingDirectory. Each line represents a region. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {

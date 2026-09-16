@@ -43,6 +43,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory JVM heap memory usage (bytes), showing used and maximum heap for each instance. Derived from JVM metrics emitted by PingDirectory. For JVM metric definitions, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -147,6 +148,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory throughput (ops/sec) by operation type, derived from the `*.*.throughput` metric emitted by PingDirectory. Each line represents an {instance, operation} pair. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -240,6 +242,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory total throughput (ops/sec), derived from the `*.*.throughput` metric emitted by PingDirectory. Each line represents an instance. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -333,6 +336,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory response time (ms) by operation type, derived from the `*.*.response-time` metric emitted by PingDirectory. Each line represents an {instance, operation} pair. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -429,6 +433,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory average latency (ms), derived from the `*.*.response-time` metric emitted by PingDirectory. Each line represents an instance. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -522,6 +527,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory garbage collection live megabytes, derived from the `*.garbage-collection-live-mbytes` metric emitted by PingDirectory. Each line represents an instance. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -615,6 +621,7 @@ spec:
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "description": "Per-instance PingDirectory garbage collection rate (collections per minute) by type, size, and cause, derived from the `*.*.*.garbage-collections` metric emitted by PingDirectory. Each line represents an {instance, gcType, size, cause} combination. For the metric definition and semantics, refer to the PingDirectory product documentation",
           "fieldConfig": {
             "defaults": {
               "color": {
