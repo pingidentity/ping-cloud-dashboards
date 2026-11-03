@@ -9,11 +9,13 @@
 - Revised Monitoring dashboard panels and also included change for s3 dedicated pipeline
 - Add informational NOTE banner to PingOne Advanced Services Ingress Usage dashboard for No Data panels context, fix ingressName variable to filter by selected cluster_name and ensure cluster_name variable defaults to All
 - Fix Volume Autoscaler Grafana panel showing wrong version due to hardcoded version string in upstream app
+- Updated OS/Grafana Dashboard as per JSON changes
 
 _Changes_
 
 - [X] PDO-10657 Grafana: Add PD backends to replication backlog dashboard
 - [X] PDO-10742 Identify and Document Transformed Metrics in Grafana Dashboards
+- [X] PDO-10261 Remediate OS Dashboards for PF, PA, PA-WAS, and PD
 - [X] PDO-11030 Opensearch: Decouple Impossible Login panels into optional PF dashboards
 - [X] PDO-11360 Grafana: Add cluster name filtering to High Usage Volumes panel in Kubernetes storage volumes namespace dashboard
 - [X] PDO-11092 Grafana: Update Dashboards for (Fluent Bit → 2x Logstash)
